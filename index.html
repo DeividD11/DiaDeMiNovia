@@ -1,10 +1,90 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Hola Mundo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación Especial</title>
+  <style>
+    :root {
+      --primary-color: #FF6B81;
+      --secondary-color: #FFADC6;
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Roboto', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+      font-family: var(--font-body);
+      color: #333;
+    }
+    .card {
+      background: white;
+      border-radius: 2rem;
+      max-width: 400px;
+      width: 90%;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease-out;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent 70%);
+      animation: rotateBg 8s linear infinite;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    p {
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: var(--font-heading);
+    }
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes rotateBg {
+      from { transform: rotate(0deg);} 
+      to { transform: rotate(360deg);}    
+    }
+  </style>
 </head>
 <body>
-    <p>Hola mundo</p>
-</body>
+  <div class="card">
+    <h1>¡Feliz Día, Amor!</h1>
+    <p>Este día quiero celebrarlo contigo y recordarte lo especial que eres para mí. <br>¿Me acompañas a una cena sorpresa esta noche?</p>
+    <button id="rsvp">¡Claro que sí!</button>
+  </div>  <script>
+    document.getElementById('rsvp').addEventListener('click', function() {
+      this.disabled = true;
+      this.textContent = '¡Te amo! ❤️';
+      setTimeout(() => alert('Nos vemos a las 7 PM en nuestro lugar favorito :)'), 500);
+    });
+  </script></body>
 </html>
