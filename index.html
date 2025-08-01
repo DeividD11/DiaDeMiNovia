@@ -13,6 +13,7 @@
       --radius: 2rem;
       --font-heading: 'Poppins', sans-serif;
       --font-body: 'Roboto', sans-serif;
+      --heart-color: #FF6B81;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -24,13 +25,13 @@
       padding: 1rem;
     }
     .card {
+      position: relative;
       background: #fff;
       border-radius: var(--radius);
       max-width: 480px;
       width: 100%;
-      padding: 2rem;
+      padding: 2.5rem;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      position: relative;
       overflow: hidden;
       animation: fadeIn 1s ease-out;
     }
@@ -44,92 +45,113 @@
     }
     .header h1 {
       font-family: var(--font-heading);
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       color: var(--primary);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
     }
     .header p {
       font-size: 1rem;
       color: var(--dark);
+      font-style: italic;
     }
-    .photo {
-      width: 100%;
-      height: auto;
-      border-radius: var(--radius);
-      margin: 1.5rem 0;
-      background: url('https://via.placeholder.com/460x260?text=Momentos+Mágicos') no-repeat center;
-      background-size: cover;
-      aspect-ratio: 16/9;
+    .decor {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: var(--heart-color);
+      clip-path: polygon(50% 0%, 61% 17%, 81% 17%, 89% 34%, 100% 50%, 89% 66%, 81% 83%, 61% 83%, 50% 100%, 39% 83%, 19% 83%, 11% 66%, 0% 50%, 11% 34%, 19% 17%, 39% 17%);
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite;
+    }
+    .decor:nth-child(2) {
+      top: -20px;
+      right: -20px;
+      animation-duration: 8s;
+    }
+    .decor:nth-child(3) {
+      bottom: -20px;
+      left: -30px;
+      animation-duration: 7s;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
     .content p {
       font-size: 1.05rem;
       line-height: 1.6;
       margin-bottom: 1rem;
+      text-align: center;
     }
     .tips {
       background: var(--accent);
       border-radius: 1rem;
-      padding: 1rem;
+      padding: 1rem 1.5rem;
       margin: 1rem 0 1.5rem;
+    }
+    .tips p {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      text-align: center;
     }
     .tips ul {
       list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .tips li {
+      position: relative;
+      padding-left: 1.5rem;
+      font-size: 0.95rem;
     }
     .tips li::before {
-      content: '✨';
-      margin-right: 0.5rem;
+      content: '💖';
+      position: absolute;
+      left: 0;
     }
-    .schedule {
+    .schedule p {
+      text-align: center;
+      font-size: 1rem;
       margin-bottom: 1.5rem;
-    }
-    .schedule h2 {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      color: var(--primary);
-      margin-bottom: 0.75rem;
-    }
-    .schedule ol {
-      padding-left: 1.2rem;
-      line-height: 1.6;
     }
     .footer {
       text-align: center;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--dark);
       opacity: 0.8;
+      margin-top: 1rem;
+      line-height: 1.4;
     }
   </style>
 </head>
 <body>
   <div class="card">
+    <div class="decor"></div>
+    <div class="decor"></div>
+    <div class="decor"></div>
     <div class="header">
-      <h1>Un Día Inolvidable 💖</h1>
-      <p>Solo tú y yo, en una aventura mágica...</p>
+      <h1>Un Día Único 💫</h1>
+      <p>Solo tú y yo en un mundo de sorpresas...</p>
     </div>
-    <div class="photo"></div>
     <div class="content">
-      <p>Mi amor, hoy quiero sorprenderte con un plan lleno de risas, relax y momentos que atesoraremos por siempre. Mantén la curiosidad porque pronto descubrirás cada detalle.</p>
-      <div class="tips">
-        <p><strong>Preparativos:</strong></p>
-        <ul>
-          <li>Ponte cómoda y relajada</li>
-          <li>Trae tu ropa de baño favorita</li>
-          <li>No olvides tu toalla y bloqueador</li>
-          <li>Y sobre todo, ¡tu mejor sonrisa!</li>
-        </ul>
-      </div>
-      <div class="schedule">
-        <h2>¿A qué hora podemos vernos?</h2>
-        <ol>
-          <li>Envíame un mensaje con la hora más temprana que te acomode.</li>
-          <li>Prepara tu música favorita para el camino.</li>
-          <li>Yo me encargo de todo lo demás.</li>
-        </ol>
-      </div>
-      <p>Estoy emocionado por compartir este momento contigo. ¡Será un día mágico!</p>
+      <p>Amor mío, hoy quiero llevarte a vivir momentos inolvidables. Guarda espacio en tu corazón y déjate llevar por la magia que he preparado solo para ti.</p>
+    </div>
+    <div class="tips">
+      <p><strong>Consejos para hoy:</strong></p>
+      <ul>
+        <li>Ponte cómoda</li>
+        <li>Lleva tu traje de baño</li>
+        <li>No olvides tu toalla</li>
+        <li>Carga energías</li>
+      </ul>
+    </div>
+    <div class="schedule">
+      <p>Cuando puedas, envíame un mensaje con la hora más temprana que te acomode para encontrarnos.</p>
     </div>
     <div class="footer">
-      Con todo mi amor, <br>Tu Novio 😘
+      Con todo mi amor,<br>
+      Tu Novio para Siempre ❤️
     </div>
   </div>
 </body>
