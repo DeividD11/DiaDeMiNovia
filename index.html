@@ -2,188 +2,237 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invitación Dinámica ✨</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <title>Invitación Especial 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #FF385C;
-      --secondary: #FFFCF9;
-      --accent: #FFE4E1;
-      --text: #333;
-      --radius: 1.5rem;
-      --spacing: 1rem;
-      --font-heading: 'Poppins', sans-serif;
-      --font-body: 'Roboto', sans-serif;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      display:flex; align-items:center; justify-content:center;
-      min-height:100vh; padding:var(--spacing);
-      background:linear-gradient(135deg, var(--accent), var(--secondary));
-      font-family:var(--font-body); color:var(--text);
-    }
-    .heart-bg {
-      position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden;
-      z-index:0;
-    }
-    .heart-bg div {
-      position:absolute; width:12px; height:12px;
-      background:var(--primary);
-      clip-path: polygon(50% 0%,61% 17%,81% 17%,89% 34%,100% 50%,89% 66%,81%83%,61%83%,50%100%,39%83%,19%83%,11%66%,0%50%,11%34%,19%17%,39%17%);
-      opacity:0.5; animation:rise 5s infinite ease-in;
-    }
-    @keyframes rise {
-      0% { transform: translateY(100vh) scale(0.5); opacity:0; }
-      50% { opacity:0.7; }
-      100% { transform: translateY(-10vh) scale(1); opacity:0; }
-    }
-    .confetti {
-      position:absolute; width:100%; height:100%; overflow:hidden; z-index:0;
-    }
-    .confetti span {
-      position:absolute; width:6px; height:6px; background:var(--primary);
-      opacity:0.8; animation:fall linear infinite;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-10vh) rotate(0deg); opacity:1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity:0; }
-    }
-    .container {
-      position:relative; z-index:1;
-      max-width:550px; width:100%; background:#FFF; border-radius:var(--radius);
-      box-shadow:0 12px 30px rgba(0,0,0,0.1);
-      overflow:hidden;
-      display:grid; grid-template-rows:auto 1fr auto; 
-      animation:popUp 0.8s ease-out;
-    }
-    @keyframes popUp {
-      from { transform: scale(0.9); opacity:0; }
-      to { transform: scale(1); opacity:1; }
-    }
-    header {
-      padding:var(--spacing) var(--spacing);
-      background:var(--primary); color:#FFF;
-      text-align:center;
-      animation:slideDown 0.8s ease;
-    }
-    header h1 {
-      font-family:var(--font-heading);
-      font-size:2.4rem; line-height:1.2;
-      margin-bottom:0.25rem;
-    }
-    header p {
-      font-size:1rem; opacity:0.9;
-    }
-    @keyframes slideDown {
-      from { transform: translateY(-20px); opacity:0; }
-      to { transform: translateY(0); opacity:1; }
-    }
-    main {
-      padding:calc(var(--spacing) * 1.5);
-    }
-    main p {
-      font-size:1.1rem; line-height:1.6; margin-bottom:var(--spacing);
-      text-align:center;
-      animation:fadeIn 1s ease-in;
-    }
-    @keyframes fadeIn {
-      from { opacity:0; }
-      to { opacity:1; }
-    }
-    .poem {
-      font-family:var(--font-heading); font-size:1rem; font-style:italic;
-      text-align:center; margin:1rem 0;
-      color:var(--primary);
-      animation:fadeIn 1s ease-in 0.5s both;
-    }
-    .tips {
-      background:var(--accent); border-radius:var(--radius);
-      padding:var(--spacing); margin:var(--spacing) 0;
-      display:flex; flex-wrap:wrap; justify-content:space-around;
-      animation:popPulse 2s infinite;
-    }
-    .tips div {
-      flex:1 1 45%; margin:0.5rem;
-      display:flex; align-items:flex-start;
-      animation:fadeIn 1s ease-in 1s both;
-    }
-    .tips div::before {
-      content:'💕'; margin-right:0.5rem; font-size:1.2rem;
-    }
-    @keyframes popPulse {
-      0%,100% { transform:scale(1); }
-      50% { transform:scale(1.03); }
-    }
-    .schedule {
-      text-align:center; padding-bottom:var(--spacing);
-      font-size:1.05rem; animation:fadeIn 1s ease-in 1.5s both;
-    }
-    footer {
-      background:#FAFAFA; padding:var(--spacing); text-align:center;
-      font-size:0.9rem; opacity:0.8;
-      border-top:1px solid #EEE;
-      animation:fadeIn 1s ease-in 2s both;
-    }
-    @media (max-width:600px) {
-      header h1 { font-size:2rem; }
-      .tips { flex-direction:column; }
-      .tips div { flex:1 1 100%; }
-    }
+      --primary: #ff6f91;
+      --secondary: #ffb6c1;
+      --accent: #fff0f5;
+      --dark: #333333;
+      --light: #ffffff;
+      --radius: 1.8rem;
+      --font-heading: 'Great Vibes', cursive;
+      --font-body: 'Poppins', sans-serif;
+    }* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(270deg, #fff0f5, #ffe4e1, #fff0f5);
+  background-size: 600% 600%;
+  animation: gradientShift 20s ease infinite;
+  font-family: var(--font-body);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card {
+  background: var(--light);
+  border-radius: var(--radius);
+  max-width: 520px;
+  width: 100%;
+  padding: 2.5rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  animation: fadeInCard 1.2s ease-out;
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--primary);
+  animation: typing 5s steps(40, end), blink 0.75s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid var(--primary);
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+main p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--dark);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+main p:nth-of-type(2) { animation-delay: 0.5s; }
+main p:nth-of-type(3) { animation-delay: 1s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(15px); }
+}
+
+.tips {
+  background: var(--accent);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  animation: pulse 3s infinite;
+}
+
+.tips ul {
+  columns: 2;
+  list-style: none;
+  padding-left: 0;
+}
+
+.tips li {
+  margin-bottom: 0.75rem;
+}
+
+.tips li::before {
+  content: '💫';
+  margin-right: 0.4rem;
+}
+
+.plan h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.plan ol {
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+.poem {
+  font-style: italic;
+  text-align: center;
+  color: var(--dark);
+  margin: 2rem 0 1rem;
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+footer {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--dark);
+  margin-top: 2rem;
+  opacity: 0.85;
+}
+
+.confetti, .heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 18s-6-4.3-8.6-7.7C.5 7.8 2.4 4 5.5 4c1.8 0 3 1.2 3.7 2.2C9.6 5.2 10.8 4 12.5 4c3.1 0 5 3.8 4.1 6.3C16 13.7 10 18 10 18z' fill='%23ff6f91'/%3E%3C/svg%3E");
+  animation: floatHeart 10s linear infinite;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
   </style>
 </head>
 <body>
-  <div class="heart-bg">
-    <script>
-      // Crear corazones flotantes
-      for(let i=0;i<20;i++){
-        const div=document.createElement('div');
-        div.style.left=Math.random()*100+'%';
-        div.style.animationDelay=Math.random()*5+'s';
-        div.style.animationDuration=(4+Math.random()*3)+'s';
-        document.querySelector('.heart-bg').append(div);
-      }
-    </script>
-  </div>
-  <div class="confetti">
-    <script>
-      // Crear confetti
-      for(let i=0;i<40;i++){
-        const span=document.createElement('span');
-        span.style.left=Math.random()*100+'%';
-        span.style.animationDelay=Math.random()*5+'s';
-        span.style.animationDuration=(3+Math.random()*2)+'s';
-        document.querySelector('.confetti').append(span);
-      }
-    </script>
-  </div>
-  <div class="container">
+  <div class="card">
     <header>
-      <h1>Un Día Inolvidable 💖</h1>
-      <p>Una aventura sorpresa solo para ti</p>
+      <h1>Una Sorpresa para Ti 💕</h1>
     </header>
     <main>
-      <p>Amor mío, hoy el universo conspira para regalarte momentos únicos. Deja que la emoción te guíe y prepárate para lo inesperado.</p>
-      <div class="poem">
-        "Bajo un cielo de promesas,<br>
-        tu sonrisa es mi sol,<br>
-        hoy serás mi alegría,<br>
-        mi más preciado farol."
-      </div>
-      <div class="tips">
-        <div>Tu mejor sonrisa</div>
-        <div>Traje de baño y toalla</div>
-        <div>Ropa cómoda</div>
-        <div>Bloqueador solar</div>
-      </div>
-      <div class="schedule">
-        <p>Cuando puedas, envíame la hora más temprana para vernos,<br>y haré que cada instante brille para ti. 🕊️</p>
-      </div>
-    </main>
-    <footer>
-      Con todo mi amor,<br>
-      Tu Novio que ya sueña contigo 🥰
-    </footer>
+      <p>Mi amor, hoy quiero que te dejes llevar por la magia de este momento que he preparado especialmente para ti. Es un día para sonreír, relajarte y sentir cuánto te amo.</p>
+      <p>Imagina un lugar donde solo estamos tú y yo, sin prisas, sin estrés… solo alegría, ternura y conexión. Estoy deseando verte feliz y verte brillar.</p>
+      <p>Por eso, quiero que me digas cuál es la hora más temprana en la que podemos vernos. Mientras tanto, ve preparándote con lo siguiente:</p><div class="tips">
+    <ul>
+      <li>Usa ropa cómoda</li>
+      <li>Lleva tu ropa de baño</li>
+      <li>No olvides tu toalla</li>
+      <li>Usa bloqueador solar</li>
+      <li>Ten tu mejor sonrisa lista</li>
+      <li>Confía en la sorpresa 💌</li>
+    </ul>
   </div>
-</body>
+
+  <div class="plan">
+    <h2>¿Qué sigue?</h2>
+    <ol>
+      <li>Envíame un mensaje con la hora más temprana en que puedas salir.</li>
+      <li>Empaca con calma y emoción.</li>
+      <li>Prepárate para desconectarte del mundo y disfrutar.</li>
+    </ol>
+  </div>
+
+  <div class="poem">
+    <p>"Eres mi lugar favorito,<br>
+    donde quiero estar siempre,<br>
+    sin importar el cuándo,<br>
+    solo el contigo."
+    </p>
+  </div>
+</main>
+<footer>
+  Con todo mi corazón,<br>Tu novio 💗
+</footer>
+
+  </div>  <script>
+    function createFloatingElement(type, total, className, speedRange) {
+      for (let i = 0; i < total; i++) {
+        const el = document.createElement("div");
+        el.className = className;
+        el.style.left = Math.random() * 100 + "%";
+        el.style.top = Math.random() * 100 + 100 + "%";
+        el.style.animationDuration = (Math.random() * (speedRange[1] - speedRange[0]) + speedRange[0]) + "s";
+        el.style.opacity = Math.random();
+        el.style.transform = `scale(${Math.random() * 0.6 + 0.4})`;
+        document.body.appendChild(el);
+      }
+    }
+
+    createFloatingElement("heart", 15, "heart", [8, 15]);
+  </script></body>
 </html>
