@@ -1,122 +1,108 @@
 <!DOCTYPE html><html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Invitación Inolvidable</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
   <style>
-    /* Variables de tema */
+    /* === Variables de Tema === */
     :root {
       --primary-color: #ff69b4;
-      --background-start: #fff0f5;
-      --background-end: #ffe4e1;
-      --text-color: #2e2e2e;
+      --bg-start: #fff0f5;
+      --bg-end: #ffe4e1;
       --card-bg: #ffffff;
-      --shadow: rgba(0, 0, 0, 0.1);
+      --text-color: #333333;
+      --shadow-color: rgba(0, 0, 0, 0.1);
       --radius: 1rem;
       --font-title: 'Great Vibes', cursive;
       --font-body: 'Poppins', sans-serif;
+      --spacing: 1rem;
+      --transition: 0.4s ease;
+      --max-width: 420px;
     }
-    /* Reset y base */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow-x: hidden; }
+    /* === Reset === */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; overflow-x: hidden; }
     body {
       font-family: var(--font-body);
       color: var(--text-color);
-      line-height: 1.5;
-      background: linear-gradient(180deg, var(--background-start), var(--background-end));
+      background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
       background-attachment: fixed;
-      padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom) env(safe-area-inset-left);
+      padding: env(safe-area-inset-top) var(--spacing) env(safe-area-inset-bottom) var(--spacing);
     }
-    /* Scroll progress bar */
+    /* === Scrollbar Invisible === */
+    ::-webkit-scrollbar { width: 0; }
+    /* === Progress Bar === */
     #progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: var(--primary-color);
-      width: 0;
-      z-index: 100;
-      transition: width 0.1s ease;
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: var(--primary-color); width: 0; z-index: 100;
     }
-    /* Contenedor principal */
+    /* === Contenedor === */
     .container {
-      max-width: 420px;
+      max-width: var(--max-width);
       margin: 0 auto;
-      padding: 1rem;
+      display: flex; flex-direction: column; gap: var(--spacing);
     }
-    /* Secciones con márgenes para scroll espaciado */
+    /* === Sección Tarjeta === */
     section {
       background: var(--card-bg);
       border-radius: var(--radius);
-      box-shadow: 0 8px 20px var(--shadow);
-      margin-bottom: 1.5rem;
-      padding: 1.2rem;
-      animation: fadeInUp 0.8s ease forwards;
+      box-shadow: 0 8px 20px var(--shadow-color);
+      padding: calc(var(--spacing) * 1.2);
       opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s var(--transition) forwards;
     }
-    section:nth-of-type(1) { animation-delay: 0.3s; }
-    section:nth-of-type(2) { animation-delay: 0.6s; }
-    section:nth-of-type(3) { animation-delay: 0.9s; }
-    section:nth-of-type(4) { animation-delay: 1.2s; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity:1; transform: translateY(0);} }
-    /* Título central */
+    section:nth-child(1) { animation-delay: 0.2s; }
+    section:nth-child(2) { animation-delay: 0.4s; }
+    section:nth-child(3) { animation-delay: 0.6s; }
+    section:nth-child(4) { animation-delay: 0.8s; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* === Títulos === */
+    h1, h2 { margin-bottom: 0.5rem; }
     h1 {
       font-family: var(--font-title);
-      font-size: 2.8rem;
-      text-align: center;
+      font-size: 2.6rem;
       color: var(--primary-color);
-      margin-bottom: 0.5rem;
+      text-align: center;
+      white-space: nowrap; overflow: hidden;
+      border-right: 2px solid var(--primary-color);
+      width: 0;
+      animation: typing 3s steps(30) forwards, blink 0.7s step-end infinite;
     }
     h2 {
       font-family: var(--font-body);
       font-size: 1.2rem;
       color: var(--primary-color);
-      margin-bottom: 0.5rem;
+      text-align: left;
     }
-    p {
-      font-size: 1rem;
-      margin-bottom: 0.8rem;
-      text-align: justify;
-    }
-    ol {
-      padding-left: 1.2rem;
-      margin-bottom: 0.8rem;
-    }
-    ol li {
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-    }
-    ul {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-      margin-bottom: 0.8rem;
-    }
-    ul li::before {
-      content: '💖';
-      margin-right: 0.4rem;
-    }
-    /* Poema estilizado */
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+    /* === Texto === */
+    p, li { font-size: 1rem; line-height: 1.6; }
+    p + p { margin-top: var(--spacing); }
+    /* === Listas === */
+    ul, ol { margin: 0; padding-left: 1.2rem; }
+    ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.8rem; }
+    ul li::before { content: '❤️'; margin-right: 0.4rem; }
+    ol li { margin-bottom: 0.6rem; }
+    /* === Poema === */
     .poem {
       font-family: var(--font-title);
       font-size: 1rem;
       text-align: center;
-      margin: 0.8rem 0;
+      margin: var(--spacing) 0;
       color: var(--text-color);
     }
-    /* Footer */
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-    }
-    /* Responsive para iPhone 14 Pro */
+    /* === Footer === */
+    footer { text-align: center; font-size: 0.9rem; opacity: 0.9; margin-bottom: var(--spacing); }
+    /* === Media Queries iPhone 14 Pro === */
     @media (max-width: 430px) {
-      h1 { font-size: 2.4rem; }
-      h2 { font-size: 1.1rem; }
-      p, ol li, ul li { font-size: 0.95rem; }
+      h1 { font-size: 2rem; }
+      .poem { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -124,11 +110,11 @@
   <div id="progress"></div>
   <div class="container">
     <section>
-      <h1>¡Mi Sorpresa Para Ti!</h1>
-      <p>Amor mío, hoy he preparado algo muy especial solo para ti. Quiero que disfrutes cada instante y te dejes llevar por la magia de este día.</p>
+      <h1>¡Sorpresa Especial!</h1>
+      <p>Amor mío, hoy he preparado algo único solo para ti. Quiero que te relajes, sonrías y disfrutes cada instante de esta aventura.</p>
     </section>
     <section>
-      <h2>Detalles Importantes</h2>
+      <h2>Prepara Esto</h2>
       <ul>
         <li>Ropa cómoda</li>
         <li>Traje de baño</li>
@@ -137,28 +123,27 @@
       </ul>
     </section>
     <section>
-      <h2>¿Cómo Funciona?</h2>
+      <h2>¿Cómo Comenzar?</h2>
       <ol>
-        <li>Envíame la hora más temprana en la que puedas verme.</li>
-        <li>Relájate y prepara tu mejor sonrisa.</li>
-        <li>Yo me encargo de sorprenderte.</li>
+        <li>Envía la hora más temprana en que puedas verme.</li>
+        <li>Empaca con emoción y calma.</li>
+        <li>Prepárate para desconectar y sonreír.</li>
       </ol>
     </section>
     <section>
-      <div class="poem">"En cada latido, mi amor por ti florece; hoy y siempre, eres mi única belleza."</div>
+      <div class="poem">"Eres mi refugio perfecto,<br>mi instante más puro;<br>hoy y siempre, solo contigo. "</div>
     </section>
     <footer>
-      Con todo mi amor,<br>
-      Tu Novio 💗
+      Con todo mi amor,<br>Tu Novio 💗
     </footer>
   </div>
   <script>
-    // Scroll progress indicator
+    // Indicador de progreso de scroll
     window.addEventListener('scroll', () => {
       const doc = document.documentElement;
-      const scrollTop = doc.scrollTop;
+      const winScroll = doc.scrollTop;
       const height = doc.scrollHeight - doc.clientHeight;
-      const scrolled = (scrollTop / height) * 100;
+      const scrolled = (winScroll / height) * 100;
       document.getElementById('progress').style.width = scrolled + '%';
     });
   </script>
