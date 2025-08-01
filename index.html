@@ -1,201 +1,136 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Invitación Mágica</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Una Sorpresa Para Ti 💖</title>
   <style>
-    /* ===== Variables ===== */
     :root {
-      --primary: #ff6f91;          /* color principal */
-      --secondary: #fff5f8;        /* fondo suave */
-      --accent: #ffd1e3;           /* resaltados */
-      --text: #2c2c2c;             /* texto principal */
-      --bg-card: #ffffff;          /* fondo tarjetas */
-      --shadow-color: rgba(0,0,0,0.06);
-      --radius: 1rem;
-      --font-title: 'Great Vibes', cursive;
-      --font-body: 'Quicksand', sans-serif;
-      --spacing: 1rem;
-      --max-width: 420px;
-      --transition: 0.4s ease;
-      --tap: 44px;
-    }
-    /* ===== Reset ===== */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin:0; padding:0; height:100%; overflow-x:hidden; }
-    body {
-      font-family: var(--font-body);
-      color: var(--text);
-      background: var(--secondary);
-      padding: env(safe-area-inset-top) var(--spacing) env(safe-area-inset-bottom) var(--spacing);
-      display:flex; justify-content:center;
-    }
-    /* ===== Scrollbar ligero ===== */
-    .container::-webkit-scrollbar { width:6px; }
-    .container::-webkit-scrollbar-thumb { background: var(--accent); border-radius:3px; }
-    /* ===== Container ===== */
-    .container {
-      max-width: var(--max-width);
-      width: 100%;
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 25px var(--shadow-color);
-      overflow-y: auto;
-      max-height: calc(100vh - 2*var(--spacing));
-      position: relative;
-      scroll-behavior: smooth;
-    }
-    /* ===== Progress Bar ===== */
-    #progress {
-      position: absolute; top:0; left:0; height:3px;
-      background: var(--primary); width:0; z-index:10;
-      transition: width 0.2s ease;
-    }
-    /* ===== Header ===== */
-    header {
-      position: sticky; top:0; background: var(--bg-card);
-      padding: var(--spacing) 0;
-      text-align: center;
-      z-index:5;
-      box-shadow: 0 2px 8px var(--shadow-color);
-    }
-    header h1 {
-      font-family: var(--font-title);
-      font-size:2.6rem;
-      color: var(--primary);
-      line-height:1.2;
-      margin-bottom:0.3rem;
-      position: relative;
-    }
-    /* Subrayado animado */
-    header h1::after {
-      content: '';
-      position: absolute; left:50%; bottom:-4px;
-      width:0; height:3px; background:var(--primary);
-      border-radius:2px;
-      transition: width 0.6s ease, left 0.6s ease;
-    }
-    header h1:hover::after {
-      width:60%; left:20%;
-    }
-    header p {
-      font-size:1rem;
-      color: var(--text);
-      margin-top:0.5rem;
-    }
-    /* ===== Sections ===== */
-    section { padding: var(--spacing); }
-    section + section { border-top:1px solid var(--accent); }
-    section h2 {
-      font-size:1.3rem;
-      color: var(--primary);
-      margin-bottom:0.5rem;
-    }
-    section p { font-size:1rem; line-height:1.6; margin-bottom:var(--spacing); }
-    /* ===== Lists ===== */
-    ul, ol { padding-left:1.2rem; margin-bottom:var(--spacing); }
-    ul { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; }
-    ul li {
-      font-size:1rem;
-      display:flex; align-items:center;
-      min-height: var(--tap);
-    }
-    ul li::before {
-      content:'🎒'; margin-right:0.5rem;
-      font-size:1.1rem;
-    }
-    ol li {
-      font-size:1rem;
-      margin-bottom:0.5rem;
-      padding-left:0.4rem;
-      min-height: var(--tap);
-      border-left: 3px solid var(--accent);
-    }
-    /* ===== Button final ===== */
-    .action {
-      text-align:center;
-      margin: var(--spacing) 0;
-    }
-    .action button {
-      padding:0.6rem 1rem;
-      font-size:1rem;
-      color:#fff;
-      background: var(--primary);
-      border:none;
-      border-radius: var(--radius);
-      min-height: var(--tap);
-      transition: background var(--transition), transform var(--transition);
-    }
-    .action button:hover { background: var(--accent); }
-    .action button:active { transform: scale(0.96); }
-    /* ===== Poema ===== */
-    .poem {
-      font-family: var(--font-title);
-      font-size:1rem;
-      text-align:center;
-      margin:var(--spacing) 0;
-      color: var(--text);
-    }
-    /* ===== Animación suave para cada section ===== */
-    section { opacity:0; transform: translateY(15px); animation: enter 0.5s forwards; }
-    section:nth-of-type(1) { animation-delay:0.2s; }
-    section:nth-of-type(2) { animation-delay:0.4s; }
-    section:nth-of-type(3) { animation-delay:0.6s; }
-    section:nth-of-type(4) { animation-delay:0.8s; }
-    @keyframes enter { to { opacity:1; transform: translateY(0);} }
-    /* ===== Responsive ===== */
-    @media (max-width:430px) {
-      header h1 { font-size:2.2rem; }
-      section h2 { font-size:1.2rem; }
-      p, li, button { font-size:0.95rem; }
-    }
+      --rosa: #ff7eb9;
+      --amarillo: #fce38a;
+      --morado: #6a0572;
+      --blanco: #fff;
+      --sombra: rgba(0, 0, 0, 0.15);
+      --trans: 0.4s ease;
+      --fuente-titulo: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --fuente-texto: 'Open Sans', sans-serif;
+    }* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--fuente-texto);
+  background: linear-gradient(135deg, var(--rosa), var(--morado));
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--morado);
+}
+.carta {
+  background: var(--blanco);
+  border-radius: 2rem;
+  padding: 2.5rem;
+  box-shadow: 0 10px 25px var(--sombra);
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  animation: entrada 1s ease-out forwards;
+  opacity: 0;
+}
+h1 {
+  font-family: var(--fuente-titulo);
+  font-size: 2.2rem;
+  color: var(--rosa);
+  margin-bottom: 1rem;
+  animation: pop 1s ease-out 0.5s forwards;
+  opacity: 0;
+}
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 1rem;
+  animation: deslizamiento 1s ease-out 1s forwards;
+  opacity: 0;
+}
+.decoracion {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: var(--rosa);
+  transform: rotate(45deg);
+  opacity: 0.7;
+  animation: flotar 6s infinite ease-in;
+}
+.decoracion::before, .decoracion::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: var(--rosa);
+  border-radius: 50%;
+}
+.decoracion::before {
+  top: -0.5rem;
+  left: 0;
+}
+.decoracion::after {
+  top: 0;
+  left: 0.5rem;
+}
+
+@keyframes entrada {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes deslizamiento {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes flotar {
+  0% { transform: translateY(0) rotate(45deg) scale(1); opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-200px) rotate(45deg) scale(0.5); opacity: 0; }
+}
+
+@media (max-width: 500px) {
+  .carta {
+    padding: 2rem 1.5rem;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="progress"></div>
-    <header>
-      <h1>¡Tu Día Mágico!</h1>
-      <p>Un plan diseñado para la maestra de corazones más especial.</p>
-    </header>
-    <section id="sec1" tabindex="0">
-      <h2>Preparativos</h2>
-      <ul>
-        <li>Ropa cómoda</li>
-        <li>Traje de baño</li>
-        <li>Toalla ligera</li>
-        <li>Protector solar</li>
-      </ul>
-    </section>
-    <section id="sec2" tabindex="0">
-      <h2>Pasos</h2>
-      <ol>
-        <li>Indícame la hora más temprana.</li>
-        <li>Relájate y sonríe.</li>
-        <li>Déjate sorprender.</li>
-      </ol>
-    </section>
-    <section id="sec3" tabindex="0">
-      <h2>Inspiración</h2>
-      <div class="poem">"Contigo aprendí que la felicidad nace en la sencillez y florece en tu sonrisa."</div>
-    </section>
-    <section id="sec4" class="action" tabindex="0">
-      <button aria-label="Enviar hora">Enviar Hora</button>
-    </section>
-    <footer>
-      Con todo mi cariño,<br>Tu Novio 💗
-    </footer>
+  <div class="carta">
+    <h1>Mi amor hermosa 💖</h1>
+    <p>Hoy es un día muy especial, y no podía dejarlo pasar sin celebrarte como mereces.</p>
+    <p>He preparado algo especial, con cariño y mucho amor... un plan secreto sólo para nosotros.</p>
+    <p>No necesitas nada más que tu sonrisa, ropa cómoda... y tu traje de baño favorito 🩱😉</p>
+    <p>Prepárate para relajarte, reír y disfrutar juntas memorias inolvidables.</p>
+    <p>Nos vemos muy pronto, te amo 🌹</p>
   </div>
   <script>
-    // Scroll progress
-    const prog = document.getElementById('progress');
-    window.addEventListener('scroll', () => {
-      const doc = document.documentElement;
-      const percent = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
-      prog.style.width = percent + '%';
-    });
+    const cantidad = 20;
+    for (let i = 0; i < cantidad; i++) {
+      const corazon = document.createElement('div');
+      corazon.className = 'decoracion';
+      corazon.style.left = Math.random() * 100 + '%';
+      corazon.style.top = Math.random() * 100 + '%';
+      corazon.style.width = corazon.style.height = (Math.random() * 0.8 + 0.7) + 'rem';
+      corazon.style.animationDelay = (Math.random() * 5) + 's';
+      document.body.appendChild(corazon);
+    }
   </script>
 </body>
 </html>
