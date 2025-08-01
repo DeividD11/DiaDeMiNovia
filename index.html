@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invitación Mágica 🌟</title>
+  <title>Invitación Mágica ✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -13,146 +13,220 @@
       --radius: 2rem;
       --font-heading: 'Poppins', sans-serif;
       --font-body: 'Roboto', sans-serif;
-      --heart-color: #FF6B81;
+      --heart: #FF6B81;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       min-height: 100vh;
       background: linear-gradient(135deg, var(--accent), var(--secondary));
       font-family: var(--font-body);
       color: var(--dark);
-      padding: 1rem;
-    }
-    .card {
-      position: relative;
-      background: #fff;
-      border-radius: var(--radius);
-      max-width: 480px;
-      width: 100%;
-      padding: 2.5rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       overflow: hidden;
-      animation: fadeIn 1s ease-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .header {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .header h1 {
-      font-family: var(--font-heading);
-      font-size: 2.6rem;
-      color: var(--primary);
-      margin-bottom: 0.25rem;
-    }
-    .header p {
-      font-size: 1rem;
-      color: var(--dark);
-      font-style: italic;
-    }
-    .decor {
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      background: var(--heart-color);
-      clip-path: polygon(50% 0%, 61% 17%, 81% 17%, 89% 34%, 100% 50%, 89% 66%, 81% 83%, 61% 83%, 50% 100%, 39% 83%, 19% 83%, 11% 66%, 0% 50%, 11% 34%, 19% 17%, 39% 17%);
-      opacity: 0.1;
-      animation: float 6s ease-in-out infinite;
-    }
-    .decor:nth-child(2) {
-      top: -20px;
-      right: -20px;
-      animation-duration: 8s;
-    }
-    .decor:nth-child(3) {
-      bottom: -20px;
-      left: -30px;
-      animation-duration: 7s;
-    }
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    .content p {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    .tips {
-      background: var(--accent);
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-      margin: 1rem 0 1.5rem;
-    }
-    .tips p {
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-    .tips ul {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-    }
-    .tips li {
-      position: relative;
-      padding-left: 1.5rem;
-      font-size: 0.95rem;
-    }
-    .tips li::before {
-      content: '💖';
-      position: absolute;
-      left: 0;
-    }
-    .schedule p {
-      text-align: center;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--dark);
-      opacity: 0.8;
-      margin-top: 1rem;
-      line-height: 1.4;
-    }
+      padding: 1rem;
+      animation: fadeInBody 2s ease-in;
+    }@keyframes fadeInBody {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.card {
+  position: relative;
+  background: #fff;
+  border-radius: var(--radius);
+  max-width: 500px;
+  width: 100%;
+  padding: 2.5rem;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  overflow: hidden;
+  animation: popUp 1.2s ease-out;
+}
+
+@keyframes popUp {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  animation: slideDown 1.2s ease;
+}
+
+.header h1 {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.header p {
+  font-size: 1rem;
+  color: var(--dark);
+  font-style: italic;
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.content {
+  text-align: center;
+  animation: fadeInText 2s ease-in-out;
+}
+
+.content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tips {
+  background: var(--accent);
+  border-radius: 1.2rem;
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0 2rem;
+  animation: pulse 2s infinite;
+}
+
+.tips p {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.tips ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.tips li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 1rem;
+}
+
+.tips li::before {
+  content: '💖';
+  position: absolute;
+  left: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255,107,129, 0.4); }
+  50% { transform: scale(1.02); box-shadow: 0 0 15px rgba(255,107,129, 0.25); }
+}
+
+.schedule {
+  text-align: center;
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+  animation: fadeInText 2s ease-in-out;
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--dark);
+  opacity: 0.85;
+  line-height: 1.5;
+  animation: fadeInText 3s ease-in-out;
+}
+
+.floating-hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--heart);
+  clip-path: polygon(50% 0%, 61% 17%, 81% 17%, 89% 34%, 100% 50%, 89% 66%, 81% 83%, 61% 83%, 50% 100%, 39% 83%, 19% 83%, 11% 66%, 0% 50%, 11% 34%, 19% 17%, 39% 17%);
+  opacity: 0.4;
+  animation: floatHeart 6s infinite ease-in;
+}
+
+.heart:nth-child(odd) {
+  background: #ffb3c6;
+  animation-duration: 8s;
+}
+
+.heart:nth-child(even) {
+  background: #ff6b81;
+  animation-duration: 6s;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="decor"></div>
-    <div class="decor"></div>
-    <div class="decor"></div>
+  <div class="floating-hearts">
+    <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart" style="left: 25%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 40%; animation-delay: 4s;"></div>
+    <div class="heart" style="left: 55%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 70%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 85%; animation-delay: 5s;"></div>
+  </div>  <div class="card">
     <div class="header">
       <h1>Un Día Único 💫</h1>
-      <p>Solo tú y yo en un mundo de sorpresas...</p>
+      <p>Solo tú y yo en un mundo lleno de amor...</p>
     </div>
     <div class="content">
-      <p>Amor mío, hoy quiero llevarte a vivir momentos inolvidables. Guarda espacio en tu corazón y déjate llevar por la magia que he preparado solo para ti.</p>
-    </div>
-    <div class="tips">
-      <p><strong>Consejos para hoy:</strong></p>
-      <ul>
-        <li>Ponte cómoda</li>
-        <li>Lleva tu traje de baño</li>
-        <li>No olvides tu toalla</li>
-        <li>Carga energías</li>
-      </ul>
-    </div>
-    <div class="schedule">
-      <p>Cuando puedas, envíame un mensaje con la hora más temprana que te acomode para encontrarnos.</p>
-    </div>
-    <div class="footer">
-      Con todo mi amor,<br>
-      Tu Novio para Siempre ❤️
-    </div>
+      <p>Amor mío, he preparado una pequeña aventura para ti.<br>
+      Un plan secreto, lleno de detalles pensados con el corazón.<br>
+      Hoy no necesitas saber el destino, solo dejarte llevar... 💕</p>
+    </div><div class="tips">
+  <p>✨ Cosas que debes llevar:</p>
+  <ul>
+    <li>Una sonrisa enorme</li>
+    <li>Tu traje de baño</li>
+    <li>Ropa cómoda</li>
+    <li>Toalla ligera</li>
+  </ul>
+</div>
+
+<div class="schedule">
+  <p>Solo dime lo más temprano que podemos vernos,<br>
+  y yo haré que el resto del día sea inolvidable. 🕊️</p>
+</div>
+
+<div class="footer">
+  Con todo mi amor,<br>
+  Tu Novio que no ve la hora de verte 🥰
+</div>
+
   </div>
 </body>
 </html>
