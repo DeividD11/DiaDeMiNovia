@@ -2,120 +2,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Invitación Inolvidable</title>
+  <title>Invitación Mágica</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     /* ===== Variables ===== */
     :root {
-      --primary: #ff7fa9;
-      --secondary: #fff5f8;
-      --accent: #ffd1e3;
-      --text-main: #2c2c2c;
-      --bg-card: #ffffff;
-      --shadow: rgba(0,0,0,0.07);
+      --primary: #ff6f91;          /* color principal */
+      --secondary: #fff5f8;        /* fondo suave */
+      --accent: #ffd1e3;           /* resaltados */
+      --text: #2c2c2c;             /* texto principal */
+      --bg-card: #ffffff;          /* fondo tarjetas */
+      --shadow-color: rgba(0,0,0,0.06);
       --radius: 1rem;
       --font-title: 'Great Vibes', cursive;
       --font-body: 'Quicksand', sans-serif;
       --spacing: 1rem;
       --max-width: 420px;
-      --transition: 0.3s ease;
-      --tap-size: 44px;
+      --transition: 0.4s ease;
+      --tap: 44px;
     }
     /* ===== Reset ===== */
-    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
-    html, body { height:100%; overflow-x:hidden; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin:0; padding:0; height:100%; overflow-x:hidden; }
     body {
       font-family: var(--font-body);
-      color: var(--text-main);
-      background: linear-gradient(180deg, var(--secondary), var(--accent));
+      color: var(--text);
+      background: var(--secondary);
       padding: env(safe-area-inset-top) var(--spacing) env(safe-area-inset-bottom) var(--spacing);
       display:flex; justify-content:center;
     }
+    /* ===== Scrollbar ligero ===== */
+    .container::-webkit-scrollbar { width:6px; }
+    .container::-webkit-scrollbar-thumb { background: var(--accent); border-radius:3px; }
     /* ===== Container ===== */
     .container {
       max-width: var(--max-width);
-      width:100%;
+      width: 100%;
       background: var(--bg-card);
       border-radius: var(--radius);
-      box-shadow: 0 8px 20px var(--shadow);
+      box-shadow: 0 10px 25px var(--shadow-color);
       overflow-y: auto;
       max-height: calc(100vh - 2*var(--spacing));
-      scroll-behavior: smooth;
       position: relative;
+      scroll-behavior: smooth;
     }
     /* ===== Progress Bar ===== */
-    #progress { position: absolute; top:0; left:0; height:4px; background: var(--primary); width:0; }
+    #progress {
+      position: absolute; top:0; left:0; height:3px;
+      background: var(--primary); width:0; z-index:10;
+      transition: width 0.2s ease;
+    }
     /* ===== Header ===== */
     header {
-      text-align: center;
+      position: sticky; top:0; background: var(--bg-card);
       padding: var(--spacing) 0;
-      background: var(--bg-card);
-      position: sticky; top:0;
-      z-index:10;
-      box-shadow: 0 2px 5px var(--shadow);
+      text-align: center;
+      z-index:5;
+      box-shadow: 0 2px 8px var(--shadow-color);
     }
     header h1 {
       font-family: var(--font-title);
-      font-size:2.4rem;
+      font-size:2.6rem;
       color: var(--primary);
       line-height:1.2;
+      margin-bottom:0.3rem;
+      position: relative;
+    }
+    /* Subrayado animado */
+    header h1::after {
+      content: '';
+      position: absolute; left:50%; bottom:-4px;
+      width:0; height:3px; background:var(--primary);
+      border-radius:2px;
+      transition: width 0.6s ease, left 0.6s ease;
+    }
+    header h1:hover::after {
+      width:60%; left:20%;
     }
     header p {
       font-size:1rem;
+      color: var(--text);
       margin-top:0.5rem;
     }
     /* ===== Sections ===== */
-    section {
-      padding: var(--spacing);
-      border-bottom:1px solid var(--accent);
-    }
-    section:last-of-type { border-bottom:none; }
+    section { padding: var(--spacing); }
+    section + section { border-top:1px solid var(--accent); }
     section h2 {
       font-size:1.3rem;
       color: var(--primary);
-      margin-bottom:0.6rem;
+      margin-bottom:0.5rem;
     }
     section p { font-size:1rem; line-height:1.6; margin-bottom:var(--spacing); }
     /* ===== Lists ===== */
     ul, ol { padding-left:1.2rem; margin-bottom:var(--spacing); }
-    ul { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
-    ul li { display:flex; align-items:center; font-size:1rem; min-height: var(--tap-size); }
-    ul li::before { content:'🌟'; margin-right:0.5rem; }
-    ol li { margin-bottom:0.6rem; font-size:1rem; padding-left:0.4rem; border-left: 3px solid var(--accent); min-height: var(--tap-size); }
+    ul { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; }
+    ul li {
+      font-size:1rem;
+      display:flex; align-items:center;
+      min-height: var(--tap);
+    }
+    ul li::before {
+      content:'🎒'; margin-right:0.5rem;
+      font-size:1.1rem;
+    }
+    ol li {
+      font-size:1rem;
+      margin-bottom:0.5rem;
+      padding-left:0.4rem;
+      min-height: var(--tap);
+      border-left: 3px solid var(--accent);
+    }
+    /* ===== Button final ===== */
+    .action {
+      text-align:center;
+      margin: var(--spacing) 0;
+    }
+    .action button {
+      padding:0.6rem 1rem;
+      font-size:1rem;
+      color:#fff;
+      background: var(--primary);
+      border:none;
+      border-radius: var(--radius);
+      min-height: var(--tap);
+      transition: background var(--transition), transform var(--transition);
+    }
+    .action button:hover { background: var(--accent); }
+    .action button:active { transform: scale(0.96); }
     /* ===== Poema ===== */
-    .poem { font-family: var(--font-title); font-size:1rem; text-align:center; margin:var(--spacing) 0; }
-    /* ===== Footer ===== */
-    footer { text-align:center; padding:var(--spacing) 0; font-size:0.9rem; }
-    /* ===== Interaction ===== */
-    button { display:block; margin:0 auto; padding:0.6rem 1.2rem; background:var(--primary); color:#fff; border:none; border-radius:var(--radius); font-size:1rem; transition: transform var(--transition); }
-    button:active { transform: scale(0.97); }
-    /* ===== Section Nav Dots ===== */
-    .nav-dots { position: fixed; right: 1rem; top:50%; transform: translateY(-50%); display:flex; flex-direction:column; gap:0.5rem; z-index:10; }
-    .nav-dots button { width:10px; height:10px; background:var(--accent); border-radius:50%; border:none; transition: background var(--transition); }
-    .nav-dots button.active { background:var(--primary); }
-    /* ===== Animations ===== */
-    @keyframes fadeInUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
-    section { animation: fadeInUp 0.5s ease both; }
-    /* ===== Media ===== */
+    .poem {
+      font-family: var(--font-title);
+      font-size:1rem;
+      text-align:center;
+      margin:var(--spacing) 0;
+      color: var(--text);
+    }
+    /* ===== Animación suave para cada section ===== */
+    section { opacity:0; transform: translateY(15px); animation: enter 0.5s forwards; }
+    section:nth-of-type(1) { animation-delay:0.2s; }
+    section:nth-of-type(2) { animation-delay:0.4s; }
+    section:nth-of-type(3) { animation-delay:0.6s; }
+    section:nth-of-type(4) { animation-delay:0.8s; }
+    @keyframes enter { to { opacity:1; transform: translateY(0);} }
+    /* ===== Responsive ===== */
     @media (max-width:430px) {
-      header h1 { font-size:2rem; }
+      header h1 { font-size:2.2rem; }
       section h2 { font-size:1.2rem; }
-      ul li, ol li { font-size:0.95rem; }
+      p, li, button { font-size:0.95rem; }
     }
   </style>
 </head>
 <body>
-  <div class="nav-dots" aria-hidden="true">
-    <button data-target="#sec1" class="active"></button>
-    <button data-target="#sec2"></button>
-    <button data-target="#sec3"></button>
-    <button data-target="#sec4"></button>
-  </div>
-  <div id="progress"></div>
-  <div class="container" role="main">
+  <div class="container">
+    <div id="progress"></div>
     <header>
-      <h1>¡Tu Sorpresa Especial!</h1>
-      <p>Un detalle pensado con cariño para ti, maestra de pequeños corazones.</p>
+      <h1>¡Tu Día Mágico!</h1>
+      <p>Un plan diseñado para la maestra de corazones más especial.</p>
     </header>
     <section id="sec1" tabindex="0">
       <h2>Preparativos</h2>
@@ -129,38 +171,30 @@
     <section id="sec2" tabindex="0">
       <h2>Pasos</h2>
       <ol>
-        <li>Indícame la hora más temprana que puedas.</li>
+        <li>Indícame la hora más temprana.</li>
         <li>Relájate y sonríe.</li>
-        <li>Déjate llevar por la ilusión.</li>
+        <li>Déjate sorprender.</li>
       </ol>
     </section>
     <section id="sec3" tabindex="0">
       <h2>Inspiración</h2>
-      <div class="poem">"En cada gesto tuyo, florece mi alegría; gracias por ser mi guía y mi poesía."</div>
+      <div class="poem">"Contigo aprendí que la felicidad nace en la sencillez y florece en tu sonrisa."</div>
     </section>
-    <section id="sec4" tabindex="0">
-      <button aria-label="Enviar hora" onclick="alert('¡Esperando tu mensaje con amor! 😊');">Enviar Hora</button>
+    <section id="sec4" class="action" tabindex="0">
+      <button aria-label="Enviar hora">Enviar Hora</button>
     </section>
     <footer>
       Con todo mi cariño,<br>Tu Novio 💗
     </footer>
-  </div>  <script>
+  </div>
+  <script>
     // Scroll progress
+    const prog = document.getElementById('progress');
     window.addEventListener('scroll', () => {
       const doc = document.documentElement;
-      const scrolled = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
-      document.getElementById('progress').style.width = scrolled + '%';
-      // update nav-dots
-      document.querySelectorAll('section').forEach((sec, i) => {
-        const rect = sec.getBoundingClientRect();
-        document.querySelectorAll('.nav-dots button')[i].classList.toggle('active', rect.top <= window.innerHeight/2 && rect.bottom >= window.innerHeight/2);
-      });
+      const percent = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+      prog.style.width = percent + '%';
     });
-    // Nav-dots click
-    document.querySelectorAll('.nav-dots button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelector(btn.dataset.target).scrollIntoView({behavior:'smooth'});
-      });
-    });
-  </script></body>
+  </script>
+</body>
 </html>
