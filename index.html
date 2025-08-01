@@ -2,32 +2,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invitación Especial</title>
+  <title>Invitación Sorpresa 🌹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #FF6B81;
-      --secondary-color: #FFADC6;
+      --secondary-color: #FFD1DC;
+      --accent-color: #FFF0F5;
+      --text-color: #333;
       --font-heading: 'Poppins', sans-serif;
       --font-body: 'Roboto', sans-serif;
+      --radius: 2rem;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
       font-family: var(--font-body);
-      color: #333;
+      color: var(--text-color);
+      padding: 1rem;
     }
     .card {
-      background: white;
-      border-radius: 2rem;
-      max-width: 400px;
-      width: 90%;
+      background: #fff;
+      border-radius: var(--radius);
+      max-width: 500px;
+      width: 100%;
       padding: 2rem;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      text-align: center;
       position: relative;
       overflow: hidden;
       animation: fadeInUp 1s ease-out;
@@ -35,6 +43,100 @@
     .card::before {
       content: '';
       position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.4), transparent 70%);
+      animation: rotateBg 10s linear infinite;
+    }
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      text-align: center;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .instructions {
+      background: var(--accent-color);
+      padding: 1rem;
+      border-radius: 1rem;
+      margin-top: 1.5rem;
+      font-size: 1rem;
+    }
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-weight: 600;
+    }
+    input[type="time"] {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 1rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      display: block;
+      margin: 2rem auto 0;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: var(--font-heading);
+    }
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes rotateBg {
+      from { transform: rotate(0deg);} 
+      to { transform: rotate(360deg);}    
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>💖 Una Sorpresa Para Ti 💖</h1>
+    <p>Mi amor, hoy quiero sorprenderte con un plan especial solo para nosotros dos. No te diré qué haremos, pero sí puedo darte pistas...</p>
+    <div class="instructions">
+      <p><strong>Indicaciones:</strong></p>
+      <ul>
+        <li>Ponte cómoda 😊</li>
+        <li>Lleva tu mejor energía 💃</li>
+        <li>No olvides ropa de baño 👙</li>
+        <li>Y sobre todo, prepárate para sonreír mucho ❤️</li>
+      </ul>
+    </div>
+    <label for="hora">¿A qué hora es lo más temprano que podemos vernos hoy?</label>
+    <input type="time" id="hora" name="hora">
+    <button id="confirmar">Confirmar</button>
+  </div>  <script>
+    document.getElementById('confirmar').addEventListener('click', function() {
+      var hora = document.getElementById('hora').value;
+      if (!hora) {
+        alert('Por favor dime la hora más temprana para vernos ❤️');
+        return;
+      }
+      this.disabled = true;
+      this.textContent = '¡Perfecto, amor! 💌';
+      setTimeout(function() {
+        alert('Anotado. Prepárate para una tarde increíble. Te amo ❤️');
+      }, 600);
+    });
+  </script></body>
+</html>      position: absolute;
       top: -50%; left: -50%;
       width: 200%; height: 200%;
       background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent 70%);
