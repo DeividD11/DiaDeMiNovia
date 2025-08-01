@@ -23,11 +23,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
       color: var(--morado);
-      position: relative;
     }
-    /* Caja principal */
     .carta {
       background: var(--blanco);
       border-radius: 2rem;
@@ -41,25 +38,24 @@
       animation: entrada 1s ease-out forwards;
       opacity: 0;
     }
-    /* Título */
-    h1 {
+    h2 {
       font-family: var(--fuente-titulo);
-      font-size: 2.4rem;
+      font-size: 1.8rem;
       color: var(--rosa);
-      margin-bottom: 1rem;
-      animation: pop 1s ease-out 0.5s forwards;
+      margin: 1.5rem 0 0.5rem;
+      animation: pop 1s ease-out forwards;
       opacity: 0;
     }
-    /* Subtítulos y texto */
-    .carta p {
+    section {
+      animation: deslizamiento 1s ease-out forwards;
+      opacity: 0;
+    }
+    section p {
       font-size: 1.1rem;
       line-height: 1.6;
       color: #444;
       margin-bottom: 1rem;
-      animation: deslizamiento 1s ease-out 1s forwards;
-      opacity: 0;
     }
-    /* Banda decorativa inferior */
     .carta::after {
       content: '';
       position: absolute;
@@ -70,13 +66,11 @@
       background: linear-gradient(90deg, var(--rosa), var(--amarillo), var(--rosa));
       animation: barra 2s infinite;
     }
-    /* Animaciones */
     @keyframes entrada { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     @keyframes pop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
     @keyframes deslizamiento { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
     @keyframes barra { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-    /* Decoraciones móviles */
-    .decoracion {
+    .decor {
       position: absolute;
       width: 1rem;
       height: 1rem;
@@ -85,7 +79,7 @@
       opacity: 0.7;
       animation: flotar 6s infinite ease-in;
     }
-    .decoracion::before, .decoracion::after {
+    .decor::before, .decor::after {
       content: '';
       position: absolute;
       width: 1rem;
@@ -93,35 +87,37 @@
       background: var(--rosa);
       border-radius: 50%;
     }
-    .decoracion::before { top: -0.5rem; left: 0; }
-    .decoracion::after { top: 0; left: 0.5rem; }
+    .decor::before { top: -0.5rem; left: 0; }
+    .decor::after { top: 0; left: 0.5rem; }
     @keyframes flotar { 0% { transform: translateY(0) rotate(45deg) scale(1); opacity: 0.7; } 50% { opacity: 1; } 100% { transform: translateY(-220px) rotate(45deg) scale(0.5); opacity: 0; } }
-    /* Responsive */
     @media (max-width: 520px) {
       .carta { padding: 2rem 1.5rem; }
-      h1 { font-size: 2rem; }
-      .carta p { font-size: 1rem; }
+      h2 { font-size: 1.6rem; }
+      section p { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
   <div class="carta">
-    <h1>Mi amor hermosa 💖</h1>
-    <p>Hoy, en tu día, quiero celebrarte como nunca.</p>
-    <p>He preparado un plan secreto lleno de risas, relajación y momentos inolvidables.</p>
-    <p>Lleva tu traje de baño favorito, una toalla suave y tu mejor actitud.</p>
-    <p>Nos encontraremos a las <strong>4:00 PM</strong> en nuestro rincón especial junto al agua.</p>
-    <p>Escucha tu canción favorita, huele esa fragancia que tanto te encanta y prepárate para un día de puro amor.</p>
-    <p>Después, nos espera un picnic ligero con tus snacks preferidos y una bebida refrescante.</p>
-    <p>Más tarde, veremos atardecer juntos y brindaremos por nosotros.</p>
-    <p>Estoy deseando verte sonreír. ¡Te amo! 🌹</p>
+    <h2>¡Feliz Día de la Novia! 💖</h2>
+    <section>
+      <p>Hoy quiero sorprenderte con un plan muy especial, creado con todo mi cariño para ti.</p>
+    </section>
+    <section>
+      <p>Ven cómoda y no olvides tu traje de baño favorito 🩱😉</p>
+    </section>
+    <section>
+      <p>¿Cuál es la hora más temprana que te viene bien para vernos y comenzar esta sorpresa?</p>
+    </section>
+    <section>
+      <p>Estoy deseando compartir cada instante a tu lado. ¡Te amo! 🌹</p>
+    </section>
   </div>
   <script>
-    // Creación de corazones flotantes
-    const total = 25;
+    const total = 20;
     for (let i = 0; i < total; i++) {
       const el = document.createElement('div');
-      el.className = 'decoracion';
+      el.className = 'decor';
       el.style.left = Math.random() * 100 + '%';
       el.style.top = Math.random() * 100 + '%';
       const size = (Math.random() * 0.8 + 0.6).toFixed(2);
