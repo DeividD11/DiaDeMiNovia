@@ -1,238 +1,203 @@
 <!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Invitación Especial 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    /* Variables de tema */
     :root {
       --primary: #ff6f91;
       --secondary: #ffb6c1;
       --accent: #fff0f5;
-      --dark: #333333;
-      --light: #ffffff;
-      --radius: 1.8rem;
+      --dark: #333;
+      --light: #fff;
+      --radius: 1.5rem;
+      --spacing: 1rem;
       --font-heading: 'Great Vibes', cursive;
       --font-body: 'Poppins', sans-serif;
-    }* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  background: linear-gradient(270deg, #fff0f5, #ffe4e1, #fff0f5);
-  background-size: 600% 600%;
-  animation: gradientShift 20s ease infinite;
-  font-family: var(--font-body);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  position: relative;
-  overflow-x: hidden;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.card {
-  background: var(--light);
-  border-radius: var(--radius);
-  max-width: 520px;
-  width: 100%;
-  padding: 2.5rem;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-  animation: fadeInCard 1.2s ease-out;
-}
-
-@keyframes fadeInCard {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-header h1 {
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  color: var(--primary);
-  animation: typing 5s steps(40, end), blink 0.75s step-end infinite;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid var(--primary);
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
-main p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--dark);
-  margin-bottom: 1.2rem;
-  opacity: 0;
-  animation: fadeUp 1s ease forwards;
-}
-
-main p:nth-of-type(2) { animation-delay: 0.5s; }
-main p:nth-of-type(3) { animation-delay: 1s; }
-
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-  from { opacity: 0; transform: translateY(15px); }
-}
-
-.tips {
-  background: var(--accent);
-  border-radius: 1rem;
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
-  animation: pulse 3s infinite;
-}
-
-.tips ul {
-  columns: 2;
-  list-style: none;
-  padding-left: 0;
-}
-
-.tips li {
-  margin-bottom: 0.75rem;
-}
-
-.tips li::before {
-  content: '💫';
-  margin-right: 0.4rem;
-}
-
-.plan h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--primary);
-}
-
-.plan ol {
-  padding-left: 1.2rem;
-  line-height: 1.6;
-}
-
-.poem {
-  font-style: italic;
-  text-align: center;
-  color: var(--dark);
-  margin: 2rem 0 1rem;
-  animation: fadeIn 2s ease-in-out forwards;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; transform: scale(0.9); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-footer {
-  text-align: center;
-  font-size: 0.95rem;
-  color: var(--dark);
-  margin-top: 2rem;
-  opacity: 0.85;
-}
-
-.confetti, .heart {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.heart {
-  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 18s-6-4.3-8.6-7.7C.5 7.8 2.4 4 5.5 4c1.8 0 3 1.2 3.7 2.2C9.6 5.2 10.8 4 12.5 4c3.1 0 5 3.8 4.1 6.3C16 13.7 10 18 10 18z' fill='%23ff6f91'/%3E%3C/svg%3E");
-  animation: floatHeart 10s linear infinite;
-}
-
-@keyframes floatHeart {
-  0% { transform: translateY(0) rotate(0); opacity: 1; }
-  100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-}
-
+      --transition: 0.3s ease;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: var(--spacing);
+      background: linear-gradient(270deg, var(--accent), var(--secondary), var(--accent));
+      background-size: 400% 400%; animation: gradient 15s ease infinite;
+      font-family: var(--font-body); color: var(--dark);
+      overflow: hidden;
+    }
+    @keyframes gradient {
+      0%,100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    /* Container principal */
+    .card {
+      position: relative;
+      background: var(--light);
+      border-radius: var(--radius);
+      width: 100%; max-width: 520px;
+      padding: calc(var(--spacing) * 2);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+      z-index: 1;
+      display: flex; flex-direction: column;
+      transition: transform var(--transition);
+    }
+    .card:hover { transform: translateY(-5px); }
+    /* Encabezado */
+    header {
+      text-align: center;
+      margin-bottom: calc(var(--spacing) * 1.5);
+      animation: fadeInDown 1s ease;
+    }
+    header h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      color: var(--primary);
+      white-space: nowrap; overflow: hidden; border-right: 2px solid var(--primary);
+      width: 0; animation: typing 4s steps(30) forwards, blinkCaret 0.75s step-end infinite;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: var(--dark);
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+    }
+    @keyframes typing { from { width: 0; } to { width: 100%; } }
+    @keyframes blinkCaret { 50% { border-color: transparent; } }
+    @keyframes fadeInDown { from { opacity:0; transform: translateY(-20px);} to{opacity:1;transform:translateY(0);} }
+    /* Contenido principal */
+    main {
+      flex:1; display:flex; flex-direction:column;
+    }
+    main p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: var(--spacing);
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    main p:nth-child(1) { animation-delay: 1s; }
+    main p:nth-child(2) { animation-delay: 1.5s; }
+    main p:nth-child(3) { animation-delay: 2s; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(10px);} to { opacity:1; transform: translateY(0);} }
+    /* Lista de tips */
+    .tips {
+      background: var(--accent);
+      border-radius: var(--radius);
+      padding: var(--spacing);
+      margin: var(--spacing) 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+      gap: var(--spacing);
+      animation: scalePulse 3s ease-in-out infinite;
+    }
+    .tips div {
+      display:flex; align-items:flex-start;
+      font-size: 0.95rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+    .tips div:nth-child(1) { animation-delay: 2.5s; }
+    .tips div:nth-child(2) { animation-delay: 2.7s; }
+    .tips div:nth-child(3) { animation-delay: 2.9s; }
+    .tips div:nth-child(4) { animation-delay: 3.1s; }
+    .tips div:nth-child(5) { animation-delay: 3.3s; }
+    .tips div::before {
+      content: '💫'; margin-right: 0.5rem; font-size:1.2rem;
+    }
+    @keyframes scalePulse { 0%,100%{transform:scale(1);}50%{transform:scale(1.02);} }
+    /* Plan de acción */
+    .plan {
+      margin: var(--spacing) 0;
+      opacity:0;
+      animation: fadeIn 1s ease 3.5s forwards;
+    }
+    .plan h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--primary);
+    }
+    .plan ol {
+      padding-left: 1.2rem; font-size: 0.95rem; line-height:1.5;
+    }
+    /* Poema decorativo */
+    .poem {
+      font-style: italic;
+      text-align: center;
+      margin: var(--spacing) 0;
+      color: var(--dark);
+      font-size: 0.95rem;
+      opacity:0;
+      animation: fadeIn 1s ease 4.2s forwards;
+    }
+    /* Pie de página */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--dark);
+      opacity: 0;
+      animation: fadeIn 1s ease 4.8s forwards;
+      margin-top: var(--spacing);
+    }
+    /* Elementos decorativos */
+    .heart {
+      position:absolute; width:20px; height:20px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23ff6f91' d='M10 18s-6-4.3-8.6-7.7C.5 7.8 2.4 4 5.5 4c1.8 0 3 1.2 3.7 2.2C9.6 5.2 10.8 4 12.5 4c3.1 0 5 3.8 4.1 6.3C16 13.7 10 18 10 18z'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:0; opacity:0.6;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp { 0%{transform:translateY(100vh) scale(0.5);}100%{transform:translateY(-20vh) scale(1);opacity:0;} }
+    /* Generación dinámica */
   </style>
 </head>
 <body>
   <div class="card">
     <header>
-      <h1>Una Sorpresa para Ti 💕</h1>
+      <h1>Una Sorpresa para Ti</h1>
+      <p>Prepara tu corazón para un momento mágico</p>
     </header>
     <main>
-      <p>Mi amor, hoy quiero que te dejes llevar por la magia de este momento que he preparado especialmente para ti. Es un día para sonreír, relajarte y sentir cuánto te amo.</p>
-      <p>Imagina un lugar donde solo estamos tú y yo, sin prisas, sin estrés… solo alegría, ternura y conexión. Estoy deseando verte feliz y verte brillar.</p>
-      <p>Por eso, quiero que me digas cuál es la hora más temprana en la que podemos vernos. Mientras tanto, ve preparándote con lo siguiente:</p><div class="tips">
-    <ul>
-      <li>Usa ropa cómoda</li>
-      <li>Lleva tu ropa de baño</li>
-      <li>No olvides tu toalla</li>
-      <li>Usa bloqueador solar</li>
-      <li>Ten tu mejor sonrisa lista</li>
-      <li>Confía en la sorpresa 💌</li>
-    </ul>
+      <p>Hoy he planeado algo muy especial solo para ti. Quiero verte sonreír y disfrutar cada segundo.</p>
+      <p>Imagina un lugar secreto donde el tiempo se detiene y solo existimos tú y yo, rodeados de nuestra alegría.</p>
+      <p>Para que todo sea perfecto, dime la hora más temprana en la que puedas verme.</p>
+      <div class="tips">
+        <div>💖 Ropa cómoda</div>
+        <div>💖 Traje de baño</div>
+        <div>💖 Toalla ligera</div>
+        <div>💖 Bloqueador solar</div>
+        <div>💖 Tu mejor sonrisa</div>
+      </div>
+      <div class="plan">
+        <h2>¿Qué sigue?</h2>
+        <ol>
+          <li>Envía un mensaje con tu hora ideal.</li>
+          <li>Relájate y prepárate.</li>
+          <li>Déjate sorprender.</li>
+        </ol>
+      </div>
+      <div class="poem">
+        "Eres mi refugio,<br>mi paz en cada suspiro,<br>hoy y siempre contigo."
+      </div>
+    </main>
+    <footer>
+      Con amor,<br>Tu Novio 💗
+    </footer>
   </div>
-
-  <div class="plan">
-    <h2>¿Qué sigue?</h2>
-    <ol>
-      <li>Envíame un mensaje con la hora más temprana en que puedas salir.</li>
-      <li>Empaca con calma y emoción.</li>
-      <li>Prepárate para desconectarte del mundo y disfrutar.</li>
-    </ol>
-  </div>
-
-  <div class="poem">
-    <p>"Eres mi lugar favorito,<br>
-    donde quiero estar siempre,<br>
-    sin importar el cuándo,<br>
-    solo el contigo."
-    </p>
-  </div>
-</main>
-<footer>
-  Con todo mi corazón,<br>Tu novio 💗
-</footer>
-
-  </div>  <script>
-    function createFloatingElement(type, total, className, speedRange) {
-      for (let i = 0; i < total; i++) {
-        const el = document.createElement("div");
-        el.className = className;
-        el.style.left = Math.random() * 100 + "%";
-        el.style.top = Math.random() * 100 + 100 + "%";
-        el.style.animationDuration = (Math.random() * (speedRange[1] - speedRange[0]) + speedRange[0]) + "s";
-        el.style.opacity = Math.random();
-        el.style.transform = `scale(${Math.random() * 0.6 + 0.4})`;
-        document.body.appendChild(el);
-      }
+  <script>
+    // Generar corazones flotantes
+    const count = 12;
+    for(let i=0;i<count;i++){
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random()*100 + '%';
+      heart.style.animationDuration = (6 + Math.random()*4) + 's';
+      heart.style.animationDelay = Math.random()*3 + 's';
+      document.body.appendChild(heart);
     }
-
-    createFloatingElement("heart", 15, "heart", [8, 15]);
-  </script></body>
+  </script>
+</body>
 </html>
