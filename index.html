@@ -5,116 +5,169 @@
   <title>Una Sorpresa Para Ti 💖</title>
   <style>
     :root {
-      --rosa: #ff7eb9;
-      --amarillo: #fce38a;
-      --morado: #6a0572;
+      --rosa-claro: #ffd3e2;
+      --rosa: #ff6fa8;
+      --rosa-oscuro: #d94f87;
+      --dorado: #ffe9a7;
       --blanco: #fff;
-      --sombra: rgba(0, 0, 0, 0.15);
-      --trans: 0.4s ease;
+      --sombra: rgba(0, 0, 0, 0.1);
       --fuente-titulo: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       --fuente-texto: 'Open Sans', sans-serif;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: var(--fuente-texto);
-      background: linear-gradient(135deg, var(--rosa), var(--morado));
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--morado);
-    }
-    .carta {
-      background: var(--blanco);
-      border-radius: 2rem;
-      padding: 3rem;
-      box-shadow: 0 10px 25px var(--sombra);
-      max-width: 500px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      animation: entrada 1s ease-out forwards;
-      opacity: 0;
-    }
-    h2 {
-      font-family: var(--fuente-titulo);
-      font-size: 1.8rem;
-      color: var(--rosa);
-      margin: 1.5rem 0 0.5rem;
-      animation: pop 1s ease-out forwards;
-      opacity: 0;
-    }
-    section {
-      animation: deslizamiento 1s ease-out forwards;
-      opacity: 0;
-    }
-    section p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #444;
-      margin-bottom: 1rem;
-    }
-    .carta::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, var(--rosa), var(--amarillo), var(--rosa));
-      animation: barra 2s infinite;
-    }
-    @keyframes entrada { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    @keyframes pop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-    @keyframes deslizamiento { 0% { transform: translateY(20px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-    @keyframes barra { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-    .decor {
-      position: absolute;
-      width: 1rem;
-      height: 1rem;
-      background: var(--rosa);
-      transform: rotate(45deg);
-      opacity: 0.7;
-      animation: flotar 6s infinite ease-in;
-    }
-    .decor::before, .decor::after {
-      content: '';
-      position: absolute;
-      width: 1rem;
-      height: 1rem;
-      background: var(--rosa);
-      border-radius: 50%;
-    }
-    .decor::before { top: -0.5rem; left: 0; }
-    .decor::after { top: 0; left: 0.5rem; }
-    @keyframes flotar { 0% { transform: translateY(0) rotate(45deg) scale(1); opacity: 0.7; } 50% { opacity: 1; } 100% { transform: translateY(-220px) rotate(45deg) scale(0.5); opacity: 0; } }
-    @media (max-width: 520px) {
-      .carta { padding: 2rem 1.5rem; }
-      h2 { font-size: 1.6rem; }
-      section p { font-size: 1rem; }
-    }
+    }* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--fuente-texto);
+  background: radial-gradient(circle at top left, var(--rosa-claro), var(--rosa));
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--rosa-oscuro);
+  position: relative;
+  overflow: hidden;
+}
+
+.carta {
+  background: var(--blanco);
+  border-radius: 2rem;
+  padding: 3rem;
+  box-shadow: 0 15px 35px var(--sombra);
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 3px solid var(--dorado);
+  animation: entrada 1s ease-out forwards;
+  opacity: 0;
+}
+
+h2 {
+  font-family: var(--fuente-titulo);
+  font-size: 2.2rem;
+  color: var(--rosa);
+  margin: 1rem 0 1.5rem;
+  animation: pop 1s ease-out forwards;
+  opacity: 0;
+}
+
+section {
+  margin-bottom: 1.5rem;
+  animation: deslizamiento 1s ease-out forwards;
+  opacity: 0;
+}
+
+section p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #555;
+  background: var(--rosa-claro);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+}
+
+.carta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--rosa), var(--dorado), var(--rosa));
+  animation: barra 3s linear infinite;
+}
+
+.decor {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: var(--rosa);
+  transform: rotate(45deg);
+  opacity: 0.6;
+  animation: flotar 6s infinite ease-in;
+}
+
+.decor::before, .decor::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: var(--rosa);
+  border-radius: 50%;
+}
+
+.decor::before { top: -0.5rem; left: 0; }
+.decor::after { top: 0; left: 0.5rem; }
+
+@keyframes entrada {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes deslizamiento {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes barra {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes flotar {
+  0% { transform: translateY(0) rotate(45deg) scale(1); opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-240px) rotate(45deg) scale(0.5); opacity: 0; }
+}
+
+@media (max-width: 520px) {
+  .carta { padding: 2rem 1.5rem; }
+  h2 { font-size: 2rem; }
+  section p { font-size: 1rem; }
+}
+
   </style>
 </head>
 <body>
   <div class="carta">
-    <h2>¡Feliz Día de la Novia! 💖</h2>
-    <section>
-      <p>Hoy quiero sorprenderte con un plan muy especial, creado con todo mi cariño para ti.</p>
-    </section>
-    <section>
-      <p>Ven cómoda y no olvides tu traje de baño favorito 🩱😉</p>
-    </section>
-    <section>
-      <p>¿Cuál es la hora más temprana que te viene bien para vernos y comenzar esta sorpresa?</p>
-    </section>
-    <section>
-      <p>Estoy deseando compartir cada instante a tu lado. ¡Te amo! 🌹</p>
-    </section>
-  </div>
-  <script>
-    const total = 20;
+    <h2>Mi cielo, hoy es tu día 💖</h2><section>
+  <p>
+    Desde que te conocí, cada día a tu lado ha sido un regalo. Pero hoy, quiero darte yo a ti uno: un momento para nosotrxs, sin distracciones, sólo tú y yo.
+  </p>
+</section>
+
+<section>
+  <p>
+    He preparado algo especial, lleno de cariño, detalles y todo lo que te hace sonreír. Pero lo más importante... es que estés tú.
+  </p>
+</section>
+
+<section>
+  <p>
+    Ponte algo cómodo, lleva tu traje de baño y tu esencia tan tú. No necesitas nada más, solo tu ternura y esas ganas de compartir un momento inolvidable.
+  </p>
+</section>
+
+<section>
+  <p>
+    ¿A qué hora podrías estar lista? Me encantaría verte lo más pronto posible y comenzar este día tan nuestro.
+  </p>
+</section>
+
+<section>
+  <p>
+    Te amo más de lo que caben en estas palabras. Gracias por ser tú, por hacer que todo cobre sentido solo con mirarte.
+  </p>
+</section>
+
+  </div>  <script>
+    const total = 25;
     for (let i = 0; i < total; i++) {
       const el = document.createElement('div');
       el.className = 'decor';
@@ -125,6 +178,5 @@
       el.style.animationDelay = (Math.random() * 5).toFixed(2) + 's';
       document.body.appendChild(el);
     }
-  </script>
-</body>
+  </script></body>
 </html>
