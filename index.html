@@ -1,151 +1,151 @@
 <!DOCTYPE html><html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Invitación Inolvidable</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Invitación Especial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    /* === Variables de Tema === */
+    /* Variables de tema */
     :root {
-      --primary-color: #ff69b4;
-      --bg-start: #fff0f5;
-      --bg-end: #ffe4e1;
-      --card-bg: #ffffff;
-      --text-color: #333333;
-      --shadow-color: rgba(0, 0, 0, 0.1);
+      --primary: #ff8ba7;           /* rosa suave */
+      --secondary: #fff5f8;         /* fondo claro */
+      --accent: #fddde6;            /* detalles pastel */
+      --text: #3d3d3d;              /* texto principal */
       --radius: 1rem;
-      --font-title: 'Great Vibes', cursive;
-      --font-body: 'Poppins', sans-serif;
-      --spacing: 1rem;
-      --transition: 0.4s ease;
       --max-width: 420px;
+      --spacing: 1rem;
+      --font-title: 'Great Vibes', cursive;
+      --font-body: 'Quicksand', sans-serif;
     }
-    /* === Reset === */
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; height: 100%; overflow-x: hidden; }
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
     body {
       font-family: var(--font-body);
-      color: var(--text-color);
-      background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
-      background-attachment: fixed;
+      background-color: var(--secondary);
+      color: var(--text);
       padding: env(safe-area-inset-top) var(--spacing) env(safe-area-inset-bottom) var(--spacing);
+      display: flex; justify-content: center;
     }
-    /* === Scrollbar Invisible === */
-    ::-webkit-scrollbar { width: 0; }
-    /* === Progress Bar === */
-    #progress {
-      position: fixed; top: 0; left: 0; height: 3px;
-      background: var(--primary-color); width: 0; z-index: 100;
-    }
-    /* === Contenedor === */
     .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: flex; flex-direction: column; gap: var(--spacing);
-    }
-    /* === Sección Tarjeta === */
-    section {
-      background: var(--card-bg);
+      width: 100%; max-width: var(--max-width);
+      background: white;
       border-radius: var(--radius);
-      box-shadow: 0 8px 20px var(--shadow-color);
-      padding: calc(var(--spacing) * 1.2);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.8s var(--transition) forwards;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      overflow-y: auto;
+      max-height: calc(100vh - 2*var(--spacing));
+      padding: var(--spacing);
     }
-    section:nth-child(1) { animation-delay: 0.2s; }
-    section:nth-child(2) { animation-delay: 0.4s; }
-    section:nth-child(3) { animation-delay: 0.6s; }
-    section:nth-child(4) { animation-delay: 0.8s; }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* === Títulos === */
-    h1, h2 { margin-bottom: 0.5rem; }
-    h1 {
-      font-family: var(--font-title);
-      font-size: 2.6rem;
-      color: var(--primary-color);
+    header {
       text-align: center;
-      white-space: nowrap; overflow: hidden;
-      border-right: 2px solid var(--primary-color);
-      width: 0;
-      animation: typing 3s steps(30) forwards, blink 0.7s step-end infinite;
+      margin-bottom: var(--spacing);
+    }
+    header h1 {
+      font-family: var(--font-title);
+      font-size: 2.4rem;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    header p {
+      font-size: 1rem;
+      color: var(--text);
+      margin-top: 0.5rem;
+    }
+    section {
+      margin-bottom: calc(var(--spacing) * 1.2);
     }
     h2 {
-      font-family: var(--font-body);
       font-size: 1.2rem;
-      color: var(--primary-color);
-      text-align: left;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
     }
-    @keyframes typing { from { width: 0; } to { width: 100%; } }
-    @keyframes blink { 50% { border-color: transparent; } }
-    /* === Texto === */
-    p, li { font-size: 1rem; line-height: 1.6; }
-    p + p { margin-top: var(--spacing); }
-    /* === Listas === */
-    ul, ol { margin: 0; padding-left: 1.2rem; }
-    ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.8rem; }
-    ul li::before { content: '❤️'; margin-right: 0.4rem; }
-    ol li { margin-bottom: 0.6rem; }
-    /* === Poema === */
-    .poem {
-      font-family: var(--font-title);
+    p, li {
       font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
+    ul, ol {
+      margin-left: 1.2rem;
+    }
+    ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.8rem;
+    }
+    ul li::before {
+      content: '★';
+      color: var(--accent);
+      margin-right: 0.4rem;
+    }
+    ol li {
+      margin-bottom: 0.6rem;
+      padding-left: 0.4rem;
+      border-left: 3px solid var(--accent);
+    }
+    .poem {
+      font-style: italic;
       text-align: center;
       margin: var(--spacing) 0;
-      color: var(--text-color);
+      font-size: 0.95rem;
     }
-    /* === Footer === */
-    footer { text-align: center; font-size: 0.9rem; opacity: 0.9; margin-bottom: var(--spacing); }
-    /* === Media Queries iPhone 14 Pro === */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-top: var(--spacing);
+    }
+    /* Subtle transitions */
+    .container, header h1, section, footer {
+      transition: transform 0.3s ease;
+    }
+    .container:hover {
+      transform: translateY(-2px);
+    }
+    /* Scroll barra personalizada ligera */
+    .container::-webkit-scrollbar { width: 6px; }
+    .container::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 3px;
+    }
+    /* Adaptación a iPhone 14 Pro */
     @media (max-width: 430px) {
-      h1 { font-size: 2rem; }
-      .poem { font-size: 0.95rem; }
+      header h1 { font-size: 2rem; }
+      h2 { font-size: 1.1rem; }
+      p, li { font-size: 0.95rem; }
     }
   </style>
 </head>
 <body>
-  <div id="progress"></div>
   <div class="container">
+    <header>
+      <h1>Una Sorpresa Muy Especial</h1>
+      <p>Porque cada detalle contigo merece ser inolvidable.</p>
+    </header>
     <section>
-      <h1>¡Sorpresa Especial!</h1>
-      <p>Amor mío, hoy he preparado algo único solo para ti. Quiero que te relajes, sonrías y disfrutes cada instante de esta aventura.</p>
-    </section>
-    <section>
-      <h2>Prepara Esto</h2>
+      <h2>Preparativos</h2>
       <ul>
         <li>Ropa cómoda</li>
         <li>Traje de baño</li>
         <li>Toalla ligera</li>
-        <li>Bloqueador solar</li>
+        <li>Protector solar</li>
       </ul>
     </section>
     <section>
-      <h2>¿Cómo Comenzar?</h2>
+      <h2>Pasos a Seguir</h2>
       <ol>
-        <li>Envía la hora más temprana en que puedas verme.</li>
-        <li>Empaca con emoción y calma.</li>
-        <li>Prepárate para desconectar y sonreír.</li>
+        <li>Envíame la hora más temprana que puedas.</li>
+        <li>Relájate y sonríe.</li>
+        <li>Disfruta sin pensar en nada más.</li>
       </ol>
     </section>
     <section>
-      <div class="poem">"Eres mi refugio perfecto,<br>mi instante más puro;<br>hoy y siempre, solo contigo. "</div>
+      <div class="poem">"Contigo aprendí<br>que la felicidad es simple;<br>hoy la haremos realidad. "</div>
     </section>
     <footer>
-      Con todo mi amor,<br>Tu Novio 💗
+      Con todo mi cariño,<br>
+      Tu Novio 💗
     </footer>
   </div>
-  <script>
-    // Indicador de progreso de scroll
-    window.addEventListener('scroll', () => {
-      const doc = document.documentElement;
-      const winScroll = doc.scrollTop;
-      const height = doc.scrollHeight - doc.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.getElementById('progress').style.width = scrolled + '%';
-    });
-  </script>
 </body>
 </html>
