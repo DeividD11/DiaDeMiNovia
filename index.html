@@ -18,35 +18,91 @@
     :root { --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; --font-hand:'Dancing Script',cursive; --transition-fast:0.3s ease; }
     html { box-sizing:border-box; font-size:16px; -webkit-text-size-adjust:100%; }
     *, *:before, *:after { box-sizing:inherit; }
-    body { margin:0; padding:env(safe-area-inset); background:var(--color-bg); color:var(--color-text);
-      font-family:var(--font-sans); display:flex; align-items:center; justify-content:center;
-      min-height:100vh; line-height:1.5; transition:background var(--transition-fast),color var(--transition-fast);
+    body {
+      margin:0;
+      padding:env(safe-area-inset);
+      background:var(--color-bg);
+      color:var(--color-text);
+      font-family:var(--font-sans);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      line-height:1.5;
+      transition:background var(--transition-fast), color var(--transition-fast);
+      /* Feedback táctil */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
-    main { max-width:430px; margin:auto; padding:1rem; display:grid; grid-template-rows:auto 1fr auto; row-gap:1rem; }
+    main {
+      max-width:430px;
+      margin:auto;
+      padding:1rem;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      row-gap:1rem;
+    }
     header { position:relative; text-align:center; animation:fadeIn 1s ease-out; }
-    .toggle { position:absolute; top:0; right:0; background:none; border:none; cursor:pointer;
-      font-size:1.2rem; padding:0.5rem; color:var(--color-text); transition:transform var(--transition-fast);
+    .toggle {
+      position:absolute; top:0; right:0;
+      background:none;
+      border:none;
+      cursor:pointer;
+      font-size:1.2rem;
+      padding:0.5rem;
+      color:var(--color-text);
+      transition:transform var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     .toggle:hover { transform:rotate(20deg); }
-    header h1 { margin:0; font-family:var(--font-hand); font-size:2.5rem; color:var(--color-primary);
+    header h1 {
+      margin:0;
+      font-family:var(--font-hand);
+      font-size:2.5rem;
+      color:var(--color-primary);
       transition:transform 0.3s ease;
     }
-    section { background:var(--color-accent); padding:1rem; border-radius:1rem;
-      box-shadow:0 4px 10px rgba(0,0,0,0.1); animation:slideUp 1s ease-out;
+    section {
+      background:var(--color-accent);
+      padding:1rem;
+      border-radius:1rem;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+      animation:slideUp 1s ease-out;
       transition:background var(--transition-fast);
     }
-    .text { overflow:hidden; white-space:nowrap; border-right:0.1em solid var(--color-text);
-      font-family:var(--font-hand); font-size:1.1rem;
+    .text {
+      overflow:hidden;
+      white-space:nowrap;
+      border-right:0.1em solid var(--color-text);
+      font-family:var(--font-hand);
+      font-size:1.1rem;
     }
-    button { font-family:var(--font-sans); display:block; margin:1rem auto 0; padding:0.75rem 1.5rem;
-      font-size:1rem; color:#fff; background:var(--color-primary); border:none; border-radius:0.5rem;
-      cursor:pointer; transition:transform var(--transition-fast),background var(--transition-fast);
-      touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+    button {
+      font-family:var(--font-sans);
+      display:block;
+      margin:1rem auto 0;
+      padding:0.75rem 1.5rem;
+      font-size:1rem;
+      color:#fff;
+      background:var(--color-primary);
+      border:none;
+      border-radius:0.5rem;
+      cursor:pointer;
+      transition:transform var(--transition-fast), background var(--transition-fast);
+      /* Feedback táctil */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
     button:hover { transform:scale(1.05); }
     button:active { transform:scale(0.98); }
-    #sorpresa { display:none; margin-top:1rem; font-family:var(--font-hand);
-      font-size:1.2rem; color:var(--color-primary); text-align:center;
+    #sorpresa {
+      display:none;
+      margin-top:1rem;
+      font-family:var(--font-hand);
+      font-size:1.2rem;
+      color:var(--color-primary);
+      text-align:center;
     }
     /* Latido */
     @keyframes heartbeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
@@ -87,7 +143,7 @@
         }
       }
       document.addEventListener('DOMContentLoaded', escribe);
-      // Sorpresa sin confeti
+      // Sorpresa
       const btn = document.getElementById('btn-sorpresa');
       const sor = document.getElementById('sorpresa');
       btn.addEventListener('click', () => {
