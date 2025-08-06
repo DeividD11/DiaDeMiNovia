@@ -1,182 +1,152 @@
 <!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Una Sorpresa Para Ti 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Carta para Mi preciosa princesa</title>
+  <!-- Estilos inline -->
   <style>
+    /* Variables de tema */
     :root {
-      --rosa-claro: #ffd3e2;
-      --rosa: #ff6fa8;
-      --rosa-oscuro: #d94f87;
-      --dorado: #ffe9a7;
-      --blanco: #fff;
-      --sombra: rgba(0, 0, 0, 0.1);
-      --fuente-titulo: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --fuente-texto: 'Open Sans', sans-serif;
-    }* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: var(--fuente-texto);
-  background: radial-gradient(circle at top left, var(--rosa-claro), var(--rosa));
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  color: var(--rosa-oscuro);
-  position: relative;
-  overflow: hidden;
-}
-
-.carta {
-  background: var(--blanco);
-  border-radius: 2rem;
-  padding: 3rem;
-  box-shadow: 0 15px 35px var(--sombra);
-  max-width: 520px;
-  width: 100%;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  border: 3px solid var(--dorado);
-  animation: entrada 1s ease-out forwards;
-  opacity: 0;
-}
-
-h2 {
-  font-family: var(--fuente-titulo);
-  font-size: 2.2rem;
-  color: var(--rosa);
-  margin: 1rem 0 1.5rem;
-  animation: pop 1s ease-out forwards;
-  opacity: 0;
-}
-
-section {
-  margin-bottom: 1.5rem;
-  animation: deslizamiento 1s ease-out forwards;
-  opacity: 0;
-}
-
-section p {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: #555;
-  background: var(--rosa-claro);
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
-}
-
-.carta::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(90deg, var(--rosa), var(--dorado), var(--rosa));
-  animation: barra 3s linear infinite;
-}
-
-.decor {
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  background: var(--rosa);
-  transform: rotate(45deg);
-  opacity: 0.6;
-  animation: flotar 6s infinite ease-in;
-}
-
-.decor::before, .decor::after {
-  content: '';
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  background: var(--rosa);
-  border-radius: 50%;
-}
-
-.decor::before { top: -0.5rem; left: 0; }
-.decor::after { top: 0; left: 0.5rem; }
-
-@keyframes entrada {
-  from { transform: translateY(60px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes pop {
-  0% { transform: scale(0.7); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes deslizamiento {
-  0% { transform: translateY(20px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes barra {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-@keyframes flotar {
-  0% { transform: translateY(0) rotate(45deg) scale(1); opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-240px) rotate(45deg) scale(0.5); opacity: 0; }
-}
-
-@media (max-width: 520px) {
-  .carta { padding: 2rem 1.5rem; }
-  h2 { font-size: 2rem; }
-  section p { font-size: 1rem; }
-}
-
+      --color-bg: #fff8f0;
+      --color-text: #333;
+      --color-primary: #e07a5f;
+      --color-accent: #f2cc8f;
+      --font-sans: 'Helvetica Neue', Arial, sans-serif;
+      --font-hand: 'Dancing Script', cursive;
+      --transition-fast: 0.3s ease;
+    }
+    html {
+      box-sizing: border-box;
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
+    *, *:before, *:after { box-sizing: inherit; }
+    body {
+      margin: 0;
+      padding: env(safe-area-inset);
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 430px; /* ancho iPhone14Pro */
+      margin: auto;
+      padding: 1rem;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      row-gap: 1rem;
+    }
+    header {
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+    header h1 {
+      font-family: var(--font-hand);
+      font-size: 2.5rem;
+      margin: 0;
+      color: var(--color-primary);
+    }
+    section {
+      background: var(--color-accent);
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      animation: slideUp 1s ease-out;
+    }
+    .text {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 0.1em solid var(--color-text);
+      font-family: var(--font-hand);
+      font-size: 1.1rem;
+    }
+    button {
+      display: block;
+      margin: 1rem auto 0;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      color: #fff;
+      background: var(--color-primary);
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: transform var(--transition-fast);
+    }
+    button:hover { transform: scale(1.05); }
+    #sorpresa {
+      display: none;
+      margin-top: 1rem;
+      font-family: var(--font-hand);
+      font-size: 1.2rem;
+      color: var(--color-primary);
+      text-align: center;
+    }
+    /* Animaciones */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes bounceIn {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-15px); }
+      60% { transform: translateY(-7px); }
+    }
+    /* Responsive */
+    @media(min-width: 768px) {
+      body { padding: 2rem; }
+      main { max-width: 600px; }
+    }
   </style>
 </head>
 <body>
-  <div class="carta">
-    <h2>Mi cielo, hoy es tu día 💖</h2><section>
-  <p>
-    Desde que te conocí, cada día a tu lado ha sido un regalo. Pero hoy, quiero darte yo a ti uno: un momento para nosotrxs, sin distracciones, sólo tú y yo.
-  </p>
-</section>
-
-<section>
-  <p>
-    He preparado algo especial, lleno de cariño, detalles y todo lo que te hace sonreír. Pero lo más importante... es que estés tú.
-  </p>
-</section>
-
-<section>
-  <p>
-    Ponte algo cómodo, lleva tu traje de baño y tu esencia tan tú. No necesitas nada más, solo tu ternura y esas ganas de compartir un momento inolvidable.
-  </p>
-</section>
-
-<section>
-  <p>
-    ¿A qué hora podrías estar lista? Me encantaría verte lo más pronto posible y comenzar este día tan nuestro.
-  </p>
-</section>
-
-<section>
-  <p>
-    Te amo más de lo que caben en estas palabras. Gracias por ser tú, por hacer que todo cobre sentido solo con mirarte.
-  </p>
-</section>
-
-  </div>  <script>
-    const total = 25;
-    for (let i = 0; i < total; i++) {
-      const el = document.createElement('div');
-      el.className = 'decor';
-      el.style.left = Math.random() * 100 + '%';
-      el.style.top = Math.random() * 100 + '%';
-      const size = (Math.random() * 0.8 + 0.6).toFixed(2);
-      el.style.width = el.style.height = size + 'rem';
-      el.style.animationDelay = (Math.random() * 5).toFixed(2) + 's';
-      document.body.appendChild(el);
-    }
-  </script></body>
+  <main>
+    <header>
+      <h1>Para Mi preciosa princesa</h1>
+    </header>
+    <section aria-labelledby="carta">
+      <article id="carta" class="text" aria-live="polite">
+        <!-- El texto será llenado con JS -->
+      </article>
+      <button id="btn-sorpresa" aria-controls="sorpresa">Revelar sorpresa</button>
+      <div id="sorpresa" role="region" aria-label="Mensaje secreto">
+        ¡Te amo más allá de las estrellas! ⭐
+      </div>
+    </section>
+    <footer>
+      <p style="text-align:center; font-size:0.9rem;">Con todo mi amor, tu Dev.</p>
+    </footer>
+    <noscript>
+      <p style="color:red; text-align:center;">Activa JavaScript para ver la animación especial 💖</p>
+    </noscript>
+  </main>
+  <!-- Script inline -->
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      const texto = `Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.`;
+      const contenedor = document.getElementById('carta');
+      let idx=0;
+      function escribir(){
+        if(idx<texto.length){
+          contenedor.textContent += texto.charAt(idx++);
+          setTimeout(escribir,50);
+        } else { contenedor.style.borderRight='none'; }
+      }
+      escribir();
+      const btn = document.getElementById('btn-sorpresa');
+      const sor = document.getElementById('sorpresa');
+      btn.addEventListener('click',()=>{
+        sor.style.display='block';
+        sor.style.animation='bounceIn 0.8s';
+      });
+      // Accesibilidad: tecla Enter en botón
+      btn.addEventListener('keydown',e=>{ if(e.key==='Enter') btn.click(); });
+    });
+  </script>
+</body>
 </html>
