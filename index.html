@@ -73,8 +73,9 @@
     }
     .card {
       background: var(--color-accent);
-      border-radius: var(--space-4);
-      box-shadow: var(--shadow-elevation);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
       padding: var(--space-3);
       animation: slideUp 1s ease-out;
       transition: background var(--transition-fast);
@@ -164,8 +165,7 @@
   </main>
   <script defer>
     document.addEventListener('DOMContentLoaded',()=>{
-      const t = "Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.".split(''),
-            c = document.getElementById('carta'), h = document.getElementById('titulo');
+      const t = "Cada día a tu lado es un regalo...".split(''), c = document.getElementById('carta'), h = document.getElementById('titulo');
       let i=0; function w(){ i<t.length ? (c.textContent+=t[i++], setTimeout(w,50)) : (c.style.borderRight='none', h.style.animation='heartbeat 1s ease-in-out 2') } w();
       const b=document.getElementById('btn-sorpresa'), s=document.getElementById('sorpresa');
       b.addEventListener('click',()=>{ const e=b.getAttribute('aria-expanded')==='true'; b.setAttribute('aria-expanded',!e); s.style.display=e?'none':'block'; !e&&(s.style.animation='bounceIn 0.8s') });
