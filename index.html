@@ -11,7 +11,7 @@
   <meta property="og:description" content="Una carta romántica interactiva, optimizada para iPhone 14 Pro.">
   <meta property="og:image" content="/images/carta-preview.png">
   <meta property="og:locale" content="es_CO">
-  <!-- Preconexiones y carga de fuente optimizada -->
+  <!-- Fuentes optimizadas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
@@ -53,13 +53,9 @@
       animation:fadeIn 1s ease-out;
     }
     .toggle {
-      position:absolute;
-      top:0; right:0;
-      background:none;
-      border:none;
-      cursor:pointer;
-      font-size:1.2rem;
-      padding:0.5rem;
+      position:absolute; top:0; right:0;
+      background:none; border:none; cursor:pointer;
+      font-size:1.2rem; padding:0.5rem;
       color:var(--color-text);
       transition:transform var(--transition-fast);
       -webkit-tap-highlight-color: transparent;
@@ -114,17 +110,25 @@
       color:var(--color-primary);
       text-align:center;
     }
-    /* Landmark aside para firma */
     aside[role="contentinfo"] {
       text-align:center;
       font-size:0.9rem;
       color:var(--color-text);
     }
-    /* Latido */
+    /* Animaciones */
     @keyframes heartbeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
     @keyframes slideUp { from{transform:translateY(20px);opacity:0;} to{transform:translateY(0);opacity:1;} }
     @keyframes bounceIn { 0%,20%,50%,80%,100%{transform:translateY(0);} 40%{transform:translateY(-15px);} 60%{transform:translateY(-7px);} }
+    /* Print Styles */
+    @media print {
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      main[role="main"] { box-shadow: none !important; border-radius: 0 !important; padding: 0 !important; }
+      section[role="region"] { background: none !important; box-shadow: none !important; }
+      button, .toggle { display: none !important; }
+      header h1 { color: black !important; }
+      aside[role="contentinfo"] p { color: black !important; }
+    }
     @media (min-width:768px) { body{padding:2rem;} main{max-width:600px;} }
   </style>
 </head>
@@ -150,7 +154,7 @@
     (() => {
       const cont = document.getElementById('carta');
       const titulo = document.getElementById('titulo');
-      const texto = `Cada día a tu lado es un regalo. Tu risa ilumina mi mundo...`;
+      const texto = `Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.`;
       let i = 0;
       function escribe() {
         if (i < texto.length) {
@@ -162,7 +166,6 @@
         }
       }
       document.addEventListener('DOMContentLoaded', escribe);
-      // Interacción sorpresa
       const btn = document.getElementById('btn-sorpresa');
       const sor = document.getElementById('sorpresa');
       btn.addEventListener('click', () => {
@@ -171,11 +174,9 @@
         sor.style.display = expanded ? 'none' : 'block';
         if (!expanded) sor.style.animation = 'bounceIn 0.8s';
       });
-      // Teclas
       [btn, document.getElementById('theme-toggle')].forEach(el => el.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') el.click();
       }));
-      // Tema oscuro
       const themeBtn = document.getElementById('theme-toggle');
       const root = document.documentElement;
       const stored = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
