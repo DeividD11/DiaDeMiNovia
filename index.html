@@ -1,1 +1,194 @@
-<!DOCTYPE html><html lang="es-CO" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>Carta para Mi preciosa princesa</title><meta property="og:type" content="article"><meta property="og:title" content="Carta para Mi preciosa princesa"><meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro"><meta property="og:image" content="/images/carta-preview.png"><meta property="og:locale" content="es_CO"><script id="manifest-data" type="application/json">{"name":"Carta para Mi preciosa princesa","short_name":"Carta","icons":[{"src":"/icons/icon-192.png","type":"image/png","sizes":"192x192"}],"start_url":".","display":"standalone","background_color":"#fff8f0","theme_color":"#e07a5f"}</script><script>const m=JSON.parse(document.getElementById('manifest-data').textContent),b=new Blob([JSON.stringify(m)],{type:'application/json'}),u=URL.createObjectURL(b),l=document.createElement('link');l.rel='manifest';l.href=u;document.head.appendChild(l);</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet"><style>:root{--color-bg:#fff8f0;--color-text:#333;--color-primary:#e07a5f;--color-accent:#f2cc8f} [data-theme="dark"]{--color-bg:#1a1a1a;--color-text:#eee;--color-primary:#ffb4a2;--color-accent:#6d6875}@media(prefers-color-scheme:dark){html{data-theme:dark}}:root{--font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-hand:'Dancing Script',cursive;--transition-fast:0.3s ease}html,*,*:before,*:after{box-sizing:border-box;font-size:16px;-webkit-text-size-adjust:100%}body{margin:0;padding:env(safe-area-inset);background:var(--color-bg);color:var(--color-text);font-family:var(--font-sans);display:flex;align-items:center;justify-content:center;min-height:100vh;line-height:1.5;transition:background var(--transition-fast),color var(--transition-fast);-webkit-tap-highlight-color:transparent;touch-action:manipulation}main[role=main]{max-width:430px;margin:auto;padding:1rem;display:grid;grid-template-rows:auto 1fr auto;row-gap:1rem}header[role=banner]{position:relative;text-align:center;animation:fadeIn 1s ease-out}.toggle{position:absolute;top:0;right:0;background:none;border:none;cursor:pointer;font-size:1.2rem;padding:0.5rem;color:var(--color-text);transition:transform var(--transition-fast);-webkit-tap-highlight-color:transparent;touch-action:manipulation}.toggle:hover{transform:rotate(20deg)}header h1{margin:0;font-family:var(--font-hand);font-size:2.5rem;color:var(--color-primary);transition:transform 0.3s ease}section[role=region]{background:var(--color-accent);padding:1rem;border-radius:1rem;box-shadow:0 4px 10px rgba(0,0,0,0.1);animation:slideUp 1s ease-out;transition:background var(--transition-fast)}.text{overflow:hidden;white-space:nowrap;border-right:0.1em solid var(--color-text);font-family:var(--font-hand);font-size:1.1rem}button{font-family:var(--font-sans);display:block;margin:1rem auto 0;padding:0.75rem 1.5rem;font-size:1rem;color:#fff;background:var(--color-primary);border:none;border-radius:0.5rem;cursor:pointer;transition:transform var(--transition-fast),background var(--transition-fast);-webkit-tap-highlight-color:transparent;touch-action:manipulation}button:hover{transform:scale(1.05)}button:active{transform:scale(0.98)}#btn-sorpresa[aria-expanded=true]{background:#c2595a}#sorpresa{display:none;margin-top:1rem;font-family:var(--font-hand);font-size:1.2rem;color:var(--color-primary);text-align:center}aside[role=contentinfo]{text-align:center;font-size:0.9rem;color:var(--color-text)}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes bounceIn{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-15px)}60%{transform:translateY(-7px)}}@media(print){body{background:#fff!important;color:#000!important;padding:0!important}main[role=main],section[role=region]{box-shadow:none!important;border-radius:0!important;background:none!important;padding:0!important}button,.toggle{display:none!important}header h1,aside[role=contentinfo] p{color:#000!important}}@media(min-width:768px){body{padding:2rem}main{max-width:600px}}</style><script defer>document.addEventListener('DOMContentLoaded',function(){var t="Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.".split(''),c=document.getElementById('carta'),i=0,f=function(){i<t.length?(c.textContent+=t[i++],setTimeout(f,50)):c.style.borderRight='none',document.getElementById('titulo').style.animation='heartbeat 1s ease-in-out 2'},f();var b=document.getElementById('btn-sorpresa'),s=document.getElementById('sorpresa');b.addEventListener('click',function(){var e=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',!e);s.style.display=e?'none':'block';!e&& (s.style.animation='bounceIn 0.8s')});[b,document.getElementById('theme-toggle')].forEach(function(el){el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')el.click()})});var tb=document.getElementById('theme-toggle'),r=document.documentElement,m=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light',st=localStorage.getItem('theme')||m;r.setAttribute('data-theme',st);tb.textContent=st==='dark'?'☀️':'🌙';tb.setAttribute('aria-pressed',st==='dark');tb.addEventListener('click',function(){var n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem('theme',n);tb.textContent=n==='dark'?'☀️':'🌙';tb.setAttribute('aria-pressed',n==='dark')})});if('serviceWorker'in navigator)window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(console.error)});</script></head><body><main role="main"><header role="banner"><h1 id="titulo">Para Mi preciosa princesa</h1><button class="toggle" id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false">🌙</button></header><section role="region" aria-labelledby="carta"><article id="carta" class="text" aria-live="polite"></article><button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false">Revelar sorpresa</button><div id="sorpresa" role="region" aria-label="Mensaje secreto">¡Te amo más allá de las estrellas! ⭐</div></section><aside role="contentinfo"><p>Con todo mi amor, tu Dev.</p></aside><noscript><p style="color:red;text-align:center;">Activa JavaScript para ver la animación especial 💖</p></noscript></main></body></html>
+<!DOCTYPE html><html lang="es-CO" data-theme="light">  <head>      <meta charset="UTF-8">    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">    
+  <meta name="apple-mobile-web-app-capable" content="yes">    
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">    
+  <title>Carta para Mi preciosa princesa</title>    
+  <!-- Open Graph -->    
+  <meta property="og:type" content="article">    
+  <meta property="og:title" content="Carta para Mi preciosa princesa">    
+  <meta property="og:description" content="Una carta romántica interactiva, optimizada para iPhone 14 Pro.">    
+  <meta property="og:image" content="/images/carta-preview.png">    
+  <meta property="og:locale" content="es_CO">    
+  <!-- Fuentes optimizadas -->    
+  <link rel="preconnect" href="https://fonts.googleapis.com">    
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">    
+  <style>    
+    /* Variables tema claro/oscuro */    
+    :root { --color-bg:#fff8f0; --color-text:#333; --color-primary:#e07a5f; --color-accent:#f2cc8f; }    
+    [data-theme="dark"] { --color-bg:#1a1a1a; --color-text:#eee; --color-primary:#ffb4a2; --color-accent:#6d6875; }    
+    @media (prefers-color-scheme:dark) { html { data-theme:dark; } }    
+    /* Tipografías */    
+    :root { --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; --font-hand:'Dancing Script',cursive; --transition-fast:0.3s ease; }    
+    html { box-sizing:border-box; font-size:16px; -webkit-text-size-adjust:100%; }    
+    *, *:before, *:after { box-sizing:inherit; }    
+    body {    
+      margin:0;    
+      padding:env(safe-area-inset);    
+      background:var(--color-bg);    
+      color:var(--color-text);    
+      font-family:var(--font-sans);    
+      display:flex;    
+      align-items:center;    
+      justify-content:center;    
+      min-height:100vh;    
+      line-height:1.5;    
+      transition:background var(--transition-fast), color var(--transition-fast);    
+      -webkit-tap-highlight-color: transparent;    
+      touch-action: manipulation;    
+    }    
+    main[role="main"] {    
+      max-width:430px;    
+      margin:auto;    
+      padding:1rem;    
+      display:grid;    
+      grid-template-rows:auto 1fr auto;    
+      row-gap:1rem;    
+    }    
+    header[role="banner"] {    
+      position:relative;    
+      text-align:center;    
+      animation:fadeIn 1s ease-out;    
+    }    
+    .toggle {    
+      position:absolute; top:0; right:0;    
+      background:none; border:none; cursor:pointer;    
+      font-size:1.2rem; padding:0.5rem;    
+      color:var(--color-text);    
+      transition:transform var(--transition-fast);    
+      -webkit-tap-highlight-color: transparent;    
+      touch-action: manipulation;    
+    }    
+    .toggle:hover { transform:rotate(20deg); }    
+    header h1 {    
+      margin:0;    
+      font-family:var(--font-hand);    
+      font-size:2.5rem;    
+      color:var(--color-primary);    
+      transition:transform 0.3s ease;    
+    }    
+    section[role="region"] {    
+      background:var(--color-accent);    
+      padding:1rem;    
+      border-radius:1rem;    
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);    
+      animation:slideUp 1s ease-out;    
+      transition:background var(--transition-fast);    
+    }    
+    .text {    
+      overflow:hidden;    
+      white-space:nowrap;    
+      border-right:0.1em solid var(--color-text);    
+      font-family:var(--font-hand);    
+      font-size:1.1rem;    
+    }    
+    button {    
+      font-family:var(--font-sans);    
+      display:block;    
+      margin:1rem auto 0;    
+      padding:0.75rem 1.5rem;    
+      font-size:1rem;    
+      color:#fff;    
+      background:var(--color-primary);    
+      border:none;    
+      border-radius:0.5rem;    
+      cursor:pointer;    
+      transition:transform var(--transition-fast), background var(--transition-fast);    
+      -webkit-tap-highlight-color: transparent;    
+      touch-action: manipulation;    
+    }    
+    button:hover { transform:scale(1.05); }    
+    button:active { transform:scale(0.98); }    
+    #btn-sorpresa[aria-expanded="true"] { background:#c2595a; }    
+    #sorpresa {    
+      display:none;    
+      margin-top:1rem;    
+      font-family:var(--font-hand);    
+      font-size:1.2rem;    
+      color:var(--color-primary);    
+      text-align:center;    
+    }    
+    aside[role="contentinfo"] {    
+      text-align:center;    
+      font-size:0.9rem;    
+      color:var(--color-text);    
+    }    
+    /* Animaciones */    
+    @keyframes heartbeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }    
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }    
+    @keyframes slideUp { from{transform:translateY(20px);opacity:0;} to{transform:translateY(0);opacity:1;} }    
+    @keyframes bounceIn { 0%,20%,50%,80%,100%{transform:translateY(0);} 40%{transform:translateY(-15px);} 60%{transform:translateY(-7px);} }    
+    /* Print Styles */    
+    @media print {    
+      body { background: white !important; color: black !important; padding: 0 !important; }    
+      main[role="main"] { box-shadow: none !important; border-radius: 0 !important; padding: 0 !important; }    
+      section[role="region"] { background: none !important; box-shadow: none !important; }    
+      button, .toggle { display: none !important; }    
+      header h1 { color: black !important; }    
+      aside[role="contentinfo"] p { color: black !important; }    
+    }    
+    @media (min-width:768px) { body{padding:2rem;} main{max-width:600px;} }    
+  </style>    
+</head>    
+<body>    
+  <main role="main">    
+    <header role="banner">    
+      <h1 id="titulo">Para Mi preciosa princesa</h1>    
+      <button class="toggle" id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false">🌙</button>    
+    </header>    
+    <section role="region" aria-labelledby="carta">    
+      <article id="carta" class="text" aria-live="polite"></article>    
+      <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false">Revelar sorpresa</button>    
+      <div id="sorpresa" role="region" aria-label="Mensaje secreto">¡Te amo más allá de las estrellas! ⭐</div>    
+    </section>    
+    <aside role="contentinfo">    
+      <p>Con todo mi amor, tu Dev.</p>    
+    </aside>    
+    <noscript>    
+      <p style="color:red;text-align:center;">Activa JavaScript para ver la animación especial 💖</p>    
+    </noscript>    
+  </main>    
+  <script>    
+    (() => {    
+      const cont = document.getElementById('carta');    
+      const titulo = document.getElementById('titulo');    
+      const texto = `Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.`;    
+      let i = 0;    
+      function escribe() {    
+        if (i < texto.length) {    
+          cont.textContent += texto.charAt(i++);    
+          setTimeout(escribe, 50);    
+        } else {    
+          cont.style.borderRight = 'none';    
+          titulo.style.animation = 'heartbeat 1s ease-in-out 2';    
+        }    
+      }    
+      document.addEventListener('DOMContentLoaded', escribe);    
+      const btn = document.getElementById('btn-sorpresa');    
+      const sor = document.getElementById('sorpresa');    
+      btn.addEventListener('click', () => {    
+        const expanded = btn.getAttribute('aria-expanded') === 'true';    
+        btn.setAttribute('aria-expanded', !expanded);    
+        sor.style.display = expanded ? 'none' : 'block';    
+        if (!expanded) sor.style.animation = 'bounceIn 0.8s';    
+      });    
+      [btn, document.getElementById('theme-toggle')].forEach(el => el.addEventListener('keydown', e => {    
+        if (e.key === 'Enter' || e.key === ' ') el.click();    
+      }));    
+      const themeBtn = document.getElementById('theme-toggle');    
+      const root = document.documentElement;    
+      const stored = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');    
+      root.setAttribute('data-theme', stored);    
+      themeBtn.textContent = stored === 'dark' ? '☀️' : '🌙';    
+      themeBtn.setAttribute('aria-pressed', stored === 'dark');    
+      themeBtn.addEventListener('click', () => {    
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';    
+        root.setAttribute('data-theme', next);    
+        localStorage.setItem('theme', next);    
+        themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';    
+        themeBtn.setAttribute('aria-pressed', next === 'dark');    
+      });    
+    })();    
+  </script>    
+</body>    
+</html>
