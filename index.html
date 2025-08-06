@@ -10,179 +10,121 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* Variables de tema claro/oscuro */
-    :root {
-      --color-bg: #fff8f0;
-      --color-text: #333;
-      --color-primary: #e07a5f;
-      --color-accent: #f2cc8f;
-    }
-    [data-theme="dark"] {
-      --color-bg: #1a1a1a;
-      --color-text: #eee;
-      --color-primary: #ffb4a2;
-      --color-accent: #6d6875;
-    }
-    @media (prefers-color-scheme: dark) {
-      html { data-theme: dark; }
-    }
+    /* Variables tema claro/oscuro */
+    :root { --color-bg:#fff8f0;--color-text:#333;--color-primary:#e07a5f;--color-accent:#f2cc8f; }
+    [data-theme="dark"] { --color-bg:#1a1a1a;--color-text:#eee;--color-primary:#ffb4a2;--color-accent:#6d6875; }
+    @media(prefers-color-scheme:dark){ html{data-theme:dark;} }
     /* Tipografías */
-    :root {
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-hand: 'Dancing Script', cursive;
-      --transition-fast: 0.3s ease;
+    :root{ --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; --font-hand:'Dancing Script',cursive; --transition-fast:0.3s ease; }
+    html{ box-sizing:border-box; font-size:16px; -webkit-text-size-adjust:100%; }
+    *,*:before,*:after{ box-sizing:inherit; }
+    body{ margin:0; padding:env(safe-area-inset); background:var(--color-bg); color:var(--color-text);
+      font-family:var(--font-sans); display:flex; align-items:center; justify-content:center;
+      min-height:100vh; line-height:1.5; transition:background var(--transition-fast),color var(--transition-fast);
     }
-    html { box-sizing: border-box; font-size: 16px; -webkit-text-size-adjust: 100%; }
-    *, *:before, *:after { box-sizing: inherit; }
-    body {
-      margin: 0;
-      padding: env(safe-area-inset);
-      background: var(--color-bg);
-      color: var(--color-text);
-      font-family: var(--font-sans);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      line-height: 1.5;
-      transition: background var(--transition-fast), color var(--transition-fast);
+    main{ max-width:430px; margin:auto; padding:1rem; display:grid; grid-template-rows:auto 1fr auto; row-gap:1rem; }
+    header{ position:relative; text-align:center; animation:fadeIn 1s ease-out; }
+    .toggle{ position:absolute; top:0; right:0; background:none; border:none; cursor:pointer;
+      font-size:1.2rem; padding:0.5rem; color:var(--color-text); transition:transform var(--transition-fast);
     }
-    main {
-      max-width: 430px;
-      margin: auto;
-      padding: 1rem;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      row-gap: 1rem;
+    .toggle:hover{ transform:rotate(20deg); }
+    header h1{ margin:0; font-family:var(--font-hand); font-size:2.5rem; color:var(--color-primary);
+      transition:transform 0.3s ease;
     }
-    header {
-      text-align: center;
-      animation: fadeIn 1s ease-out;
-      position: relative;
+    section{ background:var(--color-accent); padding:1rem; border-radius:1rem;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1); animation:slideUp 1s ease-out;
+      transition:background var(--transition-fast);
     }
-    .toggle {
-      position: absolute;
-      top: 0; right: 0;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      padding: 0.5rem;
-      color: var(--color-text);
-      transition: transform var(--transition-fast);
+    .text{ overflow:hidden; white-space:nowrap; border-right:0.1em solid var(--color-text);
+      font-family:var(--font-hand); font-size:1.1rem;
     }
-    .toggle:hover { transform: rotate(20deg); }
-    header h1 {
-      font-family: var(--font-hand);
-      font-size: 2.5rem;
-      margin: 0;
-      color: var(--color-primary);
+    button{ font-family:var(--font-sans); display:block; margin:1rem auto 0; padding:0.75rem 1.5rem;
+      font-size:1rem; color:#fff; background:var(--color-primary); border:none; border-radius:0.5rem;
+      cursor:pointer; transition:transform var(--transition-fast),background var(--transition-fast);
+      touch-action:manipulation; -webkit-tap-highlight-color:transparent;
     }
-    section {
-      background: var(--color-accent);
-      padding: 1rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      animation: slideUp 1s ease-out;
-      transition: background var(--transition-fast);
+    button:hover{ transform:scale(1.05); }
+    button:active{ transform:scale(0.98); }
+    #sorpresa{ display:none; margin-top:1rem; font-family:var(--font-hand);
+      font-size:1.2rem; color:var(--color-primary); text-align:center;
     }
-    .text {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 0.1em solid var(--color-text);
-      font-family: var(--font-hand);
-      font-size: 1.1rem;
+    /* Confeti corazones */
+    .confetti{ position:absolute; width:10px; height:10px; background:red; clip-path:path('M5,0 C7,3 10,3 10,6 C10,9 7,10 5,8 C3,10 0,9 0,6 C0,3 3,3 5,0 Z');
+      opacity:0.8; pointer-events:none;
+      animation:confetti-fall 1.5s forwards ease-out;
     }
-    button, .toggle {
-      font-family: var(--font-sans);
-    }
-    button {
-      display: block;
-      margin: 1rem auto 0;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      color: #fff;
-      background: var(--color-primary);
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: transform var(--transition-fast), background var(--transition-fast);
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-    button:active { transform: scale(0.98); }
-    button:hover { transform: scale(1.05); }
-    #sorpresa {
-      display: none;
-      margin-top: 1rem;
-      font-family: var(--font-hand);
-      font-size: 1.2rem;
-      color: var(--color-primary);
-      text-align: center;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    @keyframes bounceIn {
-      0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-15px);}60%{transform:translateY(-7px);}
-    }
+    @keyframes confetti-fall{ to{ transform:translate(var(--dx),var(100vh)) rotate(360deg); opacity:0; } }
+    /* Latido */
+    @keyframes heartbeat{ 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
+    /* Animaciones base */
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    @keyframes slideUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+    @keyframes bounceIn{0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-15px);}60%{transform:translateY(-7px);}}
     @media(min-width:768px){ body{padding:2rem;} main{max-width:600px;} }
   </style>
 </head>
 <body>
   <main>
     <header>
-      <h1>Para Mi preciosa princesa</h1>
+      <h1 id="titulo">Para Mi preciosa princesa</h1>
       <button class="toggle" id="theme-toggle" aria-label="Cambiar tema">🌙</button>
     </header>
     <section aria-labelledby="carta">
       <article id="carta" class="text" aria-live="polite"></article>
       <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false">Revelar sorpresa</button>
-      <div id="sorpresa" role="region" aria-label="Mensaje secreto">
-        ¡Te amo más allá de las estrellas! ⭐
-      </div>
+      <div id="sorpresa" role="region" aria-label="Mensaje secreto">¡Te amo más allá de las estrellas! ⭐</div>
     </section>
-    <footer>
-      <p style="text-align:center; font-size:0.9rem;">Con todo mi amor, tu Dev.</p>
-    </footer>
-    <noscript>
-      <p style="color:red; text-align:center;">Activa JavaScript para ver la animación especial 💖</p>
-    </noscript>
+    <footer><p style="text-align:center;font-size:0.9rem;">Con todo mi amor, tu Dev.</p></footer>
+    <noscript><p style="color:red;text-align:center;">Activa JavaScript para ver la animación especial 💖</p></noscript>
   </main>
   <script>
     (() => {
+      const cont = document.getElementById('carta');
+      const titulo = document.getElementById('titulo');
       const texto = `Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.`;
-      const cont = document.getElementById('carta'); let i = 0;
+      let i = 0;
       function escribe() {
         if (i < texto.length) {
           cont.textContent += texto.charAt(i++);
           setTimeout(escribe, 50);
         } else {
           cont.style.borderRight = 'none';
+          titulo.style.animation = 'heartbeat 1s ease-in-out 2';
         }
       }
-      document.addEventListener('DOMContentLoaded', escribe);const btn = document.getElementById('btn-sorpresa');
-  const sor = document.getElementById('sorpresa');
-  btn.addEventListener('click', () => {
-    sor.style.display = 'block';
-    sor.style.animation = 'bounceIn 0.8s';
-    btn.setAttribute('aria-expanded', 'true');
-  });
-  btn.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
-
-  const themeBtn = document.getElementById('theme-toggle');
-  const root = document.documentElement;
-  const stored = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  root.setAttribute('data-theme', stored);
-  themeBtn.textContent = stored === 'dark' ? '☀️' : '🌙';
-  themeBtn.addEventListener('click', () => {
-    const current = root.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
-  });
-})();
-
+      document.addEventListener('DOMContentLoaded', escribe);
+      // Sorpresa + confeti
+      const btn = document.getElementById('btn-sorpresa');
+      const sor = document.getElementById('sorpresa');
+      btn.addEventListener('click', () => {
+        sor.style.display = 'block';
+        sor.style.animation = 'bounceIn 0.8s';
+        btn.setAttribute('aria-expanded', 'true');
+        // Generar confeti corazones
+        for (let j = 0; j < 20; j++) {
+          const c = document.createElement('div');
+          c.classList.add('confetti');
+          c.style.left = `${50 + (Math.random() * 80)}%`;
+          c.style.setProperty('--dx', `${(Math.random() - 0.5) * 100}px`);
+          document.body.appendChild(c);
+          setTimeout(() => c.remove(), 1600);
+        }
+      });
+      btn.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
+      // Tema oscuro
+      const themeBtn = document.getElementById('theme-toggle');
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      root.setAttribute('data-theme', stored);
+      themeBtn.textContent = stored === 'dark' ? '☀️' : '🌙';
+      themeBtn.addEventListener('click', () => {
+        const curr = root.getAttribute('data-theme');
+        const next = curr === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+      });
+    })();
   </script>
 </body>
 </html>
