@@ -1,10 +1,16 @@
-<!DOCTYPE html><html lang="es" data-theme="light">
+<!DOCTYPE html><html lang="es-CO" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Carta para Mi preciosa princesa</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Carta para Mi preciosa princesa">
+  <meta property="og:description" content="Una carta romántica interactiva, optimizada para iPhone 14 Pro.">
+  <meta property="og:image" content="/images/carta-preview.png">
+  <meta property="og:locale" content="es_CO">
   <!-- Preconexiones y carga de fuente optimizada -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,11 +36,10 @@
       min-height:100vh;
       line-height:1.5;
       transition:background var(--transition-fast), color var(--transition-fast);
-      /* Feedback táctil */
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
-    main {
+    main[role="main"] {
       max-width:430px;
       margin:auto;
       padding:1rem;
@@ -42,9 +47,14 @@
       grid-template-rows:auto 1fr auto;
       row-gap:1rem;
     }
-    header { position:relative; text-align:center; animation:fadeIn 1s ease-out; }
+    header[role="banner"] {
+      position:relative;
+      text-align:center;
+      animation:fadeIn 1s ease-out;
+    }
     .toggle {
-      position:absolute; top:0; right:0;
+      position:absolute;
+      top:0; right:0;
       background:none;
       border:none;
       cursor:pointer;
@@ -63,7 +73,7 @@
       color:var(--color-primary);
       transition:transform 0.3s ease;
     }
-    section {
+    section[role="region"] {
       background:var(--color-accent);
       padding:1rem;
       border-radius:1rem;
@@ -90,12 +100,12 @@
       border-radius:0.5rem;
       cursor:pointer;
       transition:transform var(--transition-fast), background var(--transition-fast);
-      /* Feedback táctil */
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
     button:hover { transform:scale(1.05); }
     button:active { transform:scale(0.98); }
+    #btn-sorpresa[aria-expanded="true"] { background:#c2595a; }
     #sorpresa {
       display:none;
       margin-top:1rem;
@@ -104,9 +114,14 @@
       color:var(--color-primary);
       text-align:center;
     }
+    /* Landmark aside para firma */
+    aside[role="contentinfo"] {
+      text-align:center;
+      font-size:0.9rem;
+      color:var(--color-text);
+    }
     /* Latido */
     @keyframes heartbeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
-    /* Animaciones base */
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
     @keyframes slideUp { from{transform:translateY(20px);opacity:0;} to{transform:translateY(0);opacity:1;} }
     @keyframes bounceIn { 0%,20%,50%,80%,100%{transform:translateY(0);} 40%{transform:translateY(-15px);} 60%{transform:translateY(-7px);} }
@@ -114,24 +129,28 @@
   </style>
 </head>
 <body>
-  <main>
-    <header>
+  <main role="main">
+    <header role="banner">
       <h1 id="titulo">Para Mi preciosa princesa</h1>
-      <button class="toggle" id="theme-toggle" aria-label="Cambiar tema">🌙</button>
+      <button class="toggle" id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false">🌙</button>
     </header>
-    <section aria-labelledby="carta">
+    <section role="region" aria-labelledby="carta">
       <article id="carta" class="text" aria-live="polite"></article>
       <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false">Revelar sorpresa</button>
       <div id="sorpresa" role="region" aria-label="Mensaje secreto">¡Te amo más allá de las estrellas! ⭐</div>
     </section>
-    <footer><p style="text-align:center;font-size:0.9rem;">Con todo mi amor, tu Dev.</p></footer>
-    <noscript><p style="color:red;text-align:center;">Activa JavaScript para ver la animación especial 💖</p></noscript>
+    <aside role="contentinfo">
+      <p>Con todo mi amor, tu Dev.</p>
+    </aside>
+    <noscript>
+      <p style="color:red;text-align:center;">Activa JavaScript para ver la animación especial 💖</p>
+    </noscript>
   </main>
   <script>
     (() => {
       const cont = document.getElementById('carta');
       const titulo = document.getElementById('titulo');
-      const texto = `Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.`;
+      const texto = `Cada día a tu lado es un regalo. Tu risa ilumina mi mundo...`;
       let i = 0;
       function escribe() {
         if (i < texto.length) {
@@ -143,27 +162,32 @@
         }
       }
       document.addEventListener('DOMContentLoaded', escribe);
-      // Sorpresa
+      // Interacción sorpresa
       const btn = document.getElementById('btn-sorpresa');
       const sor = document.getElementById('sorpresa');
       btn.addEventListener('click', () => {
-        sor.style.display = 'block';
-        sor.style.animation = 'bounceIn 0.8s';
-        btn.setAttribute('aria-expanded', 'true');
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        sor.style.display = expanded ? 'none' : 'block';
+        if (!expanded) sor.style.animation = 'bounceIn 0.8s';
       });
-      btn.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
+      // Teclas
+      [btn, document.getElementById('theme-toggle')].forEach(el => el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') el.click();
+      }));
       // Tema oscuro
       const themeBtn = document.getElementById('theme-toggle');
       const root = document.documentElement;
       const stored = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       root.setAttribute('data-theme', stored);
       themeBtn.textContent = stored === 'dark' ? '☀️' : '🌙';
+      themeBtn.setAttribute('aria-pressed', stored === 'dark');
       themeBtn.addEventListener('click', () => {
-        const curr = root.getAttribute('data-theme');
-        const next = curr === 'dark' ? 'light' : 'dark';
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
         themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+        themeBtn.setAttribute('aria-pressed', next === 'dark');
       });
     })();
   </script>
