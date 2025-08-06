@@ -1,179 +1,180 @@
-<!DOCTYPE html><html lang="es-CO" data-theme="light">  <head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">  
-  <meta name="apple-mobile-web-app-capable" content="yes">  
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">  
-  <title>Carta para Mi preciosa princesa</title>  
-  <!-- Open Graph -->  
-  <meta property="og:type" content="article">  
-  <meta property="og:title" content="Carta para Mi preciosa princesa">  
-  <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro">  
-  <meta property="og:image" content="/images/carta-preview.png">  
-  <meta property="og:locale" content="es_CO">  
-  <!-- Fuentes optimizadas -->  
-  <link rel="preconnect" href="https://fonts.googleapis.com">  
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">  
-  <style>  
-    /* Variables tema, diseño y espaciado */  
-    :root {  
-      --color-bg-start: #f2cc8f;  
-      --color-bg-end: #fff1e0;  
-      --color-text: #333;  
-      --color-primary: #e07a5f;  
-      --color-accent: #f2cc8f;  
-      --shadow-color: rgba(0,0,0,0.1);  
-      --shadow-elevation: 0 8px 20px var(--shadow-color);  
-      --font-sans: -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;  
-      --font-hand: 'Dancing Script',cursive;  
-      --transition-fast: 0.3s ease;  
-      /* Espaciado modular */  
-      --space-1: 0.25rem;  
-      --space-2: 0.5rem;  
-      --space-3: 1rem;  
-      --space-4: 1.5rem;  
-    }  
-    [data-theme="dark"] {  
-      --color-bg-start: #4b3f72;  
-      --color-bg-end: #1a1a1a;  
-      --color-text: #eee;  
-      --color-primary: #ffb4a2;  
-      --shadow-color: rgba(0,0,0,0.4);  
-    }  
-    @media(prefers-color-scheme:dark){html {data-theme:dark}}  
-    html {  
-      box-sizing: border-box;  
-      font-size: clamp(14px, 4vw, 18px);  
-      -webkit-text-size-adjust: 100%;  
-    }  
-    *, *:before, *:after { box-sizing: inherit; }  
-    body {  
-      margin: 0;  
-      padding: env(safe-area-inset) var(--space-3);  
-      font-family: var(--font-sans);  
-      color: var(--color-text);  
-      background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));  
-      display: flex;  
-      align-items: center;  
-      justify-content: center;  
-      min-height: 100vh;  
-      line-height: 1.5;  
-      transition: background var(--transition-fast), color var(--transition-fast);  
-      -webkit-tap-highlight-color: transparent;  
-      touch-action: manipulation;  
-    }  
-    main[role=main] {  
-      max-width: 430px;  
-      margin: auto;  
-      padding: var(--space-3);  
-      display: grid;  
-      grid-template-rows: auto 1fr auto;  
-      gap: var(--space-3);  
-    }  
-    .card {  
-      background: var(--color-accent);  
-      border-radius: 1.5rem;  
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);  
-      overflow: hidden;  
-      padding: var(--space-3);  
-      animation: slideUp 1s ease-out;  
-      transition: background var(--transition-fast);  
-    }  
-    header[role=banner] { text-align: center; position: relative; animation: fadeIn 1s ease-out; }  
-    header h1 {  
-      margin: 0;  
-      font-family: var(--font-hand);  
-      font-size: clamp(2rem, 6vw, 3rem);  
-      color: var(--color-primary);  
-      transition: transform 0.3s ease;  
-    }  
-    .toggle {  
-      position: absolute;  
-      top: var(--space-2);  
-      right: var(--space-2);  
-      background: none;  
-      border: none;  
-      cursor: pointer;  
-      font-size: 1.2rem;  
-      padding: var(--space-1);  
-      color: var(--color-text);  
-      transition: transform var(--transition-fast);  
-      -webkit-tap-highlight-color: transparent;  
-      touch-action: manipulation;  
-    }  
-    .toggle:hover { transform: rotate(20deg); }  
-    .text {  
-      overflow: hidden;  
-      white-space: nowrap;  
-      border-right: 0.1em solid var(--color-text);  
-      font-family: var(--font-hand);  
-      font-size: clamp(1rem, 4vw, 1.2rem);  
-    }  
-    button {  
-      font-family: var(--font-sans);  
-      display: block;  
-      margin: var(--space-3) auto 0;  
-      padding: var(--space-2) var(--space-3);  
-      font-size: clamp(0.9rem, 3vw, 1rem);  
-      color: #fff;  
-      background: var(--color-primary);  
-      border: none;  
-      border-radius: var(--space-2);  
-      cursor: pointer;  
-      box-shadow: var(--shadow-elevation);  
-      transition: transform var(--transition-fast), background var(--transition-fast);  
-      -webkit-tap-highlight-color: transparent;  
-      touch-action: manipulation;  
-    }  
-    button:hover { transform: scale(1.05); }  
-    button:active { transform: scale(0.98); }  
-    #btn-sorpresa[aria-expanded=true] { background: #c2595a; }  
-    #sorpresa {  
-      display: none;  
-      margin-top: var(--space-3);  
-      font-family: var(--font-hand);  
-      font-size: clamp(1.1rem, 4vw, 1.3rem);  
-      color: var(--color-primary);  
-      text-align: center;  
-    }  
-    aside[role=contentinfo] {  
-      text-align: center;  
-      font-size: clamp(0.8rem, 2.5vw, 0.9rem);  
-      color: var(--color-text);  
-    }  
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }  
-    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }  
-    @keyframes bounceIn { 0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-15px);}60%{transform:translateY(-7px);} }  
-    @keyframes heartbeat { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }  
-    @media(min-width:768px){ body{padding:var(--space-4);} main{max-width:600px;} }  
-  </style>  
-</head>  
-<body>  
-  <main role="main">  
-    <header role="banner">  
-      <h1 id="titulo">Para Mi preciosa princesa</h1>  
-      <button class="toggle" id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false">🌙</button>  
-    </header>  
-    <section role="region" class="card" aria-labelledby="carta">  
-      <article id="carta" class="text" aria-live="polite"></article>  
-      <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false">Revelar sorpresa</button>  
-      <div id="sorpresa" role="region" aria-label="Mensaje secreto">¡Te amo más allá de las estrellas! ⭐</div>  
-    </section>  
-    <aside role="contentinfo"><p>Con todo mi amor, tu Dev.</p></aside>  
-    <noscript><p style="color:red;text-align:center;">Activa JavaScript para ver la animación especial 💖</p></noscript>  
-  </main>  
-  <script defer>  
-    document.addEventListener('DOMContentLoaded',()=>{  
-      const t = "Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.".split(''), c = document.getElementById('carta'), h = document.getElementById('titulo');  
-      let i=0; function w(){ i<t.length ? (c.textContent+=t[i++], setTimeout(w,50)) : (c.style.borderRight='none', h.style.animation='heartbeat 1s ease-in-out 2') } w();  
-      const b=document.getElementById('btn-sorpresa'), s=document.getElementById('sorpresa');  
-      b.addEventListener('click',()=>{ const e=b.getAttribute('aria-expanded')==='true'; b.setAttribute('aria-expanded',!e); s.style.display=e?'none':'block'; !e&&(s.style.animation='bounceIn 0.8s') });  
-      [b,document.getElementById('theme-toggle')].forEach(el=>el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') el.click() }));  
-      const tb=document.getElementById('theme-toggle'), r=document.documentElement, st=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');  
-      r.setAttribute('data-theme',st); tb.textContent=st==='dark'?'☀️':'🌙'; tb.setAttribute('aria-pressed',st==='dark');  
-      tb.addEventListener('click',()=>{ const n=r.getAttribute('data-theme')==='dark'?'light':'dark'; r.setAttribute('data-theme',n); localStorage.setItem('theme',n); tb.textContent=n==='dark'?'☀️':'🌙'; tb.setAttribute('aria-pressed',n==='dark') });  
-      if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(console.error));  
-    });  
-  </script>  
-</body>  
+<!DOCTYPE html><html lang="es-CO" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Carta para Mi preciosa princesa</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Carta para Mi preciosa princesa">
+  <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro">
+  <meta property="og:image" content="/images/carta-preview.png">
+  <meta property="og:locale" content="es_CO">
+  <!-- Fuentes optimizadas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* Variables tema, diseño y espaciado */
+    :root {
+      --color-bg-start: #f2cc8f;
+      --color-bg-end: #fff1e0;
+      --color-text: #333;
+      --color-primary: #e07a5f;
+      --color-accent: #f2cc8f;
+      --shadow-color: rgba(0,0,0,0.1);
+      --shadow-elevation: 0 8px 20px var(--shadow-color);
+      --font-sans: -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --font-hand: 'Dancing Script',cursive;
+      --transition-fast: 0.3s ease;
+      /* Espaciado modular */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 1rem;
+      --space-4: 1.5rem;
+    }
+    [data-theme="dark"] {
+      --color-bg-start: #4b3f72;
+      --color-bg-end: #1a1a1a;
+      --color-text: #eee;
+      --color-primary: #ffb4a2;
+      --shadow-color: rgba(0,0,0,0.4);
+    }
+    @media(prefers-color-scheme:dark){html {data-theme:dark}}
+    html {
+      box-sizing: border-box;
+      font-size: clamp(14px, 4vw, 18px);
+      -webkit-text-size-adjust: 100%;
+    }
+    *, *:before, *:after { box-sizing: inherit; }
+    body {
+      margin: 0;
+      padding: env(safe-area-inset) var(--space-3);
+      font-family: var(--font-sans);
+      color: var(--color-text);
+      background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.5;
+      transition: background var(--transition-fast), color var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    main[role=main] {
+      max-width: 430px;
+      margin: auto;
+      padding: var(--space-3);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: var(--space-3);
+    }
+    .card {
+      background: var(--color-accent);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      padding: var(--space-3);
+      animation: slideUp 1s ease-out;
+      transition: background var(--transition-fast);
+    }
+    header[role=banner] { text-align: center; position: relative; animation: fadeIn 1s ease-out; }
+    header h1 {
+      margin: 0;
+      font-family: var(--font-hand);
+      font-size: clamp(2rem, 6vw, 3rem);
+      color: var(--color-primary);
+      transition: transform 0.3s ease;
+    }
+    .toggle {
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-2);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: var(--space-1);
+      color: var(--color-text);
+      transition: transform var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .toggle:hover { transform: rotate(20deg); }
+    .text {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 0.1em solid var(--color-text);
+      font-family: var(--font-hand);
+      font-size: clamp(1rem, 4vw, 1.2rem);
+    }
+    button {
+      font-family: var(--font-sans);
+      display: block;
+      margin: var(--space-3) auto 0;
+      padding: var(--space-2) var(--space-3);
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      color: #fff;
+      background: var(--color-primary);
+      border: none;
+      border-radius: var(--space-2);
+      cursor: pointer;
+      box-shadow: var(--shadow-elevation);
+      transition: transform var(--transition-fast), background var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    button:hover { transform: scale(1.05); }
+    button:active { transform: scale(0.98); }
+    #btn-sorpresa[aria-expanded=true] { background: #c2595a; }
+    #sorpresa {
+      display: none;
+      margin-top: var(--space-3);
+      font-family: var(--font-hand);
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      color: var(--color-primary);
+      text-align: center;
+    }
+    aside[role=contentinfo] {
+      text-align: center;
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+      color: var(--color-text);
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes bounceIn { 0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-15px);}60%{transform:translateY(-7px);} }
+    @keyframes heartbeat { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
+    @media(min-width:768px){ body{padding:var(--space-4);} main{max-width:600px;} }
+  </style>
+</head>
+<body>
+  <main role="main">
+    <header role="banner">
+      <h1 id="titulo">Para Mi preciosa princesa</h1>
+      <button class="toggle" id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false">🌙</button>
+    </header>
+    <section role="region" class="card" aria-labelledby="carta">
+      <article id="carta" class="text" aria-live="polite"></article>
+      <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false">Revelar sorpresa</button>
+      <div id="sorpresa" role="region" aria-label="Mensaje secreto">¡Te amo más allá de las estrellas! ⭐</div>
+    </section>
+    <aside role="contentinfo"><p>Con todo mi amor, tu Dev.</p></aside>
+    <noscript><p style="color:red;text-align:center;">Activa JavaScript para ver la animación especial 💖</p></noscript>
+  </main>
+  <script defer>
+    document.addEventListener('DOMContentLoaded',()=>{
+      const t = "Cada día a tu lado es un regalo. Tu risa ilumina mi mundo y tu bondad llena mi corazón. Gracias por ser mi compañera, mi guía y mi todo.".split(''), c = document.getElementById('carta'), h = document.getElementById('titulo');
+      let i=0; function w(){ i<t.length ? (c.textContent+=t[i++], setTimeout(w,50)) : (c.style.borderRight='none', h.style.animation='heartbeat 1s ease-in-out 2') } w();
+      const b=document.getElementById('btn-sorpresa'), s=document.getElementById('sorpresa');
+      b.addEventListener('click',()=>{ const e=b.getAttribute('aria-expanded')==='true'; b.setAttribute('aria-expanded',!e); s.style.display=e?'none':'block'; !e&&(s.style.animation='bounceIn 0.8s') });
+      [b,document.getElementById('theme-toggle')].forEach(el=>el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') el.click() }));
+      const tb=document.getElementById('theme-toggle'), r=document.documentElement, st=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      r.setAttribute('data-theme',st); tb.textContent=st==='dark'?'☀️':'🌙'; tb.setAttribute('aria-pressed',st==='dark');
+      tb.addEventListener('click',()=>{ const n=r.getAttribute('data-theme')==='dark'?'light':'dark'; r.setAttribute('data-theme',n); localStorage.setItem('theme',n); tb.textContent=n==='dark'?'☀️':'🌙'; tb.setAttribute('aria-pressed',n==='dark') });
+      if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(console.error));
+    });
+  </script>
+</body>
 </html>
