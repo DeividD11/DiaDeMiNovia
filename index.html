@@ -38,26 +38,26 @@
       --text: #eee;
       --primary: #ffb4a2;
     }
-    /* Global reset & fluid typography */
+    /* Reset & fluid type */
     *, *::before, *::after { box-sizing: border-box; }
-    html { font-size: clamp(14px, 4vw, 18px); scroll-behavior: smooth; }
+    html { font-size: clamp(14px,4vw,18px); scroll-behavior: smooth; }
     body {
       margin:0; padding:env(safe-area-inset) var(--space-3);
       font-family:var(--font-base); color:var(--text);
-      background:linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      background:linear-gradient(135deg,var(--bg-start),var(--bg-end));
       display:flex; align-items:center; justify-content:center;
       min-height:100vh; line-height:1.8; letter-spacing:0.02em;
-      -webkit-font-smoothing:antialiased; transition:background var(--speed), color var(--speed);
+      -webkit-font-smoothing:antialiased;
+      transition:background var(--speed),color var(--speed);
+      touch-action:manipulation;
     }
-    /* Main layout */
-    main { max-width:600px; width:100%; display:grid; grid-template-rows:auto 1fr auto; gap:var(--space-3); }
-    /* Card container */
+    main { width:100%; max-width:430px; display:grid; grid-template-rows:auto 1fr auto; gap:var(--space-3); }
+    /* Card */
     .card {
-      background:var(--accent); border-radius:1.5rem;
-      box-shadow:var(--shadow); overflow:hidden;
-      padding:var(--space-3); transform:translateY(0);
-      animation:fadeInUp 0.8s ease-out;
-      transition:transform var(--speed), background var(--speed);
+      background:var(--accent); border-radius:1.5rem; box-shadow:var(--shadow);
+      overflow:hidden; padding:var(--space-3);
+      animation:fadeInUp 0.8s var(--speed) ease-out;
+      transition:transform var(--speed),background var(--speed);
     }
     .card:hover { transform:translateY(-6px); }
     /* Header */
@@ -65,20 +65,21 @@
     header h1 {
       margin:0; font-family:var(--font-fancy);
       font-size:clamp(2rem,6vw,3rem); color:var(--primary);
-      animation:popIn 0.6s ease-out;
+      animation:popIn 0.6s var(--speed) ease-out;
     }
-    /* Theme toggle */
+    /* Theme switch */
     .toggle {
-      margin:var(--space-2) auto 0; background:none; border:none;
-      font-size:1.4rem; cursor:pointer; color:var(--text);
-      transition:transform var(--speed);
+      display:block; margin:var(--space-2) auto 0;
+      background:none; border:none; font-size:1.4rem; cursor:pointer;
+      color:var(--text); transition:transform var(--speed);
     }
     .toggle:hover, .toggle:focus { transform:rotate(360deg); outline:none; }
-    /* Text content */
+    /* Text animation */
     .text {
-      font-family:var(--font-base); font-size:clamp(1rem,4vw,1.2rem);
-      opacity:0; animation:fadeIn 1s ease-out forwards; animation-delay:0.5s;
-      margin-bottom:var(--space-2);
+      font-family:var(--font-base); font-weight:400;
+      font-size:clamp(1rem,4vw,1.2rem);
+      opacity:0; margin-bottom:var(--space-2);
+      animation:fadeIn 1s var(--speed) ease-out forwards;
     }
     /* Buttons */
     button {
@@ -88,30 +89,31 @@
       font-size:clamp(0.9rem,3vw,1rem); color:#fff;
       background:var(--primary); border:none; border-radius:var(--space-2);
       box-shadow:var(--shadow); cursor:pointer;
-      transition:transform var(--speed), background var(--speed);
+      transition:transform var(--speed),background var(--speed);
     }
     button:hover { transform:scale(1.05); }
     button:active { transform:scale(0.95); }
-    #btn-sorpresa[aria-expanded=true] { background:#c2595a; animation:heartbeat 1s ease-in-out infinite; }
-    /* Surprise text */
+    button:focus { outline:2px dashed var(--primary); }
+    #btn-sorpresa[aria-expanded=true] {
+      background:#c2595a; animation:heartbeat 1s var(--speed) ease-in-out infinite;
+    }
     #sorpresa {
       display:none; margin-top:var(--space-3);
-      font-family:var(--font-base); font-size:clamp(1.1rem,4vw,1.3rem);
-      color:var(--primary); text-align:center;
-      animation:fadeIn 0.5s ease-in-out forwards; animation-delay:0.2s;
+      font-family:var(--font-base); font-weight:400;
+      font-size:clamp(1.1rem,4vw,1.3rem); color:var(--primary);
+      text-align:center; line-height:1.8;
+      animation:fadeIn 0.5s var(--speed) ease-in-out forwards;
+      animation-delay:0.2s;
     }
-    /* Footer */
     aside { text-align:center; font-size:clamp(0.8rem,2.5vw,0.9rem); }
-    /* Animations */
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-    @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes popIn { from{transform:scale(0.8)} to{transform:scale(1)} }
-    @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+    /* Keyframes */
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes popIn{from{transform:scale(0.8)}to{transform:scale(1)}}
+    @keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    /* Reduce motion */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after, html, body, .card {
-        animation-duration: 0 !important;
-        transition-duration: 0 !important;
-      }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
@@ -130,15 +132,18 @@
   </main>
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
-      const text = `Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.`; // texto completo aquí
-      const arr = text.split(''), cont = document.getElementById('carta'), theme = document.getElementById('theme-toggle');
-      let i=0;
-      (function type(){ if(i<arr.length){ cont.textContent+=arr[i++]; setTimeout(type,50);} else cont.style.borderRight='none'; })();
-      // sorpresa
-      const btn=document.getElementById('btn-sorpresa'), sup=document.getElementById('sorpresa');
-      btn.addEventListener('click', ()=>{ const exp=btn.getAttribute('aria-expanded')==='true'; btn.setAttribute('aria-expanded',!exp); if(!exp){ sup.style.display='block'; sup.classList.add('fadeIn'); } });
-      // tema
-      theme.addEventListener('click', ()=>{ document.documentElement.dataset.theme = document.documentElement.dataset.theme==='light'?'dark':'light'; });
+      const text = `Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.`, arr = text.split(''), cont = document.getElementById('carta'), theme = document.getElementById('theme-toggle');
+      let i = 0;
+      (function type(){ if(i < arr.length){ cont.textContent += arr[i++]; setTimeout(type,50);} else cont.style.borderRight = 'none'; })();
+      const btn = document.getElementById('btn-sorpresa'), sup = document.getElementById('sorpresa');
+      btn.addEventListener('click', () => {
+        const exp = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !exp);
+        if(!exp){ sup.style.display='block'; sup.style.animation='fadeIn 0.5s ease-in-out'; }
+      });
+      theme.addEventListener('click', ()=>{
+        document.documentElement.dataset.theme = document.documentElement.dataset.theme==='light'?'dark':'light';
+      });
     });
   </script>
 </body>
