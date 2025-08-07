@@ -165,31 +165,7 @@
   </main>
   <script defer>
     document.addEventListener('DOMContentLoaded',()=>{
-      const t = "Querida Alejandra,
-
-Hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros, y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios. En palabras de Epicteto: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme entonces aclarar la verdad de lo ocurrido:
-
-Esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador. Acepté, como simple comerciante y amigo, su invitación al almuerzo. En ningún momento hubo intención alguna de traspasar la frontera de la amistad con Caroline, ni de asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar”, para señalar que nunca existió tal propuesta entre Caroline y yo.
-
-Comprendo, amada mía, que esas palabras y esa conversación te hayan herido. Pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu. No fui desleal a ti, sino acaso imprudente al no prever cómo podían sonar esas frases fuera de contexto.
-
-Si como dice Aristóteles, “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo. Te ruego, entonces, que no permitas que un malentendido perturbe ese alma común que hemos forjado en estos dos años y medio. Mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú.
-
-Permíteme enmendar el dolor causado con mi sinceridad:
-
-Te amo con la misma intensidad con que el sabio ama la virtud.
-
-No hay sombra en mi ánimo que no se disipe al evocar tu nombre.
-
-Deseo compartir contigo cada paso, cada decisión, de ahora en adelante, sin secretos ni sombras.
-
-
-Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”. Enriquézcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda.
-
-Con todo mi amor y mi respeto inquebrantable,
-Tu compañero y enamorado.
-
-".split(''), c = document.getElementById('carta'), h = document.getElementById('titulo');
+      const t = "Querida Alejandra, Hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros, y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios. En palabras de Epicteto: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme entonces aclarar la verdad de lo ocurrido: Esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador. Acepté, como simple comerciante y amigo, su invitación al almuerzo. En ningún momento hubo intención alguna de traspasar la frontera de la amistad con Caroline, ni de asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar”, para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo, amada mía, que esas palabras y esa conversación te hayan herido. Pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu. No fui desleal a ti, sino acaso imprudente al no prever cómo podían sonar esas frases fuera de contexto. Si como dice Aristóteles, “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo. Te ruego, entonces, que no permitas que un malentendido perturbe ese alma común que hemos forjado en estos dos años y medio. Mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Permíteme enmendar el dolor causado con mi sinceridad: Te amo con la misma intensidad con que el sabio ama la virtud. No hay sombra en mi ánimo que no se disipe al evocar tu nombre. Deseo compartir contigo cada paso, cada decisión, de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”. Enriquézcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, Tu compañero y enamorado.".split(''), c = document.getElementById('carta'), h = document.getElementById('titulo');
       let i=0; function w(){ i<t.length ? (c.textContent+=t[i++], setTimeout(w,50)) : (c.style.borderRight='none', h.style.animation='heartbeat 1s ease-in-out 2') } w();
       const b=document.getElementById('btn-sorpresa'), s=document.getElementById('sorpresa');
       b.addEventListener('click',()=>{ const e=b.getAttribute('aria-expanded')==='true'; b.setAttribute('aria-expanded',!e); s.style.display=e?'none':'block'; !e&&(s.style.animation='bounceIn 0.8s') });
