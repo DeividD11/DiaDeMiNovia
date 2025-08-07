@@ -2,56 +2,25 @@
 <html lang="es-CO" data-theme="light">
 
 <head>
-    <!-- Meta y OG intactos -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Carta para Mi preciosa princesa</title>
+    <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Carta para Mi preciosa princesa">
     <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro">
     <meta property="og:image" content="/images/carta-preview.png">
     <meta property="og:locale" content="es_CO">
-
-    <!-- Preconnect a Google Fonts -->
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Preload fuentes críticas (subset: Latin) -->
-    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/opensans/v29/mem8YaGs126MiZpBA-U1UpcaXcl0Aw.ttf"
-        type="font/ttf" crossorigin>
-    <link rel="preload" as="font"
-        href="https://fonts.gstatic.com/s/dancingscript/v20/If2RXTr6YS-zF4S-kcSWSVi_szZjjxzw.ttf" type="font/ttf"
-        crossorigin>
-
-    <!-- Google Fonts con font-display: swap y subset Latin -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Dancing+Script&display=swap&subset=latin"
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
-
     <style>
-        /* Variables y estilos generales */
-        :root {
-            --bg-light-start: #f2cc8f;
-            --bg-light-end: #fff1e0;
-            --bg-dark-start: #4b3f72;
-            --bg-dark-end: #1a1a1a;
-            --bg-gradient: linear-gradient(135deg, var(--bg-light-start), var(--bg-light-end));
-            --text: #333;
-            --text-dark: #eee;
-            --primary: #e07a5f;
-            --accent: #f2cc8f;
-            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-fancy: 'Dancing Script', cursive;
-            --speed: 0.6s;
-        }
-
-        [data-theme="dark"] {
-            --bg-gradient: linear-gradient(135deg, var(--bg-dark-start), var(--bg-dark-end));
-            --text: var(--text-dark);
-        }
-
+        /* Reset & disable selection */
         *,
         *::before,
         *::after {
@@ -84,6 +53,29 @@
             touch-action: manipulation;
         }
 
+        /* Theme Variables */
+        :root {
+            --bg-light-start: #f2cc8f;
+            --bg-light-end: #fff1e0;
+            --bg-dark-start: #4b3f72;
+            --bg-dark-end: #1a1a1a;
+            --bg-gradient: linear-gradient(135deg, var(--bg-light-start), var(--bg-light-end));
+            --text: #333;
+            --text-dark: #eee;
+            --primary: #e07a5f;
+            --accent: #f2cc8f;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-fancy: 'Dancing Script', cursive;
+            --speed: 0.6s;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, var(--bg-dark-start), var(--bg-dark-end));
+            --text: var(--text-dark);
+        }
+
+        /* Layout */
         main {
             width: 100%;
             max-width: 430px;
@@ -98,17 +90,11 @@
             box-shadow: var(--shadow);
             padding: 1rem;
             animation: fadeInUp 0.8s ease;
-            touch-action: pan-y;
             transition: transform var(--speed), background var(--speed);
         }
 
         .card:hover {
             transform: translateY(-4px);
-        }
-
-        .card.hidden {
-            transform: translateY(-100%) scale(0.9);
-            opacity: 0;
         }
 
         header {
@@ -123,15 +109,18 @@
             animation: popIn 0.6s ease;
         }
 
+        /* Controls */
         .controls {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 0.5rem;
         }
 
         .toggle,
         .skip {
             position: relative;
+            overflow: hidden;
             display: inline-block;
             width: 2.5rem;
             height: 2.5rem;
@@ -150,6 +139,10 @@
         #btn-sorpresa:focus {
             outline: 2px solid var(--primary);
             outline-offset: 4px;
+        }
+
+        .toggle[aria-pressed] {
+            /* ARIA-pressed state styling */
         }
 
         .toggle:active,
@@ -188,6 +181,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Progress bar */
         .progress {
             width: 100%;
             height: 4px;
@@ -205,7 +199,7 @@
 
         button.main {
             display: block;
-            margin: 1rem auto 0;
+            margin: 1rem auto;
             padding: 0.5rem 1rem;
             font-family: var(--font-base);
             font-weight: 600;
@@ -310,14 +304,13 @@
                 <button class="skip" id="skip-btn" aria-label="Saltar animación">⏭️</button>
             </div>
         </header>
-        <div class="card" aria-labelledby="carta" id="card">
+        <div class="card" aria-labelledby="carta">
             <article id="carta" class="text" aria-live="polite"></article>
             <div class="progress">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
             <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false" class="main">Ver sorpresa</button>
-            <div id="sorpresa" aria-label="Mensaje sorpresa" aria-live="polite">
-                ¡Te amo más allá de las estrellas! ⭐
+            <div id="sorpresa" aria-label="Mensaje sorpresa" aria-live="polite">¡Te amo más allá de las estrellas! ⭐
             </div>
         </div>
         <aside>
@@ -377,68 +370,15 @@ Con la esperanza de que nuestra razón y nuestro afecto retornen a la misma send
                 if (!exp) sup.style.animation = 'fadeIn 0.5s ease forwards';
                 if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
             });
-            // Tema automático según hora local
             const tb = document.getElementById('theme-toggle');
-            const applyTheme = t => {
-                document.documentElement.dataset.theme = t;
-                tb.textContent = t === 'light' ? '🌙' : '☀️';
-                tb.setAttribute('aria-pressed', t !== 'light');
-            };
-
-            const saved = localStorage.getItem('theme');
-            if (saved) {
-                applyTheme(saved);
-            } else {
-                const h = new Date().getHours();
-                const auto = (h < 6 || h >= 18) ? 'dark' : 'light';
-                applyTheme(auto);
-            }
-
+            const apply = t => { document.documentElement.dataset.theme = t; tb.textContent = t === 'light' ? '🌙' : '☀️'; tb.setAttribute('aria-pressed', t !== 'light'); };
+            const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+            apply(saved);
             tb.addEventListener('click', () => {
+                tb.classList.add('ripple'); setTimeout(() => tb.classList.remove('ripple'), 600);
                 const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-                applyTheme(next);
-                localStorage.setItem('theme', next);
+                apply(next); localStorage.setItem('theme', next);
                 if (navigator.vibrate) navigator.vibrate(20);
-            });
-
-            // Opcional: actualizar al cruzar medianoche
-            setInterval(() => {
-                if (!localStorage.getItem('theme')) {
-                    const h = new Date().getHours();
-                    const auto = (h < 6 || h >= 18) ? 'dark' : 'light';
-                    applyTheme(auto);
-                }
-            }, 60 * 60 * 1000);
-            // --- NUEVO: detección de swipe vertical en la tarjeta ---
-            const card = document.getElementById('card');
-            let touchStartY = 0;
-            let touchCurrentY = 0;
-            let isHidden = false;
-
-            card.addEventListener('touchstart', e => {
-                if (e.touches.length === 1) {
-                    touchStartY = e.touches[0].clientY;
-                }
-            });
-
-            card.addEventListener('touchmove', e => {
-                if (e.touches.length === 1) {
-                    touchCurrentY = e.touches[0].clientY;
-                }
-            });
-
-            card.addEventListener('touchend', () => {
-                const dy = touchStartY - touchCurrentY;
-                const threshold = 50; // Distancia mínima para considerar swipe
-                if (dy > threshold && !isHidden) {
-                    // Swipe hacia arriba: ocultar
-                    card.classList.add('hidden');
-                    isHidden = true;
-                } else if (dy < -threshold && isHidden) {
-                    // Swipe hacia abajo: mostrar otra vez
-                    card.classList.remove('hidden');
-                    isHidden = false;
-                }
             });
         });
     </script>
