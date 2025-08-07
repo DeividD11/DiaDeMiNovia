@@ -41,6 +41,7 @@
     @media(prefers-color-scheme:dark){html {data-theme:dark}}
     html {box-sizing:border-box; font-size:clamp(14px,4vw,18px); -webkit-text-size-adjust:100%;}
     *,*:before,*:after{box-sizing:inherit;}
+    html:focus-within {scroll-behavior:smooth;}
     body {
       margin:0; padding:env(safe-area-inset) var(--space-3);
       font-family:var(--font-sans); color:var(--color-text);
@@ -50,39 +51,57 @@
       transition:background var(--transition-fast),color var(--transition-fast);
       -webkit-font-smoothing:antialiased; touch-action:manipulation;
     }
-    main[role=main]{max-width:430px;margin:auto;padding:var(--space-3);
+    main[role=main]{
+      max-width:430px;margin:auto;padding:var(--space-3);
       display:grid;grid-template-rows:auto 1fr auto;gap:var(--space-3);
     }
-    .card{background:var(--color-accent);border-radius:1.5rem;
-      box-shadow:var(--shadow-elevation);overflow:hidden;padding:var(--space-3);
-      animation:slideUp 1s ease-out;transition:background var(--transition-fast);
+    .card{
+      background:var(--color-accent);
+      border-radius:1.5rem;
+      box-shadow:var(--shadow-elevation);
+      overflow:hidden;padding:var(--space-3);
+      animation:slideUp 1s ease-out;
+      transition:background var(--transition-fast), transform var(--transition-fast);
     }
+    .card:hover{transform:translateY(-4px)}
     header[role=banner]{text-align:center;animation:fadeIn 1s ease-out;}
-    header h1{margin:0;font-family:var(--font-hand);
+    header h1{
+      margin:0;font-family:var(--font-hand);
       font-size:clamp(2rem,6vw,3rem);color:var(--color-primary);
+      transition:transform 0.3s ease;
     }
-    .toggle{display:block;margin:var(--space-2) auto 0;
+    .toggle{
+      display:block;margin:var(--space-2) auto 0;
       background:none;border:none;cursor:pointer;font-size:1.2rem;
       padding:var(--space-1);color:var(--color-text);
       transition:transform var(--transition-fast);
     }
+    .toggle:focus {outline:2px dashed var(--color-primary);transform:rotate(20deg)}
     .toggle:hover{transform:rotate(20deg)}
-    .text{white-space:normal;word-break:break-word;
+    .text{
+      white-space:normal;word-break:break-word;
       font-family:var(--font-sans);font-weight:400;
       font-size:clamp(1rem,4vw,1.2rem);
       margin-bottom:var(--space-2);
+      opacity:0;color:var(--color-text);
+      animation:fadeIn 1s ease-out forwards;
+      animation-delay:0.5s;
     }
-    button{font-family:var(--font-sans);font-weight:600;
+    button{
+      font-family:var(--font-sans);font-weight:600;
       display:block;margin:var(--space-3) auto 0;
       padding:var(--space-2) var(--space-3);
-      font-size:clamp(0.9rem,3vw,1rem);color:#fff;
-      background:var(--color-primary);border:none;border-radius:var(--space-2);
+      font-size:clamp(0.9rem,3vw,1rem);
+      color:#fff;background:var(--color-primary);
+      border:none;border-radius:var(--space-2);
       box-shadow:var(--shadow-elevation);cursor:pointer;
       transition:transform var(--transition-fast),background var(--transition-fast);
     }
+    button:focus{outline:2px dashed var(--color-primary)}
     button:hover{transform:scale(1.05)}button:active{transform:scale(0.98)}
-    #btn-sorpresa[aria-expanded=true]{background:#c2595a}
-    #sorpresa{display:none;margin-top:var(--space-3);
+    #btn-sorpresa[aria-expanded=true]{background:#c2595a;animation:pulse 1s ease-in-out;}
+    #sorpresa{
+      display:none;margin-top:var(--space-3);
       font-family:var(--font-sans);font-weight:400;
       font-size:clamp(1.1rem,4vw,1.3rem);color:var(--color-primary);
       text-align:center;line-height:1.8;
@@ -91,7 +110,7 @@
       font-family:var(--font-sans);font-weight:400;
       font-size:clamp(0.8rem,2.5vw,0.9rem);color:var(--color-text);
     }
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes bounceIn{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-15px)}60%{transform:translateY(-7px)}}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes bounceIn{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-15px)}60%{transform:translateY(-7px)}}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
     @media(min-width:768px){body{padding:var(--space-4)}main{max-width:600px}}
   </style>
 </head>
@@ -111,16 +130,15 @@
   </main>
   <script defer>
     document.addEventListener('DOMContentLoaded',()=>{
-      const t = "Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.".split(''),
-            c = document.getElementById('carta'), h = document.getElementById('titulo');
-      let i=0; function w(){ i<t.length ? (c.textContent+=t[i++], setTimeout(w,50)) : (c.style.borderRight='none', h.style.animation='heartbeat 1s ease-in-out 2') } w();
-      const b=document.getElementById('btn-sorpresa'), s=document.getElementById('sorpresa');
-      b.addEventListener('click',()=>{ const e=b.getAttribute('aria-expanded')==='true'; b.setAttribute('aria-expanded',!e); s.style.display=e?'none':'block'; !e&&(s.style.animation='bounceIn 0.8s') });
-      [b,document.getElementById('theme-toggle')].forEach(el=>el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') el.click() }));
-      const tb=document.getElementById('theme-toggle'), r=document.documentElement, st=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
-      r.setAttribute('data-theme',st); tb.textContent=st==='dark'?'☀️':'🌙'; tb.setAttribute('aria-pressed',st==='dark');
-      tb.addEventListener('click',()=>{ const n=r.getAttribute('data-theme')==='dark'?'light':'dark'; r.setAttribute('data-theme',n); localStorage.setItem('theme',n); tb.textContent=n==='dark'?'☀️':'🌙'; tb.setAttribute('aria-pressed',n==='dark') });
-      if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(console.error));
+      const t = 'Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.'.split(''),c=document.getElementById('carta'),h=document.getElementById('titulo');
+      let i=0;function w(){i<t.length?(c.textContent+=t[i++],setTimeout(w,50)):(c.style.borderRight='none',h.style.animation='heartbeat 1s ease-in-out 2')}w();
+      const b=document.getElementById('btn-sorpresa'),s=document.getElementById('sorpresa');
+      b.addEventListener('click',()=>{const e=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',!e);s.style.display=e?'none':'block';!e&&(s.style.animation='bounceIn 0.8s')});
+      [b,document.getElementById('theme-toggle')].forEach(el=>el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')el.click()}));
+      const tb=document.getElementById('theme-toggle'),r=document.documentElement,st=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+      r.setAttribute('data-theme',st);tb.textContent=st==='dark'?'☀️':'🌙';tb.setAttribute('aria-pressed',st==='dark');
+      tb.addEventListener('click',()=>{const n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);localStorage.setItem('theme',n);tb.textContent=n==='dark'?'☀️':'🌙';tb.setAttribute('aria-pressed',n==='dark')});
+      if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(console.error));
     });
   </script>
 </body>
