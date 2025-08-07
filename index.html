@@ -20,12 +20,47 @@
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
     <style>
-        /* Reset & disable text selection */
+        /* Disable selection */
+        * {
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        button,
+        .toggle {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+        :root {
+            --bg-start: #f2cc8f;
+            --bg-end: #fff1e0;
+            --text: #333;
+            --primary: #e07a5f;
+            --accent: #f2cc8f;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-fancy: 'Dancing Script', cursive;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 1rem;
+            --space-4: 1.5rem;
+            --speed: 0.3s;
+        }
+
+        [data-theme="dark"] {
+            --bg-start: #4b3f72;
+            --bg-end: #1a1a1a;
+            --text: #eee;
+            --primary: #ffb4a2;
+        }
+
+        /* Reset & fluid type */
         *,
         *::before,
         *::after {
             box-sizing: border-box;
-            user-select: none;
         }
 
         html {
@@ -35,77 +70,48 @@
 
         body {
             margin: 0;
-            padding: env(safe-area-inset) 1rem;
+            padding: env(safe-area-inset) var(--space-3);
             font-family: var(--font-base);
-            line-height: 1.6;
-            letter-spacing: 0.02em;
-            -webkit-font-smoothing: antialiased;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            background: var(--bg-gradient);
-            background-size: 200% 100%;
-            background-position: left center;
-            color: var(--text);
-            transition: color var(--speed);
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
+            transition: background var(--speed), color var(--speed);
             touch-action: manipulation;
         }
 
-        /* Theme Variables */
-        :root {
-            --bg-light-start: #f2cc8f;
-            --bg-light-end: #fff1e0;
-            --bg-dark-start: #4b3f72;
-            --bg-dark-end: #1a1a1a;
-            --bg-gradient: linear-gradient(135deg, var(--bg-light-start), var(--bg-light-end));
-            --text: #333;
-            --text-dark: #eee;
-            --primary: #e07a5f;
-            --accent: #f2cc8f;
-            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-fancy: 'Dancing Script', cursive;
-            --speed: 0.6s;
-        }
-
-        [data-theme="dark"] {
-            --bg-gradient: linear-gradient(135deg, var(--bg-dark-start), var(--bg-dark-end));
-            --text: var(--text-dark);
-        }
-
-        /* Gradient slide animation */
-        @keyframes slideGradient {
-            from {
-                background-position: left center;
-            }
-
-            to {
-                background-position: right center;
-            }
-        }
-
-        /* Layout */
         main {
             width: 100%;
             max-width: 430px;
             display: grid;
             grid-template-rows: auto 1fr auto;
-            gap: 1rem;
+            gap: var(--space-3);
+        }
+
+        /* Larger screens get wider container */
+        @media(min-width:1200px) {
+            main {
+                max-width: 800px;
+            }
         }
 
         .card {
             background: var(--accent);
-            border-radius: 1rem;
+            border-radius: 1.5rem;
             box-shadow: var(--shadow);
-            padding: 1rem;
-            animation: fadeInUp 0.8s ease;
+            overflow: hidden;
+            padding: var(--space-3);
+            animation: fadeInUp 0.8s var(--speed) ease-out;
             transition: transform var(--speed), background var(--speed);
         }
 
         .card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-6px);
         }
 
         header {
@@ -117,103 +123,88 @@
             font-family: var(--font-fancy);
             font-size: clamp(2rem, 6vw, 3rem);
             color: var(--primary);
-            animation: popIn 0.6s ease;
+            animation: popIn 0.6s var(--speed) ease-out;
         }
 
-        /* Theme Toggle with ripple */
         .toggle {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            margin-top: 0.5rem;
-            width: 2.5rem;
-            height: 2.5rem;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
+            display: block;
+            margin: var(--space-2) auto 0;
             background: none;
+            border: none;
+            font-size: 1.6rem;
             cursor: pointer;
             color: var(--text);
             transition: transform var(--speed);
         }
 
-        .toggle:active {
-            transform: scale(0.9);
-        }
-
-        .toggle::after {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: 50%;
-            left: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0;
-            transition: transform 0.6s ease, opacity 0.6s ease;
-            pointer-events: none;
-        }
-
-        .toggle.ripple::after {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-            transition: none;
+        .toggle:hover,
+        .toggle:focus {
+            transform: rotate(360deg);
+            outline: none;
         }
 
         .text {
-            overflow: hidden;
-            border-right: 0.1em solid var(--text);
-            white-space: pre-wrap;
+            white-space: normal;
             word-break: break-word;
             font-family: var(--font-base);
+            font-weight: 400;
             font-size: clamp(1rem, 4vw, 1.2rem);
+            margin-bottom: var(--space-2);
         }
 
         button {
-            display: block;
-            margin: 1rem auto;
-            padding: 0.5rem 1rem;
             font-family: var(--font-base);
             font-weight: 600;
+            display: block;
+            margin: var(--space-3) auto 0;
+            padding: var(--space-2) var(--space-3);
             font-size: clamp(0.9rem, 3vw, 1rem);
             color: #fff;
             background: var(--primary);
             border: none;
-            border-radius: 0.5rem;
+            border-radius: var(--space-2);
             box-shadow: var(--shadow);
             cursor: pointer;
             transition: transform var(--speed), background var(--speed);
         }
 
+        button:hover {
+            transform: scale(1.05);
+        }
+
         button:active {
-            transform: scale(0.95);
+            transform: scale(0.95)
+        }
+
+        button:focus {
+            outline: 2px dashed var(--primary);
         }
 
         #btn-sorpresa[aria-expanded="true"] {
             background: #c2595a;
-            animation: heartbeat 1s infinite ease-in-out;
+            animation: heartbeat 1s var(--speed) ease-in-out infinite;
         }
 
         #sorpresa {
             display: none;
-            margin-top: 1rem;
-            text-align: center;
+            margin-top: var(--space-3);
             font-family: var(--font-base);
+            font-weight: 400;
             font-size: clamp(1.1rem, 4vw, 1.3rem);
             color: var(--primary);
-            animation: fadeIn 0.5s ease forwards;
+            text-align: center;
+            line-height: 1.8;
+            animation: fadeIn 0.5s var(--speed) ease-in-out forwards;
+            animation-delay: 0.2s;
         }
 
         aside {
             text-align: center;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
             opacity: 0;
-            animation: fadeInUp 0.8s 0.2s ease forwards;
+            animation: fadeInUp 0.8s calc(var(--speed)+0.2s) ease-out forwards;
         }
 
-        /* Keyframes */
         @keyframes fadeIn {
             from {
                 opacity: 0
@@ -258,7 +249,6 @@
             }
         }
 
-        /* Reduce motion */
         @media(prefers-reduced-motion:reduce) {
 
             *,
