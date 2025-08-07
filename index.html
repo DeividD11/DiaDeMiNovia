@@ -16,6 +16,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    /* Disable text selection */
+    * { user-select: none; -webkit-user-select: none; -ms-user-select: none; }
     :root {
       --bg-start: #f2cc8f;
       --bg-end: #fff1e0;
@@ -37,6 +39,7 @@
       --text: #eee;
       --primary: #ffb4a2;
     }
+    /* Reset & fluid type */
     *, *::before, *::after { box-sizing: border-box; }
     html { font-size: clamp(14px,4vw,18px); scroll-behavior: smooth; }
     body {
@@ -139,35 +142,29 @@
       // Máquina de escribir
       const msg = `Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.`, arr = msg.split(''), cont = document.getElementById('carta');
       let i = 0;
-      (function type(){ if(i < arr.length) { cont.textContent += arr[i++]; setTimeout(type,50);} else cont.style.borderRight='none'; })();// Sorpresa toggle
-  const btn = document.getElementById('btn-sorpresa'), sup = document.getElementById('sorpresa');
-  btn.addEventListener('click', () => {
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', !expanded);
-    btn.textContent = expanded ? 'Ver sorpresa' : 'Ocultar sorpresa';
-    if (expanded) {
-      sup.style.display = 'none';
-    } else {
-      sup.style.display = 'block';
-      sup.style.animation = 'fadeIn 0.5s ease-in-out';
-    }
-  });
-
-  // Tema y icono
-  const toggle = document.getElementById('theme-toggle');
-  const apply = t => {
-    document.documentElement.dataset.theme = t;
-    toggle.textContent = t === 'light' ? '🌙' : '☀️';
-  };
-  const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  apply(saved);
-  toggle.addEventListener('click', () => {
-    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-    apply(next);
-    localStorage.setItem('theme', next);
-  });
-});
-
+      (function type(){ if(i < arr.length) { cont.textContent += arr[i++]; setTimeout(type,50);} else cont.style.borderRight='none'; })();
+      // Sorpresa toggle
+      const btn = document.getElementById('btn-sorpresa'), sup = document.getElementById('sorpresa');
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        btn.textContent = expanded ? 'Ver sorpresa' : 'Ocultar sorpresa';
+        if (expanded) sup.style.display = 'none'; else { sup.style.display = 'block'; sup.style.animation = 'fadeIn 0.5s ease-in-out'; }
+      });
+      // Tema y icono
+      const toggle = document.getElementById('theme-toggle');
+      const applyTheme = t => {
+        document.documentElement.dataset.theme = t;
+        toggle.textContent = t === 'light' ? '🌙' : '☀️';
+      };
+      const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      applyTheme(saved);
+      toggle.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+        localStorage.setItem('theme', next);
+      });
+    });
   </script>
 </body>
 </html>
