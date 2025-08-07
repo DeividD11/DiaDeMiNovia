@@ -14,7 +14,7 @@
   <!-- Fuentes optimizadas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
     /* Variables tema, diseño y espaciado */
     :root {
@@ -23,12 +23,10 @@
       --color-text: #333;
       --color-primary: #e07a5f;
       --color-accent: #f2cc8f;
-      --shadow-color: rgba(0,0,0,0.1);
-      --shadow-elevation: 0 8px 20px var(--shadow-color);
-      --font-sans: -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-      --font-hand: 'Dancing Script',cursive;
+      --shadow-elevation: 0 8px 20px rgba(0,0,0,0.1);
+      --font-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-hand: 'Dancing Script', cursive;
       --transition-fast: 0.3s ease;
-      /* Espaciado modular */
       --space-1: 0.25rem;
       --space-2: 0.5rem;
       --space-3: 1rem;
@@ -39,119 +37,62 @@
       --color-bg-end: #1a1a1a;
       --color-text: #eee;
       --color-primary: #ffb4a2;
-      --shadow-color: rgba(0,0,0,0.4);
     }
     @media(prefers-color-scheme:dark){html {data-theme:dark}}
-    html {
-      box-sizing: border-box;
-      font-size: clamp(14px, 4vw, 18px);
-      -webkit-text-size-adjust: 100%;
-    }
-    *, *:before, *:after { box-sizing: inherit; }
+    html {box-sizing:border-box; font-size:clamp(14px,4vw,18px); -webkit-text-size-adjust:100%;}
+    *,*:before,*:after{box-sizing:inherit;}
     body {
-      margin: 0;
-      padding: env(safe-area-inset) var(--space-3);
-      font-family: var(--font-sans);
-      color: var(--color-text);
-      background: linear-gradient(135deg, var(--color-bg-start), var(--color-bg-end));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      line-height: 1.5;
-      transition: background var(--transition-fast), color var(--transition-fast);
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
+      margin:0; padding:env(safe-area-inset) var(--space-3);
+      font-family:var(--font-sans); color:var(--color-text);
+      background:linear-gradient(135deg,var(--color-bg-start),var(--color-bg-end));
+      display:flex;align-items:center;justify-content:center;
+      min-height:100vh; line-height:1.8; letter-spacing:0.02em;
+      transition:background var(--transition-fast),color var(--transition-fast);
+      -webkit-font-smoothing:antialiased; touch-action:manipulation;
     }
-    main[role=main] {
-      max-width: 430px;
-      margin: auto;
-      padding: var(--space-3);
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      gap: var(--space-3);
+    main[role=main]{max-width:430px;margin:auto;padding:var(--space-3);
+      display:grid;grid-template-rows:auto 1fr auto;gap:var(--space-3);
     }
-    .card {
-      background: var(--color-accent);
-      border-radius: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      overflow: hidden;
-      padding: var(--space-3);
-      animation: slideUp 1s ease-out;
-      transition: background var(--transition-fast);
+    .card{background:var(--color-accent);border-radius:1.5rem;
+      box-shadow:var(--shadow-elevation);overflow:hidden;padding:var(--space-3);
+      animation:slideUp 1s ease-out;transition:background var(--transition-fast);
     }
-    header[role=banner] {
-      text-align: center;
-      animation: fadeIn 1s ease-out;
+    header[role=banner]{text-align:center;animation:fadeIn 1s ease-out;}
+    header h1{margin:0;font-family:var(--font-hand);
+      font-size:clamp(2rem,6vw,3rem);color:var(--color-primary);
     }
-    header h1 {
-      margin: 0;
-      font-family: var(--font-hand);
-      font-size: clamp(2rem, 6vw, 3rem);
-      color: var(--color-primary);
-      transition: transform 0.3s ease;
+    .toggle{display:block;margin:var(--space-2) auto 0;
+      background:none;border:none;cursor:pointer;font-size:1.2rem;
+      padding:var(--space-1);color:var(--color-text);
+      transition:transform var(--transition-fast);
     }
-    /* Tema toggle moved below title */
-    .toggle {
-      display: block;
-      margin: var(--space-2) auto 0;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      padding: var(--space-1);
-      color: var(--color-text);
-      transition: transform var(--transition-fast);
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
+    .toggle:hover{transform:rotate(20deg)}
+    .text{white-space:normal;word-break:break-word;
+      font-family:var(--font-sans);font-weight:400;
+      font-size:clamp(1rem,4vw,1.2rem);
+      margin-bottom:var(--space-2);
     }
-    .toggle:hover { transform: rotate(20deg); }
-    .text {
-      /* Allow wrapping */
-      white-space: normal;
-      word-break: break-word;
-      border-right: none;
-      font-family: var(--font-hand);
-      font-size: clamp(1rem, 4vw, 1.2rem);
-      margin-bottom: var(--space-2);
+    button{font-family:var(--font-sans);font-weight:600;
+      display:block;margin:var(--space-3) auto 0;
+      padding:var(--space-2) var(--space-3);
+      font-size:clamp(0.9rem,3vw,1rem);color:#fff;
+      background:var(--color-primary);border:none;border-radius:var(--space-2);
+      box-shadow:var(--shadow-elevation);cursor:pointer;
+      transition:transform var(--transition-fast),background var(--transition-fast);
     }
-    button {
-      font-family: var(--font-sans);
-      display: block;
-      margin: var(--space-3) auto 0;
-      padding: var(--space-2) var(--space-3);
-      font-size: clamp(0.9rem, 3vw, 1rem);
-      color: #fff;
-      background: var(--color-primary);
-      border: none;
-      border-radius: var(--space-2);
-      cursor: pointer;
-      box-shadow: var(--shadow-elevation);
-      transition: transform var(--transition-fast), background var(--transition-fast);
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
+    button:hover{transform:scale(1.05)}button:active{transform:scale(0.98)}
+    #btn-sorpresa[aria-expanded=true]{background:#c2595a}
+    #sorpresa{display:none;margin-top:var(--space-3);
+      font-family:var(--font-sans);font-weight:400;
+      font-size:clamp(1.1rem,4vw,1.3rem);color:var(--color-primary);
+      text-align:center;line-height:1.8;
     }
-    button:hover { transform: scale(1.05); }
-    button:active { transform: scale(0.98); }
-    #btn-sorpresa[aria-expanded=true] { background: #c2595a; }
-    #sorpresa {
-      display: none;
-      margin-top: var(--space-3);
-      font-family: var(--font-hand);
-      font-size: clamp(1.1rem, 4vw, 1.3rem);
-      color: var(--color-primary);
-      text-align: center;
+    aside[role=contentinfo]{text-align:center;
+      font-family:var(--font-sans);font-weight:400;
+      font-size:clamp(0.8rem,2.5vw,0.9rem);color:var(--color-text);
     }
-    aside[role=contentinfo] {
-      text-align: center;
-      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
-      color: var(--color-text);
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    @keyframes bounceIn { 0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-15px);}60%{transform:translateY(-7px);} }
-    @keyframes heartbeat { 0%,100%{transform:scale(1);}50%{transform:scale(1.1);} }
-    @media(min-width:768px){ body{padding:var(--space-4);} main{max-width:600px;} }
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}@keyframes bounceIn{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(-15px)}60%{transform:translateY(-7px)}}@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    @media(min-width:768px){body{padding:var(--space-4)}main{max-width:600px}}
   </style>
 </head>
 <body>
@@ -170,7 +111,7 @@
   </main>
   <script defer>
     document.addEventListener('DOMContentLoaded',()=>{
-      const t = "Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que ha surgido entre nosotros; en palabras de Epicteto, “no son los hechos los que nos perturban, sino la opinión que tenemos de ellos”, y por eso te aclaro: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador y acepté su invitación al almuerzo solo como amigo y comerciante, sin intención alguna de traspasar la frontera de la amistad ni asumir el rol de “yerno”; cuando ella dijo “ya que tú no quisiste”, respondí “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu. No fui desleal, solo fui imprudente al no prever cómo sonarían esas frases fuera de contexto. Si como decía Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se basa en la confianza y el respeto mutuo, razón por la cual mañana no asistiré al almuerzo con Mary, pues mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y confías en mi transparencia, me permitas aceptarla sin inseguridades; te prometo comunicarte cada paso con total honestidad, para que lo vivamos juntos y sin sombras. Te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir cada decisión de ahora en adelante sin secretos. Que la razón nos guíe, como decía Séneca “la mayor riqueza es el bien de la mente”, y enriquezcamos la nuestra con confianza renovada, caminando juntos hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.".split(''),
+      const t = "Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.".split(''),
             c = document.getElementById('carta'), h = document.getElementById('titulo');
       let i=0; function w(){ i<t.length ? (c.textContent+=t[i++], setTimeout(w,50)) : (c.style.borderRight='none', h.style.animation='heartbeat 1s ease-in-out 2') } w();
       const b=document.getElementById('btn-sorpresa'), s=document.getElementById('sorpresa');
