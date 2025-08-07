@@ -16,112 +16,143 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Disable text selection */
+    /* Disable text selection and tap highlight */
     * { user-select: none; -webkit-user-select: none; -ms-user-select: none; }
-    :root {
-      --bg-start: #f2cc8f;
-      --bg-end: #fff1e0;
-      --text: #333;
-      --primary: #e07a5f;
-      --accent: #f2cc8f;
-      --shadow: 0 8px 20px rgba(0,0,0,0.1);
-      --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-fancy: 'Dancing Script', cursive;
-      --space-1: 0.25rem;
-      --space-2: 0.5rem;
-      --space-3: 1rem;
-      --space-4: 1.5rem;
-      --speed: 0.3s;
-    }
-    [data-theme="dark"] {
-      --bg-start: #4b3f72;
-      --bg-end: #1a1a1a;
-      --text: #eee;
-      --primary: #ffb4a2;
-    }
-    /* Reset & fluid type */
-    *, *::before, *::after { box-sizing: border-box; }
-    html { font-size: clamp(14px,4vw,18px); scroll-behavior: smooth; }
-    body {
-      margin:0; padding:env(safe-area-inset) var(--space-3);
-      font-family:var(--font-base); color:var(--text);
-      background:linear-gradient(135deg,var(--bg-start),var(--bg-end));
-      display:flex; align-items:center; justify-content:center;
-      min-height:100vh; line-height:1.8; letter-spacing:0.02em;
-      -webkit-font-smoothing:antialiased;
-      transition:background var(--speed),color var(--speed);
-      touch-action:manipulation;
-    }
-    main { width:100%; max-width:430px; display:grid; grid-template-rows:auto 1fr auto; gap:var(--space-3); }
-    .card {
-      background:var(--accent);
-      border-radius:1.5rem;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      padding:var(--space-3);
-      animation:fadeInUp 0.8s var(--speed) ease-out;
-      transition:transform var(--speed),background var(--speed);
-    }
-    .card:hover { transform:translateY(-6px); }
-    header { text-align:center; }
-    header h1 {
-      margin:0; font-family:var(--font-fancy);
-      font-size:clamp(2rem,6vw,3rem);
-      color:var(--primary);
-      animation:popIn 0.6s var(--speed) ease-out;
-    }
-    .toggle {
-      display:block; margin:var(--space-2) auto 0;
-      background:none; border:none; font-size:1.6rem;
-      cursor:pointer; color:var(--text);
-      transition:transform var(--speed);
-    }
-    .toggle:hover, .toggle:focus { transform:rotate(360deg); outline:none; }
-    .text {
-      font-family:var(--font-base); font-weight:400;
-      font-size:clamp(1rem,4vw,1.2rem);
-      opacity:0; margin-bottom:var(--space-2);
-      animation:fadeIn 1s var(--speed) ease-out forwards;
-    }
-    button {
-      font-family:var(--font-base); font-weight:600;
-      display:block; margin:var(--space-3) auto 0;
-      padding:var(--space-2) var(--space-3);
-      font-size:clamp(0.9rem,3vw,1rem);
-      color:#fff; background:var(--primary);
-      border:none; border-radius:var(--space-2);
-      box-shadow:var(--shadow);
-      cursor:pointer;
-      transition:transform var(--speed),background var(--speed);
-    }
-    button:hover { transform:scale(1.05); }
-    button:active { transform:scale(0.95); }
-    button:focus { outline:2px dashed var(--primary); }
-    #btn-sorpresa[aria-expanded=true] {
-      background:#c2595a;
-      animation:heartbeat 1s var(--speed) ease-in-out infinite;
-    }
-    #sorpresa {
-      display:none; margin-top:var(--space-3);
-      font-family:var(--font-base); font-weight:400;
-      font-size:clamp(1.1rem,4vw,1.3rem);
-      color:var(--primary);
-      text-align:center; line-height:1.8;
-      animation:fadeIn 0.5s var(--speed) ease-in-out forwards;
-      animation-delay:0.2s;
-    }
-    aside {
-      text-align:center; font-size:clamp(0.8rem,2.5vw,0.9rem);
-      opacity:0;
-      animation:fadeInUp 0.8s calc(var(--speed) + 0.2s) ease-out forwards;
-    }
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes popIn{from{transform:scale(0.8)}to{transform:scale(1)}}
-    @keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-    }
+    button, .toggle { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }:root {
+  --bg-start: #f2cc8f;
+  --bg-end: #fff1e0;
+  --text: #333;
+  --primary: #e07a5f;
+  --accent: #f2cc8f;
+  --shadow: 0 8px 20px rgba(0,0,0,0.1);
+  --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-fancy: 'Dancing Script', cursive;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --speed: 0.3s;
+}
+[data-theme="dark"] {
+  --bg-start: #4b3f72;
+  --bg-end: #1a1a1a;
+  --text: #eee;
+  --primary: #ffb4a2;
+}
+/* Reset & fluid type */
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: clamp(14px,4vw,18px); scroll-behavior: smooth; }
+body {
+  margin: 0;
+  padding: env(safe-area-inset) var(--space-3);
+  font-family: var(--font-base);
+  color: var(--text);
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--speed), color var(--speed);
+  touch-action: manipulation;
+}
+main {
+  width: 100%;
+  max-width: 430px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--space-3);
+}
+.card {
+  background: var(--accent);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: var(--space-3);
+  animation: fadeInUp 0.8s var(--speed) ease-out;
+  transition: transform var(--speed), background var(--speed);
+}
+.card:hover { transform: translateY(-6px); }
+header { text-align: center; }
+header h1 {
+  margin: 0;
+  font-family: var(--font-fancy);
+  font-size: clamp(2rem,6vw,3rem);
+  color: var(--primary);
+  animation: popIn 0.6s var(--speed) ease-out;
+}
+.toggle {
+  display: block;
+  margin: var(--space-2) auto 0;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--text);
+  transition: transform var(--speed);
+}
+.toggle:hover, .toggle:focus { transform: rotate(360deg); outline: none; }
+.text {
+  font-family: var(--font-base);
+  font-weight: 400;
+  font-size: clamp(1rem,4vw,1.2rem);
+  opacity: 0;
+  margin-bottom: var(--space-2);
+  animation: fadeIn 1s var(--speed) ease-out forwards;
+}
+button {
+  font-family: var(--font-base);
+  font-weight: 600;
+  display: block;
+  margin: var(--space-3) auto 0;
+  padding: var(--space-2) var(--space-3);
+  font-size: clamp(0.9rem,3vw,1rem);
+  color: #fff;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--space-2);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform var(--speed), background var(--speed);
+}
+button:hover { transform: scale(1.05); }
+button:active {
+  transform: scale(0.95);
+  background: var(--primary);
+}
+button:focus { outline: 2px dashed var(--primary); }
+#btn-sorpresa[aria-expanded="true"] {
+  background: #c2595a;
+  animation: heartbeat 1s var(--speed) ease-in-out infinite;
+}
+#sorpresa {
+  display: none;
+  margin-top: var(--space-3);
+  font-family: var(--font-base);
+  font-weight: 400;
+  font-size: clamp(1.1rem,4vw,1.3rem);
+  color: var(--primary);
+  text-align: center;
+  line-height: 1.8;
+  animation: fadeIn 0.5s var(--speed) ease-in-out forwards;
+  animation-delay: 0.2s;
+}
+aside {
+  text-align: center;
+  font-size: clamp(0.8rem,2.5vw,0.9rem);
+  opacity: 0;
+  animation: fadeInUp 0.8s calc(var(--speed) + 0.2s) ease-out forwards;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes popIn { from { transform: scale(0.8); } to { transform: scale(1); } }
+@keyframes heartbeat { 0%,100% { transform: scale(1);} 50% { transform: scale(1.1);} }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
   </style>
 </head>
 <body>
