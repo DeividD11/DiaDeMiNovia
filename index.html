@@ -10,57 +10,22 @@
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Carta para Mi preciosa princesa">
-    <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro y Motorola Edge 50 Fusión">
+    <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro">
     <meta property="og:image" content="/images/carta-preview.png">
     <meta property="og:locale" content="es_CO">
-    <!-- Fuentes optimizadas -->
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
     <style>
-        /* Disable selection */
-        * {
-            user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-        }
-
-        button,
-        .toggle {
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-        }
-
-        :root {
-            --bg-start: #f2cc8f;
-            --bg-end: #fff1e0;
-            --text: #333;
-            --primary: #e07a5f;
-            --accent: #f2cc8f;
-            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-fancy: 'Dancing Script', cursive;
-            --space-1: 0.25rem;
-            --space-2: 0.5rem;
-            --space-3: 1rem;
-            --space-4: 1.5rem;
-            --speed: 0.3s;
-        }
-
-        [data-theme="dark"] {
-            --bg-start: #4b3f72;
-            --bg-end: #1a1a1a;
-            --text: #eee;
-            --primary: #ffb4a2;
-        }
-
-        /* Reset & fluid type */
+        /* Reset & disable selection */
         *,
         *::before,
         *::after {
             box-sizing: border-box;
+            user-select: none;
         }
 
         html {
@@ -70,48 +35,66 @@
 
         body {
             margin: 0;
-            padding: env(safe-area-inset) var(--space-3);
+            padding: env(safe-area-inset) 1rem;
             font-family: var(--font-base);
-            color: var(--text);
-            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            line-height: 1.8;
-            letter-spacing: 0.02em;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background: var(--bg-gradient);
+            background-size: 200% 100%;
+            background-position: left center;
+            color: var(--text);
             transition: background var(--speed), color var(--speed);
             touch-action: manipulation;
         }
 
+        /* Theme Variables */
+        :root {
+            --bg-light-start: #f2cc8f;
+            --bg-light-end: #fff1e0;
+            --bg-dark-start: #4b3f72;
+            --bg-dark-end: #1a1a1a;
+            --bg-gradient: linear-gradient(135deg, var(--bg-light-start), var(--bg-light-end));
+            --text: #333;
+            --text-dark: #eee;
+            --primary: #e07a5f;
+            --accent: #f2cc8f;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-fancy: 'Dancing Script', cursive;
+            --speed: 0.6s;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient: linear-gradient(135deg, var(--bg-dark-start), var(--bg-dark-end));
+            --text: var(--text-dark);
+        }
+
+        /* Layout */
         main {
             width: 100%;
             max-width: 430px;
             display: grid;
             grid-template-rows: auto 1fr auto;
-            gap: var(--space-3);
-        }
-
-        /* Larger screens get wider container */
-        @media(min-width:1200px) {
-            main {
-                max-width: 800px;
-            }
+            gap: 1rem;
         }
 
         .card {
             background: var(--accent);
-            border-radius: 1.5rem;
+            border-radius: 1rem;
             box-shadow: var(--shadow);
-            overflow: hidden;
-            padding: var(--space-3);
-            animation: fadeInUp 0.8s var(--speed) ease-out;
+            padding: 1rem;
+            animation: fadeInUp 0.8s ease;
             transition: transform var(--speed), background var(--speed);
         }
 
         .card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-4px);
         }
 
         header {
@@ -123,86 +106,137 @@
             font-family: var(--font-fancy);
             font-size: clamp(2rem, 6vw, 3rem);
             color: var(--primary);
-            animation: popIn 0.6s var(--speed) ease-out;
+            animation: popIn 0.6s ease;
         }
 
-        .toggle {
-            display: block;
-            margin: var(--space-2) auto 0;
-            background: none;
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle,
+        .skip {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 2.5rem;
+            height: 2.5rem;
             border: none;
-            font-size: 1.6rem;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            background: none;
             cursor: pointer;
             color: var(--text);
-            transition: transform var(--speed);
+            transition: transform var(--speed), outline var(--speed);
         }
 
-        .toggle:hover,
-        .toggle:focus {
-            transform: rotate(360deg);
-            outline: none;
+        .toggle:focus,
+        .skip:focus,
+        button.main:focus,
+        #btn-sorpresa:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 4px;
+        }
+
+        .toggle[aria-pressed] {
+            /* ARIA-pressed state styling */
+        }
+
+        .toggle:active,
+        .skip:active {
+            transform: scale(0.9);
+        }
+
+        .toggle::after,
+        .skip::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: 50%;
+            left: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        .ripple::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            transition: none;
         }
 
         .text {
-            white-space: normal;
+            overflow: hidden;
+            border-right: 0.1em solid var(--text);
+            white-space: pre-wrap;
             word-break: break-word;
             font-family: var(--font-base);
-            font-weight: 400;
             font-size: clamp(1rem, 4vw, 1.2rem);
-            margin-bottom: var(--space-2);
+            margin-bottom: 0.5rem;
         }
 
-        button {
+        /* Progress bar */
+        .progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        button.main {
+            display: block;
+            margin: 1rem auto;
+            padding: 0.5rem 1rem;
             font-family: var(--font-base);
             font-weight: 600;
-            display: block;
-            margin: var(--space-3) auto 0;
-            padding: var(--space-2) var(--space-3);
             font-size: clamp(0.9rem, 3vw, 1rem);
             color: #fff;
             background: var(--primary);
             border: none;
-            border-radius: var(--space-2);
+            border-radius: 0.5rem;
             box-shadow: var(--shadow);
             cursor: pointer;
-            transition: transform var(--speed), background var(--speed);
+            transition: transform var(--speed), background var(--speed), outline var(--speed);
         }
 
-        button:hover {
-            transform: scale(1.05);
-        }
-
-        button:active {
-            transform: scale(0.95)
-        }
-
-        button:focus {
-            outline: 2px dashed var(--primary);
+        button.main:active {
+            transform: scale(0.95);
         }
 
         #btn-sorpresa[aria-expanded="true"] {
             background: #c2595a;
-            animation: heartbeat 1s var(--speed) ease-in-out infinite;
+            animation: heartbeat 1s infinite ease-in-out;
         }
 
         #sorpresa {
             display: none;
-            margin-top: var(--space-3);
+            margin-top: 1rem;
+            text-align: center;
             font-family: var(--font-base);
-            font-weight: 400;
             font-size: clamp(1.1rem, 4vw, 1.3rem);
             color: var(--primary);
-            text-align: center;
-            line-height: 1.8;
-            animation: fadeIn 0.5s var(--speed) ease-in-out forwards;
-            animation-delay: 0.2s;
+            animation: fadeIn 0.5s ease forwards;
         }
 
         aside {
             text-align: center;
-            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            font-size: 0.9rem;
             opacity: 0;
-            animation: fadeInUp 0.8s calc(var(--speed)+0.2s) ease-out forwards;
+            animation: fadeInUp 0.8s 0.2s ease forwards;
         }
 
         @keyframes fadeIn {
@@ -262,34 +296,90 @@
 </head>
 
 <body>
-    <main role="main">
-        <header role="banner">
-            <h1 id="titulo">Para Mi preciosa princesa</h1>
-            <button class="toggle" id="theme-toggle" aria-label="Modo oscuro/deslumbrante">🌙</button>
+    <main>
+        <header>
+            <h1>Para Mi preciosa princesa</h1>
+            <div class="controls">
+                <button class="toggle" id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false">🌙</button>
+                <button class="skip" id="skip-btn" aria-label="Saltar animación">⏭️</button>
+            </div>
         </header>
-        <div class="card" role="region" aria-labelledby="carta">
+        <div class="card" aria-labelledby="carta">
             <article id="carta" class="text" aria-live="polite"></article>
-            <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false">Ver sorpresa</button>
-            <div id="sorpresa" role="region" aria-label="Mensaje sorpresa">¡Te amo más allá de las estrellas! ⭐</div>
+            <div class="progress">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false" class="main">Ver sorpresa</button>
+            <div id="sorpresa" aria-label="Mensaje sorpresa" aria-live="polite">¡Te amo más allá de las estrellas! ⭐
+            </div>
         </div>
-        <aside role="contentinfo">
+        <aside>
             <p>Con todo mi amor, tu Dev.</p>
         </aside>
     </main>
     <script defer>
         document.addEventListener('DOMContentLoaded', () => {
-            const msg = `Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.`,
-                arr = msg.split(''), cont = document.getElementById('carta'); let i = 0;
-            (function t() { i < arr.length ? (cont.textContent += arr[i++], setTimeout(t, 50)) : cont.style.borderRight = 'none' })();
+            const msg = `Agradezco profundamente tu honestidad y valentía al compartir cómo te has sentido; valoro cada palabra y el amor que se esconde tras ellas. Como enseñaba Marco Aurelio, “la armonía nace cuando volvemos al principio de la razón y del afecto”, y quiero honrar tanto tu razón como tu corazón.
+
+Entiendo que, para ti, este asunto con Caroline ha sido una herida abierta desde el inicio de nuestra historia. Comprendo la ansiedad de sentirme comparado o invadido por un pasado que no te pertenece, y lamento sinceramente no haber cerrado esa herida antes. Ninguna excusa justifica el peso que has llevado; solo puedo ofrecerte mi arrepentimiento y mi voluntad de corregir el camino.
+
+Tal como decía Séneca, “no es poco tiempo el que tenemos, sino que perdemos mucho”. No deseo que despertemos más madrugadas en tensiones ni permitamos que viejas sombras consuman nuestra dicha. Por eso, quiero comprometerme contigo de esta manera:
+
+1. Evitar cualquier contacto con la familia de Caroline, pues antes de hoy no hubo inconvenientes y no fue necesario.
+
+2. Un pacto de comunicación: Cada vez que surja un tema delicado, lo abordaremos de inmediato, sin reproches ni silencios, con paciencia y ternura. Como recomendaba Epicteto, “di siempre aquello que quieras recordar con agrado”.
+
+
+3. Un espacio de sanación: Te invito a que juntos concibamos un pequeño ritual—puede ser un paseo vespertino o una cena—donde solo estemos tú y yo, reencontrando la confianza paso a paso.
+
+Deseo que sepas que mi amor por ti no admite ultimátums, sino compromisos sinceros. No busco arrancar de tu memoria aquello que te duele, sino construir, con tu mano en la mía, un recuerdo nuevo y firme, libre de comparaciones.
+
+Si necesitas tiempo o espacio, lo respetaré como el sabio respeta la naturaleza de las cosas. Pero ten por seguro que cada decisión que tome de aquí en adelante será conforme a tu bienestar y al nuestro. Porque, como afirmaba Platón, “el amor verdadero busca el bien del otro, incluso antes que el propio”.
+
+Con la esperanza de que nuestra razón y nuestro afecto retornen a la misma senda, y con todo mi amor y respeto indestructible.`;
+            const cont = document.getElementById('carta'), bar = document.getElementById('progress-bar');
+            let idx = 0, typing; const total = msg.length;
+            const startTyping = () => {
+                typing = setInterval(() => {
+                    if (idx < total) {
+                        cont.textContent += msg.charAt(idx++);
+                        bar.style.width = (idx / total * 100) + '%';
+                    } else { clearInterval(typing); cont.style.borderRight = 'none'; }
+                }, 50);
+            };
+            const finishTyping = () => {
+                clearInterval(typing);
+                cont.textContent = msg;
+                bar.style.width = '100%';
+                cont.style.borderRight = 'none';
+            };
+            startTyping();
+            document.getElementById('skip-btn').addEventListener('click', () => {
+                finishTyping(); if (navigator.vibrate) navigator.vibrate(50);
+            });
+            let lastTap = 0;
+            cont.parentElement.addEventListener('touchend', e => {
+                const now = Date.now(); if (now - lastTap < 300) finishTyping(); lastTap = now;
+            });
             const btn = document.getElementById('btn-sorpresa'), sup = document.getElementById('sorpresa');
             btn.addEventListener('click', () => {
-                const e = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', !e);
-                btn.textContent = e ? 'Ver sorpresa' : 'Ocultar sorpresa';
-                if (e) sup.style.display = 'none'; else { sup.style.display = 'block'; sup.style.animation = 'fadeIn 0.5s ease-in-out' }
+                const exp = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', !exp);
+                btn.textContent = exp ? 'Ver sorpresa' : 'Ocultar sorpresa';
+                sup.style.display = exp ? 'none' : 'block';
+                if (!exp) sup.style.animation = 'fadeIn 0.5s ease forwards';
+                if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
             });
-            const tb = document.getElementById('theme-toggle'), apply = (t) => { document.documentElement.dataset.theme = t; tb.textContent = t === 'light' ? '🌙' : '☀️' };
-            const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light'); apply(saved);
-            tb.addEventListener('click', () => { const n = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'; apply(n); localStorage.setItem('theme', n) });
+            const tb = document.getElementById('theme-toggle');
+            const apply = t => { document.documentElement.dataset.theme = t; tb.textContent = t === 'light' ? '🌙' : '☀️'; tb.setAttribute('aria-pressed', t !== 'light'); };
+            const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+            apply(saved);
+            tb.addEventListener('click', () => {
+                tb.classList.add('ripple'); setTimeout(() => tb.classList.remove('ripple'), 600);
+                const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+                apply(next); localStorage.setItem('theme', next);
+                if (navigator.vibrate) navigator.vibrate(20);
+            });
         });
     </script>
 </body>
