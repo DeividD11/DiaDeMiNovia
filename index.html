@@ -8,7 +8,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="Carta para Mi preciosa princesa">
-  <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro">
+  <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro y Motorola Edge 50 Fusión">
   <meta property="og:image" content="/images/carta-preview.png">
   <meta property="og:locale" content="es_CO">
   <!-- Fuentes optimizadas -->
@@ -70,15 +70,15 @@
     /* Theme switch */
     .toggle {
       display:block; margin:var(--space-2) auto 0;
-      background:none; border:none; font-size:1.4rem; cursor:pointer;
+      background:none; border:none; font-size:1.6rem; cursor:pointer;
       color:var(--text); transition:transform var(--speed);
     }
     .toggle:hover, .toggle:focus { transform:rotate(360deg); outline:none; }
     /* Text animation */
     .text {
       font-family:var(--font-base); font-weight:400;
-      font-size:clamp(1rem,4vw,1.2rem);
-      opacity:0; margin-bottom:var(--space-2);
+      font-size:clamp(1rem,4vw,1.2rem); opacity:0;
+      margin-bottom:var(--space-2);
       animation:fadeIn 1s var(--speed) ease-out forwards;
     }
     /* Buttons */
@@ -132,17 +132,30 @@
   </main>
   <script defer>
     document.addEventListener('DOMContentLoaded', () => {
-      const text = `Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.`, arr = text.split(''), cont = document.getElementById('carta'), theme = document.getElementById('theme-toggle');
+      // Escritura tipo máquina
+      const msg = `Querida Alejandra, hoy me pesa en el alma la sombra de la desconfianza que se ha posado sobre nosotros y quiero dirigirme a ti con la serenidad y la claridad que enseñaban los antiguos sabios: “No son los hechos los que nos perturban, sino la opinión que tenemos de ellos”. Permíteme aclarar la verdad de lo ocurrido: esta mañana recibí el mensaje de la señora Mary, madre de Caroline, para coordinar la venta del computador; acepté, como simple comerciante y amigo, su invitación al almuerzo, sin jamás traspasar la frontera de la amistad ni asumir el rol de “yerno” o cualquier otro que no me corresponda contigo. Cuando Mary aludió a su actual yerno diciendo “ya que tú no quisiste”, respondí con ligereza “malo es hablar” para señalar que nunca existió tal propuesta entre Caroline y yo. Comprendo que esas palabras te hayan herido, pero quiero que sepas que mi único anhelo eres tú: tu risa en las mañanas, tu fortaleza en las adversidades y la quietud de tu amor que nutre mi espíritu; no fui desleal a ti, sino acaso imprudente al no prever cómo sonarían esas frases fuera de contexto. Sin embargo, también deseo decirte que me hirió profundamente tu amenaza de terminar nuestra relación por este malentendido: el amor auténtico no se sostiene con ultimátums, sino con diálogo y comprensión mutua; te pido que evitemos recurrir a la palabra “adiós” cuando aún hay tanto por construir juntos. Si como dice Aristóteles “la amistad es un alma que habita en dos cuerpos”, nuestro vínculo se funda en la confianza y el respeto mutuo; mañana no asistiré al almuerzo con Mary, porque mi primera lealtad y mi prioridad eres tú. Además, deseo que sepas que en el futuro, si surge alguna invitación similar y tú confías en mi transparencia, me des la libertad de aceptarla sin inseguridades: te prometo que antes de dar cualquier paso te lo comunicaré con la misma honestidad con la que hoy te escribo, para que lo vivamos juntos y sin sombras. Permíteme enmendar el dolor causado con mi sinceridad: te amo con la misma intensidad con que el sabio ama la virtud, no hay sombra en mi ánimo que no se disipe al evocar tu nombre y deseo compartir contigo cada paso y cada decisión de ahora en adelante, sin secretos ni sombras. Que la razón nos guíe, como decía Séneca: “La mayor riqueza es el bien de la mente”; enriquezcamos la nuestra con la confianza renovada y caminemos juntos, sin temores infundados, hacia la felicidad que nos aguarda. Con todo mi amor y mi respeto inquebrantable, tu compañero y enamorado.`, arr = msg.split(''), cont = document.getElementById('carta');
       let i = 0;
-      (function type(){ if(i < arr.length){ cont.textContent += arr[i++]; setTimeout(type,50);} else cont.style.borderRight = 'none'; })();
+      (function type(){ if(i < arr.length) { cont.textContent += arr[i++]; setTimeout(type,50);} else cont.style.borderRight='none'; })();
+      // Sorpresa
       const btn = document.getElementById('btn-sorpresa'), sup = document.getElementById('sorpresa');
       btn.addEventListener('click', () => {
-        const exp = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', !exp);
-        if(!exp){ sup.style.display='block'; sup.style.animation='fadeIn 0.5s ease-in-out'; }
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        if (!expanded) { sup.style.display='block'; sup.style.animation='fadeIn 0.5s ease-in-out'; }
       });
-      theme.addEventListener('click', ()=>{
-        document.documentElement.dataset.theme = document.documentElement.dataset.theme==='light'?'dark':'light';
+      // Cambio tema con icono
+      const toggle = document.getElementById('theme-toggle');
+      const applyTheme = t => {
+        document.documentElement.dataset.theme = t;
+        toggle.textContent = t === 'light' ? '🌙' : '☀️';
+      };
+      // Init
+      const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      applyTheme(saved);
+      toggle.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        applyTheme(next);
+        localStorage.setItem('theme', next);
       });
     });
   </script>
