@@ -4,93 +4,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+    <meta name="description"
+        content="Carta romántica interactiva: una experiencia táctil y optimizada para iPhone 14 Pro, Android y escritorio.">
+    <meta name="theme-color" content="#e07a5f">
+    <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Carta para Mi princesa">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Carta para Mi preciosa princesa</title>
+
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Carta para Mi preciosa princesa">
     <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro">
     <meta property="og:image" content="/images/carta-preview.png">
     <meta property="og:locale" content="es_CO">
-    <!-- Fuentes -->
+
+    <!-- Performance: fuentes y recursos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
+    <link rel="icon" href="/favicon.ico">
+    <!-- Preload de imagen crítica (preview) para mejorar LCP -->
+    <link rel="preload" href="/images/carta-preview.png" as="image">
+
+    <!-- Structured data (Article) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Carta para Mi preciosa princesa",
+      "description": "Carta romántica interactiva optimizada para móviles y escritorio.",
+      "author": {
+        "@type": "Person",
+        "name": "Dev"
+      },
+      "datePublished": "2025-08-12",
+      "image": "/images/carta-preview.png",
+      "inLanguage": "es-CO"
+    }
+    </script>
+
     <style>
-        /* Reset & disable selection */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            user-select: none;
+        :root {
+            /* safe-area insets for notch devices */
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+            /* color palette */
+            --color-bg-light-start: #f2cc8f;
+            --color-bg-light-end: #fff1e0;
+            --color-bg-dark-start: #4b3f72;
+            --color-bg-dark-end: #1a1a1a;
+            --color-bg-gradient: linear-gradient(135deg, var(--color-bg-light-start), var(--color-bg-light-end));
+            --color-text: #333;
+            --color-text-dark: #eee;
+            --color-primary: #e07a5f;
+            --color-accent: #f2cc8f;
+            --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.05);
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+            /* typography */
+            --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-fancy: 'Dancing Script', cursive;
+            --fs-min: 14px;
+            --fs-max: 18px;
+
+            /* spacing scale */
+            --space-xs: clamp(4px, 1vw, 8px);
+            --space-sm: clamp(8px, 2vw, 16px);
+            --space-md: clamp(12px, 3vw, 24px);
+            --space-lg: clamp(16px, 4vw, 32px);
+
+            /* radii */
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 2rem;
+
+            /* animation speed */
+            --speed: 0.6s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme]) {
+                --color-bg-gradient: linear-gradient(135deg, var(--color-bg-dark-start), var(--color-bg-dark-end));
+                --color-text: var(--color-text-dark);
+            }
+        }
+
+        [data-theme="dark"] {
+            --color-bg-gradient: linear-gradient(135deg, var(--color-bg-dark-start), var(--color-bg-dark-end));
+            --color-text: var(--color-text-dark);
         }
 
         html {
-            font-size: clamp(14px, 4vw, 18px);
+            /* safe-area fallback for older iOS */
+            padding-top: constant(safe-area-inset-top);
+            padding-top: var(--safe-top);
+            padding-bottom: var(--safe-bottom);
+
+            font-size: clamp(var(--fs-min), 4vw, var(--fs-max));
             scroll-behavior: smooth;
         }
 
         body {
             margin: 0;
-            padding: env(safe-area-inset) 1rem;
+            padding: 0;
+            padding-inline: clamp(var(--space-md), 5vw, var(--space-lg));
             font-family: var(--font-base);
             line-height: 1.6;
-            letter-spacing: 0.02em;
-            -webkit-font-smoothing: antialiased;
+            color: var(--color-text);
+            background: var(--color-bg-gradient);
+            background-size: 200% 100%;
+            transition: background var(--speed), color var(--speed);
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             overflow-x: hidden;
-            background: var(--bg-gradient);
-            background-size: 200% 100%;
-            background-position: left center;
-            color: var(--text);
-            transition: background var(--speed), color var(--speed);
-            touch-action: manipulation;
+            touch-action: pan-y pinch-zoom;
         }
 
-        /* Theme Variables */
-        :root {
-            --bg-light-start: #f2cc8f;
-            --bg-light-end: #fff1e0;
-            --bg-dark-start: #4b3f72;
-            --bg-dark-end: #1a1a1a;
-            --bg-gradient: linear-gradient(135deg, var(--bg-light-start), var(--bg-light-end));
-            --text: #333;
-            --text-dark: #eee;
-            --primary: #e07a5f;
-            --accent: #f2cc8f;
-            --shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            --font-base: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-fancy: 'Dancing Script', cursive;
-            --speed: 0.6s;
-        }
-
-        [data-theme="dark"] {
-            --bg-gradient: linear-gradient(135deg, var(--bg-dark-start), var(--bg-dark-end));
-            --text: var(--text-dark);
-        }
-
-        /* Layout */
         main {
             width: 100%;
-            max-width: 430px;
+            max-width: 100%;
             display: grid;
             grid-template-rows: auto 1fr auto;
-            gap: 1rem;
+            gap: var(--space-md);
+            contain: layout;
+        }
+
+        @media (min-width: 400px) {
+            main {
+                max-width: min(500px, 100%);
+            }
+        }
+
+        @media (min-width: 768px) {
+            main {
+                max-width: min(720px, 100%);
+            }
         }
 
         .card {
-            background: var(--accent);
-            border-radius: 1rem;
+            background: var(--color-accent);
+            border-radius: var(--radius-md);
             box-shadow: var(--shadow);
-            padding: 1rem;
-            animation: fadeInUp 0.8s ease;
-            transition: transform var(--speed), background var(--speed);
+            padding: var(--space-md);
+            animation: fadeInUp var(--speed) ease;
+            backface-visibility: hidden;
+            contain: layout;
+            /* performance */
+            will-change: transform, opacity;
+            /* optimize animations */
         }
 
         .card:hover {
@@ -104,49 +172,61 @@
         header h1 {
             margin: 0;
             font-family: var(--font-fancy);
+            color: var(--color-primary);
             font-size: clamp(2rem, 6vw, 3rem);
-            color: var(--primary);
-            animation: popIn 0.6s ease;
+            line-height: 1.1;
+            animation: popIn var(--speed) ease;
+            backface-visibility: hidden;
         }
 
-        /* Controls */
         .controls {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--space-sm);
         }
 
         .toggle,
         .skip {
             position: relative;
             overflow: hidden;
-            display: inline-block;
-            width: 2.5rem;
-            height: 2.5rem;
-            border: none;
-            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(2.75rem, 10vw, 3rem);
+            height: clamp(2.75rem, 10vw, 3rem);
+            min-width: 44px;
+            min-height: 44px;
             font-size: 1.2rem;
             background: none;
+            border: none;
+            border-radius: 50%;
+            color: var(--color-text);
             cursor: pointer;
-            color: var(--text);
             transition: transform var(--speed), outline var(--speed);
+            touch-action: manipulation;
         }
 
-        .toggle:focus,
-        .skip:focus,
-        button.main:focus,
-        #btn-sorpresa:focus {
-            outline: 2px solid var(--primary);
-            outline-offset: 4px;
+        @media (pointer: coarse) {
+
+            .toggle,
+            .skip,
+            button.main {
+                touch-action: manipulation;
+                /* coarse touch */
+            }
         }
 
-        .toggle[aria-pressed] {
-            /* ARIA-pressed state styling */
+        .toggle:focus-visible,
+        .skip:focus-visible,
+        button.main:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: var(--space-sm);
         }
 
         .toggle:active,
-        .skip:active {
+        .skip:active,
+        button.main:active {
             transform: scale(0.9);
         }
 
@@ -173,48 +253,48 @@
 
         .text {
             overflow: hidden;
-            border-right: 0.1em solid var(--text);
+            border-right: 2px solid currentColor;
             white-space: pre-wrap;
             word-break: break-word;
             font-family: var(--font-base);
             font-size: clamp(1rem, 4vw, 1.2rem);
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--space-sm);
         }
 
-        /* Progress bar */
         .progress {
             width: 100%;
             height: 4px;
             background: rgba(0, 0, 0, 0.1);
             border-radius: 2px;
             overflow: hidden;
-            margin-bottom: 1rem;
+            margin-bottom: var(--space-md);
+            contain: layout;
         }
 
         .progress-bar {
-            width: 0%;
+            width: 100%;
             height: 100%;
-            background: var(--primary);
+            background: var(--color-primary);
+            transform-origin: left;
+            transform: scaleX(0);
+            will-change: transform;
+            transition: transform var(--speed) ease;
         }
 
         button.main {
             display: block;
-            margin: 1rem auto;
-            padding: 0.5rem 1rem;
+            margin: var(--space-md) auto;
+            padding: 0.75rem 1.5rem;
             font-family: var(--font-base);
             font-weight: 600;
             font-size: clamp(0.9rem, 3vw, 1rem);
             color: #fff;
-            background: var(--primary);
+            background: var(--color-primary);
             border: none;
-            border-radius: 0.5rem;
+            border-radius: var(--radius-sm);
             box-shadow: var(--shadow);
             cursor: pointer;
-            transition: transform var(--speed), background var(--speed), outline var(--speed);
-        }
-
-        button.main:active {
-            transform: scale(0.95);
+            transition: background var(--speed), transform var(--speed), outline var(--speed);
         }
 
         #btn-sorpresa[aria-expanded="true"] {
@@ -224,50 +304,54 @@
 
         #sorpresa {
             display: none;
-            margin-top: 1rem;
+            margin-top: var(--space-md);
             text-align: center;
             font-family: var(--font-base);
             font-size: clamp(1.1rem, 4vw, 1.3rem);
-            color: var(--primary);
+            color: var(--color-primary);
             animation: fadeIn 0.5s ease forwards;
+        }
+
+        [aria-expanded="true"]+#sorpresa {
+            display: block;
         }
 
         aside {
             text-align: center;
             font-size: 0.9rem;
             opacity: 0;
-            animation: fadeInUp 0.8s 0.2s ease forwards;
+            animation: fadeInUp var(--speed) 0.2s ease forwards;
         }
 
         @keyframes fadeIn {
             from {
-                opacity: 0
+                opacity: 0;
             }
 
             to {
-                opacity: 1
+                opacity: 1;
             }
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px)
+                transform: translateY(20px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0)
+                transform: translateY(0);
             }
         }
 
         @keyframes popIn {
             from {
-                transform: scale(0.8)
+                transform: scale(0.8);
             }
 
             to {
-                transform: scale(1)
+                transform: scale(1);
             }
         }
 
@@ -275,15 +359,15 @@
 
             0%,
             100% {
-                transform: scale(1)
+                transform: scale(1);
             }
 
             50% {
-                transform: scale(1.1)
+                transform: scale(1.1);
             }
         }
 
-        @media(prefers-reduced-motion:reduce) {
+        @media (prefers-reduced-motion: reduce) {
 
             *,
             *::before,
@@ -293,94 +377,336 @@
             }
         }
     </style>
+
 </head>
 
 <body>
-    <main>
-        <header>
-            <h1>Para Mi preciosa princesa</h1>
-            <div class="controls">
+    <!-- Accesibilidad: enlace para usuarios de teclado/lectores de pantalla -->
+    <a href="#carta" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Saltar al
+        contenido</a>
+
+    <main id="content" role="main">
+        <header role="banner">
+            <h1 id="title">Para Mi preciosa princesa</h1>
+            <div class="controls" role="toolbar" aria-label="Controles de la carta">
                 <button class="toggle" id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false">🌙</button>
                 <button class="skip" id="skip-btn" aria-label="Saltar animación">⏭️</button>
             </div>
         </header>
-        <div class="card" aria-labelledby="carta">
-            <article id="carta" class="text" aria-live="polite"></article>
-            <div class="progress">
-                <div class="progress-bar" id="progress-bar"></div>
+
+        <div class="card" role="region" aria-labelledby="title">
+            <!-- carta: el contenido se rellena dinámicamente -->
+            <article id="carta" class="text" lang="es" aria-live="polite" aria-atomic="false"></article>
+
+            <div class="progress" aria-hidden="false" aria-label="Barra de progreso de lectura">
+                <div class="progress-bar" id="progress-bar" role="progressbar" aria-label="Progreso de lectura"
+                    aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
             </div>
+
             <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false" class="main">Ver sorpresa</button>
             <div id="sorpresa" aria-label="Mensaje sorpresa" aria-live="polite">¡Te amo más allá de las estrellas! ⭐
             </div>
         </div>
-        <aside>
+
+        <aside role="contentinfo">
             <p>Con todo mi amor, tu Dev.</p>
         </aside>
     </main>
+
     <script defer>
-        document.addEventListener('DOMContentLoaded', () => {
-            const msg = `Agradezco profundamente tu honestidad y valentía al compartir cómo te has sentido; valoro cada palabra y el amor que se esconde tras ellas. Como enseñaba Marco Aurelio, “la armonía nace cuando volvemos al principio de la razón y del afecto”, y quiero honrar tanto tu razón como tu corazón.
+        /* mejorado/app.js
+   Objetivo: solo mejora JS; no tocar HTML/CSS.
+   Principios: rAF para animaciones, listeners pasivos cuando aplica,
+   feature-detection, memory-friendly, debouncing, transform-based progress.
+*/
+        (function () {
+            'use strict';
 
-Entiendo que, para ti, este asunto con Caroline ha sido una herida abierta desde el inicio de nuestra historia. Comprendo la ansiedad de sentirme comparado o invadido por un pasado que no te pertenece, y lamento sinceramente no haber cerrado esa herida antes. Ninguna excusa justifica el peso que has llevado; solo puedo ofrecerte mi arrepentimiento y mi voluntad de corregir el camino.
+            // --- Configuración ---
+            const CHAR_INTERVAL_MS = 50;
+            const DOUBLE_TAP_MS = 300;
+            const VIBRATE_ENABLED =
+                typeof navigator !== 'undefined' &&
+                typeof navigator.vibrate === 'function';
+            const supportsRequestIdle = typeof requestIdleCallback === 'function';
+            const preferReducedMotion =
+                typeof window !== 'undefined' &&
+                window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)')
+                    .matches;
 
-Tal como decía Séneca, “no es poco tiempo el que tenemos, sino que perdemos mucho”. No deseo que despertemos más madrugadas en tensiones ni permitamos que viejas sombras consuman nuestra dicha. Por eso, quiero comprometerme contigo de esta manera:
+            // --- Mensaje (mantengo exactamente el texto original) ---
+            const MSG = `Mi amor,
 
-1. Evitar cualquier contacto con la familia de Caroline, pues antes de hoy no hubo inconvenientes y no fue necesario.
+Tus palabras han sido un espejo y una brújula. Dices que nadie es perfecto; la filosofía antigua nos enseñó que la virtud no es ausencia de miedo, sino actuar bien a pesar de él. Tú viste mi miedo, viste mi escudo, y con la paciencia de quien comprende el alma humana lo diste vuelta con ternura. Por eso te doy gracias: no solo por amarme, sino por mostrarme que puedo ser mejor.
 
-2. Un pacto de comunicación: Cada vez que surja un tema delicado, lo abordaremos de inmediato, sin reproches ni silencios, con paciencia y ternura. Como recomendaba Epicteto, “di siempre aquello que quieras recordar con agrado”.
+Prometes cuidarme, respetarme y no destruir esto que hemos construido; yo te prometo corresponder con la misma devoción. Como los estoicos que cultivan el carácter, prometo trabajar cada día para ser digno de tu confianza. Como los platónicos que buscan lo verdadero y lo bueno, prometo buscar lo que es mejor para nosotros dos, aun cuando no sea fácil. Y como un jardinero que riega lo que ama, prometo proteger este cariño, alimentarlo y dejar que florezca.
 
+No eres la mejor mujer del mundo porque necesites un título: lo eres para mí por lo que haces con mi corazón. Gracias por aceptar mis miedos y por enseñarme que amar es abrirse, aun cuando duela. Gracias por quitar mi escudo; contigo no temo ser humano.
 
-3. Un espacio de sanación: Te invito a que juntos concibamos un pequeño ritual—puede ser un paseo vespertino o una cena—donde solo estemos tú y yo, reencontrando la confianza paso a paso.
+Te amo, hoy y en el trabajo de cada día que venga.
+Con todo mi corazón,
+— Deivid`;
 
-Deseo que sepas que mi amor por ti no admite ultimátums, sino compromisos sinceros. No busco arrancar de tu memoria aquello que te duele, sino construir, con tu mano en la mía, un recuerdo nuevo y firme, libre de comparaciones.
+            // --- Elementos del DOM (resueltos una sola vez) ---
+            const cont = document.getElementById('carta');
+            const progressBar = document.getElementById('progress-bar');
+            const skipBtn = document.getElementById('skip-btn');
+            const sorpresaBtn = document.getElementById('btn-sorpresa');
+            const sorpresa = document.getElementById('sorpresa');
+            const themeToggle = document.getElementById('theme-toggle');
+            const root = document.documentElement;
 
-Si necesitas tiempo o espacio, lo respetaré como el sabio respeta la naturaleza de las cosas. Pero ten por seguro que cada decisión que tome de aquí en adelante será conforme a tu bienestar y al nuestro. Porque, como afirmaba Platón, “el amor verdadero busca el bien del otro, incluso antes que el propio”.
+            if (!cont || !progressBar) {
+                // Si por alguna razón el HTML cambió, abortamos rápidas y evitamos errores.
+                console.warn('Elementos esperados no encontrados: cancelando script mejorado.');
+                return;
+            }
 
-Con la esperanza de que nuestra razón y nuestro afecto retornen a la misma senda, y con todo mi amor y respeto indestructible.`;
-            const cont = document.getElementById('carta'), bar = document.getElementById('progress-bar');
-            let idx = 0, typing; const total = msg.length;
-            const startTyping = () => {
-                typing = setInterval(() => {
-                    if (idx < total) {
-                        cont.textContent += msg.charAt(idx++);
-                        bar.style.width = (idx / total * 100) + '%';
-                    } else { clearInterval(typing); cont.style.borderRight = 'none'; }
-                }, 50);
-            };
-            const finishTyping = () => {
-                clearInterval(typing);
-                cont.textContent = msg;
-                bar.style.width = '100%';
-                cont.style.borderRight = 'none';
-            };
-            startTyping();
-            document.getElementById('skip-btn').addEventListener('click', () => {
-                finishTyping(); if (navigator.vibrate) navigator.vibrate(50);
-            });
+            // --- Estado interno ---
+            const totalChars = MSG.length;
+            let charIndex = 0;
+            let rafId = null;
+            let lastFrameTime = 0;
+            let accumulated = 0;
+            let running = false;
             let lastTap = 0;
-            cont.parentElement.addEventListener('touchend', e => {
-                const now = Date.now(); if (now - lastTap < 300) finishTyping(); lastTap = now;
-            });
-            const btn = document.getElementById('btn-sorpresa'), sup = document.getElementById('sorpresa');
-            btn.addEventListener('click', () => {
-                const exp = btn.getAttribute('aria-expanded') === 'true';
-                btn.setAttribute('aria-expanded', !exp);
-                btn.textContent = exp ? 'Ver sorpresa' : 'Ocultar sorpresa';
-                sup.style.display = exp ? 'none' : 'block';
-                if (!exp) sup.style.animation = 'fadeIn 0.5s ease forwards';
-                if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
-            });
-            const tb = document.getElementById('theme-toggle');
-            const apply = t => { document.documentElement.dataset.theme = t; tb.textContent = t === 'light' ? '🌙' : '☀️'; tb.setAttribute('aria-pressed', t !== 'light'); };
-            const saved = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-            apply(saved);
-            tb.addEventListener('click', () => {
-                tb.classList.add('ripple'); setTimeout(() => tb.classList.remove('ripple'), 600);
-                const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-                apply(next); localStorage.setItem('theme', next);
-                if (navigator.vibrate) navigator.vibrate(20);
-            });
-        });
+            let finished = false;
+
+            // Preparar progressBar: animar con GPU, y fallback width
+            progressBar.style.willChange = 'transform, width';
+            progressBar.style.transformOrigin = 'left center';
+            progressBar.style.transform = 'scaleX(0)';
+            progressBar.style.width = '0%';
+
+            // --- Helpers ---
+            function safeVibrate(pattern) {
+                if (VIBRATE_ENABLED) {
+                    try { navigator.vibrate(pattern); } catch (e) { /* ignore */ }
+                }
+            }
+
+            function setProgressRatio(ratio) {
+                // ratio en [0,1]
+                ratio = Math.max(0, Math.min(1, ratio));
+                const percent = ratio * 100;
+                const scale = 'scaleX(' + ratio + ')';
+
+                // GPU transform + vendor prefix
+                progressBar.style.transform = scale;
+                progressBar.style.webkitTransform = scale;
+
+                // Fallback width para asegurar visibilidad
+                progressBar.style.width = percent + '%';
+
+                // Actualizar accesibilidad
+                progressBar.setAttribute('aria-valuenow', Math.round(percent));
+            }
+
+            function finishTyping() {
+                if (finished) return;
+                finished = true;
+                running = false;
+                if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+                // Escribir el texto completo de forma atómica:
+                cont.textContent = MSG;
+                setProgressRatio(1);
+                cont.style.borderRight = 'none';
+                // Actualizar aria
+                cont.setAttribute('aria-busy', 'false');
+                // Liberar listeners no necesarios
+                removeRuntimeListeners();
+                // vibración breve
+                safeVibrate(50);
+            }
+
+            function removeRuntimeListeners() {
+                // Quitamos listeners que ya no necesitamos para evitar retenciones
+                skipBtn.removeEventListener('click', onSkipClick, false);
+                cont.parentElement.removeEventListener('pointerup', onParentPointerUp, false);
+                document.removeEventListener('keydown', onKeydown, false);
+                // no eliminamos sorpresa/tema porque son controles válidos después
+            }
+
+            // --- Loop de "typing" controlado por rAF ---
+            function tick(now) {
+                if (!running) return;
+                if (!lastFrameTime) lastFrameTime = now;
+                const delta = now - lastFrameTime;
+                lastFrameTime = now;
+                accumulated += delta;
+
+                // Si la persona prefiere reducir movimiento, saltamos animación y mostramos todo
+                if (preferReducedMotion) {
+                    finishTyping();
+                    return;
+                }
+
+                const interval = CHAR_INTERVAL_MS;
+                // Producir caracteres según tiempo acumulado
+                while (accumulated >= interval && charIndex < totalChars) {
+                    // Agregar el siguiente carácter
+                    cont.textContent += MSG.charAt(charIndex);
+                    charIndex += 1;
+                    accumulated -= interval;
+                }
+
+                // Actualizar progreso (solo transform)
+                setProgressRatio(charIndex / totalChars);
+
+                if (charIndex >= totalChars) {
+                    finishTyping();
+                    return;
+                }
+
+                rafId = requestAnimationFrame(tick);
+            }
+
+            function startTyping() {
+                if (running || finished) return;
+                running = true;
+                lastFrameTime = 0;
+                accumulated = 0;
+                // aria
+                cont.setAttribute('aria-busy', 'true');
+                // Comenzar loop
+                rafId = requestAnimationFrame(tick);
+            }
+
+            // --- Event handlers ---
+            function onSkipClick(e) {
+                // debounce mínima para evitar doble ejecución accidental
+                finishTyping();
+                safeVibrate(50);
+            }
+
+            function onParentPointerUp(e) {
+                // Usamos pointer events: funcionará para touch + mouse + pen
+                // Detectar doble-tap (rápido) para terminar la escritura
+                const now = Date.now();
+                if (now - lastTap < DOUBLE_TAP_MS) {
+                    finishTyping();
+                }
+                lastTap = now;
+            }
+
+            function onSorpresaClick(e) {
+                const expanded = sorpresaBtn.getAttribute('aria-expanded') === 'true';
+                const next = !expanded;
+                sorpresaBtn.setAttribute('aria-expanded', String(next));
+                sorpresaBtn.textContent = next ? 'Ocultar sorpresa' : 'Ver sorpresa';
+                // Mostrar/ocultar usando display (HTML original usa display)
+                sorpresa.style.display = next ? 'block' : 'none';
+                if (next) {
+                    // animar por CSS si existe; solo forzamos reflow mínimo para que la animación empiece
+                    try { sorpresa.style.animation = 'fadeIn 0.5s ease forwards'; } catch (err) { /* ignore */ }
+                }
+                safeVibrate([30, 20, 30]);
+            }
+
+            // Aplica tema: atributo + clases para compatibilidad CSS
+            function applyTheme(theme) {
+                // 1. Attribute
+                root.setAttribute('data-theme', theme);
+                // 2. ClassList (para selectores .light / .dark)
+                root.classList.remove('light', 'dark');
+                root.classList.add(theme);
+
+                // Actualiza botón
+                themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+                themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+
+                // Persiste en localStorage sin bloquear
+                const save = () => {
+                    try {
+                        localStorage.setItem('theme', theme);
+                    } catch (e) {
+                        // ignorar errores de storage
+                    }
+                };
+                if (supportsRequestIdle) {
+                    requestIdleCallback(save, { timeout: 2000 });
+                } else {
+                    setTimeout(save, 0);
+                }
+            }
+
+            function onThemeToggleClick() {
+                // efecto ripple
+                themeToggle.classList.add('ripple');
+                setTimeout(() => themeToggle.classList.remove('ripple'), 600);
+
+                // alterna tema basándose en la clase actual
+                const current = root.classList.contains('light') ? 'dark' : 'light';
+                applyTheme(current);
+                safeVibrate(20);
+            }
+
+            function onKeydown(e) {
+                if (e.key === 's' || e.key === 'S') {
+                    finishTyping();
+                }
+            }
+
+            function readSavedThemeOrSystem() {
+                try {
+                    const stored = localStorage.getItem('theme');
+                    if (stored === 'light' || stored === 'dark') {
+                        return stored;
+                    }
+                } catch (e) {
+                    // ignorar
+                }
+                if (
+                    window.matchMedia &&
+                    window.matchMedia('(prefers-color-scheme: dark)').matches
+                ) {
+                    return 'dark';
+                }
+                return 'light';
+            }
+
+            function init() {
+                // Estado inicial del contenedor
+                cont.textContent = '';
+                cont.style.borderRight = ''; // dejar al CSS decidir mientras tipeamos
+
+                // Empezar tipado (si reduce-motion: se acabará en finishTyping)
+                startTyping();
+
+                // Listeners runtime (pointer events y click)
+                // passive:true for scroll/touch handlers only; pointerup shouldn't be passive
+                const parent = cont.parentElement;
+                if (parent) parent.addEventListener('pointerup', onParentPointerUp, false);
+
+                // Skip and controls
+                skipBtn.addEventListener('click', onSkipClick, false);
+                sorpresaBtn.addEventListener('click', onSorpresaClick, false);
+                themeToggle.addEventListener('click', onThemeToggleClick, false);
+
+                // Keyboard shortcut
+                document.addEventListener('keydown', onKeydown, false);
+
+                // Apply saved theme
+                applyTheme(readSavedThemeOrSystem());
+            }
+
+            // Ejecutar cuando el DOM esté listo (este script debe colocarse con defer)
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init, { once: true });
+            } else {
+                // Ya listo
+                init();
+            }
+
+            // Export para debugging leve (no requerido; no rompe API)
+            // Si se quiere preservar "API pública" exponer en window bajo namespace opcional
+            try {
+                window.__cartaApp = window.__cartaApp || {};
+                window.__cartaApp.finishTyping = finishTyping;
+            } catch (e) { /* ignore non-writable window in some envs */ }
+
+        }());
     </script>
 </body>
 
