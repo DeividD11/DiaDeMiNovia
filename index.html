@@ -6,46 +6,53 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
     <meta name="description"
         content="Carta romántica interactiva: una experiencia táctil y optimizada para iPhone 14 Pro, Android y escritorio.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://tudominio.com/ruta-actual">
+
+    <title>Carta para Mi preciosa princesa</title>
     <meta name="theme-color" content="#e07a5f">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Carta para Mi princesa">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Carta para Mi preciosa princesa</title>
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="Carta para Mi preciosa princesa">
     <meta property="og:description" content="Carta romántica interactiva para iPhone 14 Pro">
-    <meta property="og:image" content="/images/carta-preview.png">
     <meta property="og:locale" content="es_CO">
 
-    <!-- Performance: fuentes y recursos -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Carta para Mi preciosa princesa">
+    <meta name="twitter:description"
+        content="Carta romántica interactiva: una experiencia táctil optimizada para iPhone 14 Pro, Android y escritorio.">
+
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet">
-    <link rel="icon" href="/favicon.ico">
-    <!-- Preload de imagen crítica (preview) para mejorar LCP -->
-    <link rel="preload" href="/images/carta-preview.png" as="image">
 
     <!-- Structured data (Article) -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "Carta para Mi preciosa princesa",
-      "description": "Carta romántica interactiva optimizada para móviles y escritorio.",
-      "author": {
-        "@type": "Person",
-        "name": "Dev"
-      },
-      "datePublished": "2025-08-12",
-      "image": "/images/carta-preview.png",
-      "inLanguage": "es-CO"
-    }
-    </script>
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Carta para Mi preciosa princesa",
+    "description": "Carta romántica interactiva optimizada para móviles y escritorio.",
+    "author": {
+      "@type": "Person",
+      "name": "Dev"
+    },
+    "datePublished": "2025-08-12",
+    "image": "/images/carta-preview.png",
+    "inLanguage": "es-CO"
+  }
+  </script>
 
     <style>
         :root {
@@ -85,6 +92,11 @@
 
             /* animation speed */
             --speed: 0.6s;
+
+            /* reservar proporción y tamaño intrínseco para imágenes */
+            --ar-img-default: 16/9;
+            --img-intrinsic-width: 800px;
+            --img-intrinsic-height: 450px;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -107,6 +119,15 @@
 
             font-size: clamp(var(--fs-min), 4vw, var(--fs-max));
             scroll-behavior: smooth;
+            scroll-padding-top: var(--safe-top);
+            -webkit-text-size-adjust: 100%;
+            /* coment: evita zoom automático y respeta clamp() en Safari iOS */
+        }
+
+        body,
+        main {
+            /* coment: frena rebotes de scroll y evita propagación de overscroll */
+            overscroll-behavior: contain;
         }
 
         body {
@@ -134,6 +155,7 @@
             grid-template-rows: auto 1fr auto;
             gap: var(--space-md);
             contain: layout;
+            scroll-snap-type: y proximity;
         }
 
         @media (min-width: 400px) {
@@ -156,12 +178,44 @@
             animation: fadeInUp var(--speed) ease;
             backface-visibility: hidden;
             contain: layout;
-            /* performance */
-            will-change: transform, opacity;
-            /* optimize animations */
+            contain-intrinsic-size: 280px 160px;
+            /* coment: ancho×alto aproximado de la tarjeta */
+            container-type: inline-size;
+            /* coment: habilita container queries en el ancho */
+            container-name: card;
+            /* coment: nombra el contenedor para referenciar */
+        }
+
+        @container card (max-width: 400px) {
+            .card {
+                padding: var(--space-sm);
+                /* coment: menos padding en tarjetas estrechas */
+            }
+        }
+
+        @container card (min-width: 401px) and (max-width: 720px) {
+            .card {
+                padding: var(--space-md);
+                /* coment: padding medio en ancho intermedio */
+                grid-template-columns: 1fr 1fr;
+                /* coment: disposición a dos columnas si cabe */
+                gap: var(--space-sm);
+            }
+        }
+
+        @container card (min-width: 721px) {
+            .card {
+                padding: var(--space-lg);
+                /* coment: más padding en tarjetas amplias */
+                grid-template-columns: repeat(3, 1fr);
+                /* coment: hasta tres columnas internas */
+                gap: var(--space-md);
+            }
         }
 
         .card:hover {
+            will-change: transform, opacity;
+            /* coment: crea capa GPU solo al interactuar */
             transform: translateY(-4px);
         }
 
@@ -205,6 +259,17 @@
             cursor: pointer;
             transition: transform var(--speed), outline var(--speed);
             touch-action: manipulation;
+        }
+
+        .toggle,
+        .skip,
+        button.main {
+            /* coment: padding lógico para ampliar área de toque sin romper diseño */
+            padding: max(0.75rem, 22px) max(1rem, 22px);
+            min-width: 44px;
+            min-height: 44px;
+            user-select: none;
+            /* coment: evita selección accidental de texto */
         }
 
         @media (pointer: coarse) {
@@ -259,6 +324,8 @@
             font-family: var(--font-base);
             font-size: clamp(1rem, 4vw, 1.2rem);
             margin-bottom: var(--space-sm);
+            min-height: calc(1rem * 1.2 * 3);
+            /* coment: espacio para 3 líneas con line-height 1.2 */
         }
 
         .progress {
@@ -277,8 +344,12 @@
             background: var(--color-primary);
             transform-origin: left;
             transform: scaleX(0);
-            will-change: transform;
             transition: transform var(--speed) ease;
+        }
+
+        .progress-bar.animating {
+            will-change: transform;
+            /* coment: capa GPU solo mientras dura la animación */
         }
 
         button.main {
@@ -376,37 +447,100 @@
                 transition: none !important;
             }
         }
+
+        @media (forced-colors: active) {
+
+            /* coment: deshabilitar ajustes automáticos de forced-colors */
+            * {
+                forced-color-adjust: none;
+            }
+
+            /* coment: fondo y texto principales con colores de sistema */
+            body {
+                background-color: Canvas;
+                color: CanvasText;
+            }
+
+            /* coment: tarjetas con borde y fondo de alto contraste */
+            .card {
+                background-color: Field;
+                border: 2px solid CanvasText;
+                color: CanvasText;
+            }
+
+            /* coment: controles interactivos adaptados al modo forzado */
+            .toggle,
+            .skip,
+            button.main {
+                background-color: ButtonFace;
+                color: ButtonText;
+            }
+
+            /* coment: foco muy visible usando Highlight */
+            .toggle:focus-visible,
+            .skip:focus-visible,
+            button.main:focus-visible {
+                outline: 2px solid Highlight;
+                outline-offset: var(--space-sm);
+            }
+
+            /* coment: barra de progreso siempre legible */
+            .progress {
+                background-color: GrayText;
+            }
+
+            .progress-bar {
+                background-color: Highlight;
+            }
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            border: 0;
+            padding: 0;
+            clip: rect(0 0 0 0);
+            overflow: hidden;
+            white-space: nowrap;
+        }
     </style>
 
 </head>
 
 <body>
-    <!-- Accesibilidad: enlace para usuarios de teclado/lectores de pantalla -->
-    <a href="#carta" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Saltar al
-        contenido</a>
+    <a href="#content" class="visually-hidden">Saltar al contenido</a>
 
     <main id="content" role="main">
         <header role="banner">
             <h1 id="title">Para Mi preciosa princesa</h1>
-            <div class="controls" role="toolbar" aria-label="Controles de la carta">
-                <button class="toggle" id="theme-toggle" aria-label="Cambiar tema" aria-pressed="false">🌙</button>
-                <button class="skip" id="skip-btn" aria-label="Saltar animación">⏭️</button>
-            </div>
+
+            <nav class="controls" aria-label="Controles de la carta">
+                <button type="button" class="toggle" id="theme-toggle" aria-label="Cambiar tema"
+                    aria-pressed="false">🌙</button>
+                <button type="button" class="skip" id="skip-btn" aria-label="Saltar animación">⏭️</button>
+            </nav>
         </header>
 
-        <div class="card" role="region" aria-labelledby="title">
-            <!-- carta: el contenido se rellena dinámicamente -->
-            <article id="carta" class="text" lang="es" aria-live="polite" aria-atomic="false"></article>
+        <figure class="card" aria-labelledby="title">
 
-            <div class="progress" aria-hidden="false" aria-label="Barra de progreso de lectura">
-                <div class="progress-bar" id="progress-bar" role="progressbar" aria-label="Progreso de lectura"
-                    aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+            <article id="carta" class="text" lang="es" aria-live="polite" aria-atomic="false">
+                <!-- Contenido dinámico -->
+            </article>
+
+            <div class="progress" aria-label="Barra de progreso de lectura">
+                <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                    aria-valuenow="0"></div>
             </div>
 
-            <button id="btn-sorpresa" aria-controls="sorpresa" aria-expanded="false" class="main">Ver sorpresa</button>
-            <div id="sorpresa" aria-label="Mensaje sorpresa" aria-live="polite">¡Te amo más allá de las estrellas! ⭐
+            <button type="button" id="btn-sorpresa" class="main" aria-controls="sorpresa" aria-expanded="false">Ver
+                sorpresa</button>
+
+            <div id="sorpresa" aria-label="Mensaje sorpresa" aria-live="assertive" aria-hidden="true">
+                ¡Te amo más allá de las estrellas! ⭐
             </div>
-        </div>
+        </figure>
 
         <aside role="contentinfo">
             <p>Con todo mi amor, tu Dev.</p>
@@ -414,11 +548,7 @@
     </main>
 
     <script defer>
-        /* mejorado/app.js
-   Objetivo: solo mejora JS; no tocar HTML/CSS.
-   Principios: rAF para animaciones, listeners pasivos cuando aplica,
-   feature-detection, memory-friendly, debouncing, transform-based progress.
-*/
+
         (function () {
             'use strict';
 
@@ -708,6 +838,7 @@ Con todo mi corazón,
 
         }());
     </script>
+
 </body>
 
 </html>
